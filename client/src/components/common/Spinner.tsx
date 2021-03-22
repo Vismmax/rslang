@@ -1,0 +1,23 @@
+import React from 'react';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
+  }),
+);
+
+export default function Spinner({ open = true }) {
+  const classes = useStyles();
+
+  return (
+    <Backdrop className={classes.backdrop} open={open}>
+      <CircularProgress size={80} color='inherit' />
+    </Backdrop>
+  );
+}
