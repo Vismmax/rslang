@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,24 +12,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EcoIcon from '@material-ui/icons/Eco';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
-    },
-    language: {
-      overflow: 'hidden',
-      width: 0,
-      marginLeft: -8,
-      marginRight: -8,
-      // display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        // display: 'inline',
-        width: 'auto',
-        marginLeft: 0,
-        marginRight: 0,
-      },
     },
   }),
 );
@@ -63,7 +52,7 @@ export default function Games() {
         startIcon={<SportsEsportsIcon />}
         endIcon={<ExpandMoreIcon />}
       >
-        <span className={classes.language}>Игры</span>
+        Игры
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -79,29 +68,29 @@ export default function Games() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem href={'#'}>
+        <MenuItem component={RouterLink} to='/savannah'>
           <ListItemIcon>
             <EcoIcon />
           </ListItemIcon>
           Саванна
         </MenuItem>
-        <MenuItem href={'#'}>
+        <MenuItem component={RouterLink} to='/audioChallenge'>
           <ListItemIcon>
             <HeadsetIcon />
           </ListItemIcon>
           Аудиовызов
         </MenuItem>
-        <MenuItem href={'#'}>
+        <MenuItem component={RouterLink} to='/sprint'>
           <ListItemIcon>
             <DirectionsRunIcon />
           </ListItemIcon>
           Спринт
         </MenuItem>
-        <MenuItem href={'#'}>
+        <MenuItem component={RouterLink} to='/couple'>
           <ListItemIcon>
-            <SportsEsportsIcon />
+            <ViewModuleIcon />
           </ListItemIcon>
-          Своя игра
+          Найди пару
         </MenuItem>
       </Menu>
     </div>

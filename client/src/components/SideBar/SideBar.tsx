@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { isOpenSideBarStore, setIsOpenSideBar } from '../common/commonSlice';
 import Games from './Games';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { Link as RouterLink } from 'react-router-dom';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import SettingsIcon from '@material-ui/icons/Settings';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles({
   aside: {
@@ -35,6 +42,10 @@ export default function SideBar() {
     dispatch(setIsOpenSideBar(open));
   };
 
+  const closeSideBar = () => {
+    dispatch(setIsOpenSideBar(false));
+  };
+
   return (
     <SwipeableDrawer
       open={isOpen}
@@ -42,7 +53,31 @@ export default function SideBar() {
       onOpen={toggleDrawer(true)}
     >
       <aside className={classes.aside}>
-        <Games />
+        <Games closeSideBar={closeSideBar} />
+        <List>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/about'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary='Команда' />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/settings'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Настройки' />
+          </ListItem>
+        </List>
       </aside>
     </SwipeableDrawer>
   );

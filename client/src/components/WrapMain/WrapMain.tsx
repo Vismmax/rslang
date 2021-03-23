@@ -15,17 +15,26 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: 'cover',
       backgroundPosition: 'center top',
     },
+    main: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      width: '100%',
+    },
   }),
 );
 
-export default function WrapMain() {
+interface Props {
+  children: JSX.Element;
+}
+
+export default function WrapMain({ children }: Props) {
   const classes = useStyles();
 
   return (
     <Container className={classes.root} maxWidth='xl' disableGutters>
       <Header />
-      {/*<SideBar />*/}
-      <div />
+      <main className={classes.main}>{children}</main>
       <Footer />
     </Container>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -14,6 +15,7 @@ import EcoIcon from '@material-ui/icons/Eco';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,11 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Games() {
+interface Props {
+  closeSideBar: () => void;
+}
+
+export default function Games({ closeSideBar }: Props) {
   const classes = useStyles();
   const [openGames, setOpenGames] = React.useState(true);
 
-  const handleClick = () => {
+  const handleClickGames = () => {
     setOpenGames(!openGames);
   };
 
@@ -48,29 +54,49 @@ export default function Games() {
         }
         className={classes.root}
       >
-        <ListItem button>
+        <ListItem
+          button
+          component={RouterLink}
+          to='/savannah'
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <EcoIcon />
           </ListItemIcon>
           <ListItemText primary='Саванна' />
         </ListItem>
-        <ListItem button>
+        <ListItem
+          button
+          component={RouterLink}
+          to='/audioChallenge'
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <HeadsetIcon />
           </ListItemIcon>
           <ListItemText primary='Аудиовызов' />
         </ListItem>
-        <ListItem button>
+        <ListItem
+          button
+          component={RouterLink}
+          to='/sprint'
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <DirectionsRunIcon />
           </ListItemIcon>
           <ListItemText primary='Спринт' />
         </ListItem>
-        <ListItem button>
+        <ListItem
+          button
+          component={RouterLink}
+          to='/couple'
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
-            <DirectionsRunIcon />
+            <ViewModuleIcon />
           </ListItemIcon>
-          <ListItemText primary='Своя игра' />
+          <ListItemText primary='Найди пару' />
         </ListItem>
       </List>
 
@@ -79,7 +105,7 @@ export default function Games() {
         aria-labelledby='games-list-subheader'
         className={classes.root}
       >
-        <ListItem button onClick={handleClick}>
+        <ListItem button onClick={handleClickGames}>
           <ListItemIcon>
             <SportsEsportsIcon />
           </ListItemIcon>
@@ -88,29 +114,53 @@ export default function Games() {
         </ListItem>
         <Collapse in={openGames} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              className={classes.nested}
+              component={RouterLink}
+              to='/savannah'
+              onClick={closeSideBar}
+            >
               <ListItemIcon>
                 <EcoIcon />
               </ListItemIcon>
               <ListItemText primary='Саванна' />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              className={classes.nested}
+              component={RouterLink}
+              to='/audioChallenge'
+              onClick={closeSideBar}
+            >
               <ListItemIcon>
                 <HeadsetIcon />
               </ListItemIcon>
               <ListItemText primary='Аудиовызов' />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              className={classes.nested}
+              component={RouterLink}
+              to='/sprint'
+              onClick={closeSideBar}
+            >
               <ListItemIcon>
                 <DirectionsRunIcon />
               </ListItemIcon>
               <ListItemText primary='Спринт' />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem
+              button
+              className={classes.nested}
+              component={RouterLink}
+              to='/couple'
+              onClick={closeSideBar}
+            >
               <ListItemIcon>
-                <DirectionsRunIcon />
+                <ViewModuleIcon />
               </ListItemIcon>
-              <ListItemText primary='Своя игра' />
+              <ListItemText primary='Найди пару' />
             </ListItem>
           </List>
         </Collapse>
