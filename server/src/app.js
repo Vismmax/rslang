@@ -22,6 +22,7 @@ const settingRouter = require('./resources/settings/setting.router');
 const errorHandler = require('./errors/errorHandler');
 const checkAuthentication = require('./resources/authentication/checkAuthentication');
 const { userIdValidator } = require('./utils/validation/validator');
+const imagesRouter = require('./resources/images/images.router');
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -58,6 +59,8 @@ app.use('/words', wordRouter);
 app.use('/signin', signinRouter);
 
 app.use('/users', userRouter);
+
+app.use('/images', imagesRouter);
 
 userRouter.use('/:id/tokens', userIdValidator, userTokenRouter);
 
