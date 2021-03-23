@@ -1,6 +1,6 @@
 import webApi from '../webApiHelper';
 
-const URL = '/imgs';
+const URL = '/images';
 
 interface IResponse {
   link: string;

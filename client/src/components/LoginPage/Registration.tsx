@@ -7,9 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import UserAvatar from '../LoginPage/UserAvatar';
+import UserAvatar from './UserAvatar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,7 +83,7 @@ export default function Registration() {
   return (
     <div className={classes.root}>
       <form className={classes.form} noValidate autoComplete='off'>
-        <UserAvatar input={true} />
+        <UserAvatar input={true} value={avatar} onChange={handleChangeAvatar} />
         <TextField
           className={classes.input}
           id='name'

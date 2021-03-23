@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import WrapMain from '../WrapMain/WrapMain';
 import Login from './Login';
-import Registration from '../HomePage/Registration';
+import Registration from './Registration';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
