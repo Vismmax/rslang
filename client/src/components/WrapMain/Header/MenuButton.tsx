@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { setIsOpenSideBar } from '../../common/commonSlice';
+import { setIsOpenSideBar } from '../../SideBar/sideBarSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

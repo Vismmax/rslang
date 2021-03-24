@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import commonReducer from '../components/common/commonSlice';
+import sideBarReducer from '../components/SideBar/sideBarSlice';
 import gameReducer from '../components/WrapGame/gameSlice';
 import userReducer from '../components/LoginPage/userSlice';
 import notificationReducer from '../components/common/Notification/notificationSlice';
@@ -7,7 +7,7 @@ import routeReducer from '../components/Routes/routeSlice';
 
 export const store = configureStore({
   reducer: {
-    common: commonReducer,
+    sideBar: sideBarReducer,
     game: gameReducer,
     user: userReducer,
     notification: notificationReducer,

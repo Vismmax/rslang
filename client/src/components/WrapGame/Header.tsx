@@ -8,7 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import { useDispatch } from 'react-redux';
-import { setIsOpenSideBar } from '../common/commonSlice';
+import { setIsOpenSideBar } from '../SideBar/sideBarSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

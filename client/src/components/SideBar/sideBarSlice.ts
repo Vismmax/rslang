@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
 
-interface CommonState {
+interface SideBarState {
   isOpenSideBar: boolean;
 }
 
-const initialState: CommonState = {
+const initialState: SideBarState = {
   isOpenSideBar: false,
 };
 
-export const commonSlice = createSlice({
-  name: 'common',
+export const sideBarSlice = createSlice({
+  name: 'sideBar',
   initialState,
   reducers: {
     setIsOpenSideBar: (state, action: PayloadAction<boolean>) => {
@@ -19,9 +19,9 @@ export const commonSlice = createSlice({
   },
 });
 
-export const { setIsOpenSideBar } = commonSlice.actions;
+export const { setIsOpenSideBar } = sideBarSlice.actions;
 
 export const isOpenSideBarStore = (state: RootState) =>
-  state.common.isOpenSideBar;
+  state.sideBar.isOpenSideBar;
 
-export default commonSlice.reducer;
+export default sideBarSlice.reducer;

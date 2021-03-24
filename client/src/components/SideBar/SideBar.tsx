@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { isOpenSideBarStore, setIsOpenSideBar } from '../common/commonSlice';
-import Games from './Games';
+import { isOpenSideBarStore, setIsOpenSideBar } from './sideBarSlice';
+import ListGames from './ListGames';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Link as RouterLink } from 'react-router-dom';
@@ -53,7 +53,7 @@ export default function SideBar() {
       onOpen={toggleDrawer(true)}
     >
       <aside className={classes.aside}>
-        <Games closeSideBar={closeSideBar} />
+        <ListGames closeSideBar={closeSideBar} />
         <List>
           <ListItem
             button

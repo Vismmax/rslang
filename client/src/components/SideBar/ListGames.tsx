@@ -34,7 +34,7 @@ interface Props {
   closeSideBar: () => void;
 }
 
-export default function Games({ closeSideBar }: Props) {
+export default function ListGames({ closeSideBar }: Props) {
   const classes = useStyles();
   const [openGames, setOpenGames] = React.useState(true);
 
