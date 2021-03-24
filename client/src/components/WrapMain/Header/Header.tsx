@@ -7,28 +7,28 @@ import User from './User';
 import Title from './Title';
 import MenuButton from './MenuButton';
 import Games from './Games';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/Group';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     menuButton: {
-      // [theme.breakpoints.up('sm')]: {
-      //   display: 'none',
-      // },
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
     },
     menuBar: {
-      // [theme.breakpoints.down('xs')]: {
-      //   display: 'none',
-      // },
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
     link: {
       marginLeft: theme.spacing(2),
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
   }),
 );

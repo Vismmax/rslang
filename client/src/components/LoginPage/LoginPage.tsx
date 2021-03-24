@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createStyles,
   makeStyles,
@@ -15,6 +15,9 @@ import Box from '@material-ui/core/Box';
 import WrapMain from '../WrapMain/WrapMain';
 import Login from './Login';
 import Registration from './Registration';
+import { userStore } from './userSlice';
+import { useHistory } from 'react-router-dom';
+import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   tabs: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: theme.spacing(62),
   },
 }));
 
@@ -72,6 +75,27 @@ export default function LoginPage() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const { userId } = useSelector(userStore);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const backRoute = useSelector(backRouteStore);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setBackRoute(''));
+    };
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      if (backRoute) {
+        history.push(backRoute);
+      } else {
+        history.goBack();
+      }
+      dispatch(setBackRoute(''));
+    }
+  }, [userId]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -79,6 +103,15 @@ export default function LoginPage() {
 
   const handleChangeIndex = (index: number) => {
     setValue(index);
+  };
+
+  const handleCancel = () => {
+    if (backRoute) {
+      history.push('/');
+    } else {
+      history.goBack();
+    }
+    dispatch(setBackRoute(''));
   };
 
   return (
@@ -104,10 +137,10 @@ export default function LoginPage() {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <Login />
+              <Login onCancel={handleCancel} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              <Registration />
+              <Registration onCancel={handleCancel} />
             </TabPanel>
           </SwipeableViews>
         </div>

@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     created: {
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
+      textAlign: 'center',
     },
   }),
 );

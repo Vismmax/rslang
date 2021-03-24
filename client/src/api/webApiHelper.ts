@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-// import { getToken } from 'helpers/tokenHelper';
+import { getToken } from '../common/helpers/tokenHelper';
 
 // const BASE_URL = process.env.REACT_APP_API_URL || '';
 const BASE_URL = 'http://localhost:5000';
@@ -24,7 +23,7 @@ class Api {
     return await this.instance
       .get(url, {
         headers: {
-          // Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
         },
         params,
       })
@@ -36,7 +35,7 @@ class Api {
     return await this.instance
       .post(url, data, {
         headers: {
-          // Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
         },
       })
       .then(this.handleResponse)
@@ -49,7 +48,7 @@ class Api {
     return await this.instance
       .post(url, data, {
         headers: {
-          // Authorization: `Bearer ${getToken()}`,
+          Authorization: `Bearer ${getToken()}`,
           'Content-Type': 'multipart/form-data',
         },
       })
@@ -61,7 +60,7 @@ class Api {
     return await this.instance
       .put(url, data, {
         headers: {
-          // Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
         },
       })
       .then(this.handleResponse)
@@ -72,7 +71,7 @@ class Api {
     return await this.instance
       .delete(url, {
         headers: {
-          // Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
         },
         data,
       })

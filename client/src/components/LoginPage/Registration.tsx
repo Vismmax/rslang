@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -7,7 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import { validate } from 'email-validator';
 import UserAvatar from './UserAvatar';
+import { registrationUser } from './userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,46 +54,89 @@ interface Ev {
   };
 }
 
-export default function Registration() {
+interface Props {
+  onCancel: () => void;
+}
+
+export default function Registration({ onCancel }: Props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [name, setName] = useState({ value: '', err: '' });
+  const [email, setEmail] = useState({ value: '', err: '' });
+  const [password, setPassword] = useState({ value: '', err: '' });
+  const [avatar, setAvatar] = useState({ value: '', err: '' });
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleChangeName = (ev: Ev) => {
-    setName(ev.target.value);
+    setName({ err: '', value: ev.target.value });
   };
 
   const handleChangeEmail = (ev: Ev) => {
-    setEmail(ev.target.value);
+    setEmail({ err: '', value: ev.target.value });
   };
 
   const handleChangePassword = (ev: Ev) => {
-    setPassword(ev.target.value);
+    setPassword({ err: '', value: ev.target.value });
   };
 
   const handleChangeAvatar = (url: string) => {
-    setAvatar(url);
+    setAvatar({ ...avatar, value: url });
+  };
+
+  const handleAddUser = async () => {
+    if (!name.value) {
+      setName({ ...name, err: 'Введите имя' });
+      return;
+    }
+    if (!validate(email.value)) {
+      setEmail({ ...email, err: 'Введите коректный адрес почты' });
+      return;
+    }
+    if (password.value.length < 8) {
+      setPassword({
+        ...password,
+        err: 'Пароль должен быть не менее 8 символов',
+      });
+      return;
+    }
+
+    dispatch(
+      registrationUser({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        avatar: avatar.value,
+      }),
+    );
+  };
+
+  const handleCancel = () => {
+    onCancel();
   };
 
   return (
     <div className={classes.root}>
       <form className={classes.form} noValidate autoComplete='off'>
-        <UserAvatar input={true} value={avatar} onChange={handleChangeAvatar} />
+        <UserAvatar
+          input={true}
+          value={avatar.value}
+          onChange={handleChangeAvatar}
+        />
         <TextField
           className={classes.input}
           id='name'
           label='Имя'
           fullWidth
           type='text'
-          value={name}
+          error={!!name.err}
+          helperText={name.err ? name.err : ''}
+          value={name.value}
           onChange={handleChangeName}
         />
         <TextField
@@ -99,7 +145,9 @@ export default function Registration() {
           label='Почта'
           fullWidth
           type='email'
-          value={email}
+          error={!!email.err}
+          helperText={email.err ? email.err : ''}
+          value={email.value}
           onChange={handleChangeEmail}
         />
         <TextField
@@ -108,7 +156,9 @@ export default function Registration() {
           label='Пароль'
           fullWidth
           type={showPassword ? 'text' : 'password'}
-          value={password}
+          error={!!password.err}
+          helperText={password.err ? password.err : ''}
+          value={password.value}
           onChange={handleChangePassword}
           InputProps={{
             endAdornment: (
@@ -121,8 +171,10 @@ export default function Registration() {
           }}
         />
         <div className={classes.buttons}>
-          <Button variant='contained'>Отмена</Button>
-          <Button variant='contained' color='primary'>
+          <Button variant='contained' onClick={handleCancel}>
+            Отмена
+          </Button>
+          <Button variant='contained' color='primary' onClick={handleAddUser}>
             Регистрация
           </Button>
         </div>

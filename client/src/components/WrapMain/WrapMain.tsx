@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       minHeight: '100vh',
       //   backgroundImage: 'url("/img/bg.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center top',
+      // backgroundSize: 'cover',
+      // backgroundPosition: 'center top',
     },
     main: {
       display: 'flex',
@@ -26,15 +26,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   children: JSX.Element;
+  className?: string;
 }
 
-export default function WrapMain({ children }: Props) {
+export default function WrapMain({ children, className = '' }: Props) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.root} maxWidth='xl' disableGutters>
+    <Container className={classes.root} maxWidth={false} disableGutters>
       <Header />
-      <main className={classes.main}>{children}</main>
+      <main className={`${classes.main} ${className}`}>{children}</main>
       <Footer />
     </Container>
   );

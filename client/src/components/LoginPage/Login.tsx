@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,6 +9,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import UserAvatar from './UserAvatar';
+import { loginUser, userStore } from './userSlice';
+import { showNotification } from '../common/Notification/notificationSlice';
+import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,14 +32,22 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface Props {
+  onCancel: () => void;
+}
+
 interface Ev {
   target: {
     value: string;
   };
 }
 
-export default function Login() {
+export default function Login({ onCancel }: Props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const backRoute = useSelector(backRouteStore);
+  const { userId } = useSelector(userStore);
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -51,6 +63,14 @@ export default function Login() {
 
   const handleChangePassword = (ev: Ev) => {
     setPassword(ev.target.value);
+  };
+
+  const handleLogin = () => {
+    dispatch(loginUser({ email, password }));
+  };
+
+  const handleCancel = () => {
+    onCancel();
   };
 
   return (
@@ -85,8 +105,10 @@ export default function Login() {
           }}
         />
         <div className={classes.buttons}>
-          <Button variant='contained'>Отмена</Button>
-          <Button variant='contained' color='primary'>
+          <Button variant='contained' onClick={handleCancel}>
+            Отмена
+          </Button>
+          <Button variant='contained' color='primary' onClick={handleLogin}>
             Вход
           </Button>
         </div>
