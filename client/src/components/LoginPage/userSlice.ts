@@ -16,9 +16,9 @@ import {
   setToken,
 } from '../../common/helpers/tokenHelper';
 import {
-  clearAllUserData,
-  getUserId,
-  setUserId,
+  clearLocalAllUserData,
+  getLocalUserId,
+  setLocalUserId,
 } from '../../common/helpers/userHelper';
 import {
   showNotificationError,
@@ -98,7 +98,7 @@ export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
 
   setToken(loginUser.token);
   setRefreshToken(loginUser.refreshToken);
-  setUserId(loginUser.userId);
+  setLocalUserId(loginUser.userId);
 
   const { userId, name, avatar } = { ...loginUser };
   dispatch(setUser({ userId, name, avatar, email: user.email }));
@@ -107,13 +107,13 @@ export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
 
 export const logoutUser = (): AppThunk => async (dispatch) => {
   clearAllTokens();
-  clearAllUserData();
+  clearLocalAllUserData();
   dispatch(setUser({ userId: '', name: '', avatar: '', email: '' }));
 };
 
 export const getUser = (): AppThunk => async (dispatch) => {
   dispatch(setIsLoading(true));
-  const userId = getUserId();
+  const userId = getLocalUserId();
   if (!userId) {
     dispatch(setIsLoading(false));
     return;
@@ -132,7 +132,7 @@ export const updateUser = (user: UpdateUserRequest): AppThunk => async (
   dispatch,
 ) => {
   dispatch(setIsLoading(true));
-  const userId = getUserId();
+  const userId = getLocalUserId();
   if (!userId) {
     dispatch(setIsLoading(false));
     return;
@@ -150,7 +150,7 @@ export const updateUser = (user: UpdateUserRequest): AppThunk => async (
 
 export const deleteUser = (): AppThunk => async (dispatch) => {
   dispatch(setIsLoading(true));
-  const userId = getUserId();
+  const userId = getLocalUserId();
   if (!userId) {
     dispatch(setIsLoading(false));
     return;

@@ -28,7 +28,8 @@ import {
   // setSettingsAudioChallenge,
   // setSettingsSprint,
   // setSettingsFindCouple,
-  setSettings,
+  // setSettings,
+  saveSettings,
 } from './settingsSlice';
 import SettingsTextbook from './SettingsTextbook';
 
@@ -54,7 +55,7 @@ export default function SettingsPage() {
 
   const handleChangeSettings = (nameSettings: string, settings: ISettings) => {
     console.log('nameSettings: ', nameSettings);
-    dispatch(setSettings({ nameSettings, settings }));
+    dispatch(saveSettings({ nameSettings, settings }));
   };
   // const handleOnChangeSettingsTextbook = (settings: ISettingsTextbook) => {
   //   dispatch(setSettingsTextbook(settings));

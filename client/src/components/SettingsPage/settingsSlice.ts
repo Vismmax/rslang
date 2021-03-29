@@ -7,6 +7,13 @@ import {
   setLevel,
   setWords,
 } from '../Games/gameSlice';
+import {
+  getLocalSettings,
+  setLocalSettings,
+} from '../../common/helpers/localSettings';
+import { getLocalUserId } from '../../common/helpers/userHelper';
+import { getSettings, putSettings } from '../../api/services/settingService';
+import { showNotificationError } from '../common/Notification/notificationSlice';
 
 export interface ISettingsTextbook {
   showTranslate: boolean;
@@ -41,7 +48,7 @@ export interface IOneSettings {
   settings: ISettings;
 }
 
-interface SettingsState {
+export interface ISettingsState {
   textbook: ISettingsTextbook;
   savannah: ISettingsSavannah;
   audioChallenge: ISettingsAudioChallenge;
@@ -49,7 +56,7 @@ interface SettingsState {
   findCouple: ISettingsFindCouple;
 }
 
-const initialState: SettingsState = {
+const initialState: ISettingsState = {
   textbook: {
     showTranslate: true,
     showButtons: true,
@@ -81,6 +88,9 @@ export const settingsSlice = createSlice({
       // @ts-ignore
       state[action.payload.nameSettings] = action.payload.settings;
     },
+    setAllSettings: (state, action: PayloadAction<ISettingsState>) => {
+      return action.payload;
+    },
     // setSettingsTextbook: (state, action: PayloadAction<ISettingsTextbook>) => {
     //   state.textbook = action.payload;
     // },
@@ -107,6 +117,7 @@ export const settingsSlice = createSlice({
 
 export const {
   setSettings,
+  setAllSettings,
   // setSettingsTextbook,
   // setSettingsSavannah,
   // setSettingsAudioChallenge,
@@ -114,19 +125,32 @@ export const {
   // setSettingsFindCouple,
 } = settingsSlice.actions;
 
-export const loadSettings = (level: number): AppThunk => async (
+export const saveSettings = (set: IOneSettings): AppThunk => async (
   dispatch,
   getState,
 ) => {
-  dispatch(setIsLoading(true));
-  dispatch(setIsLoading(false));
+  dispatch(setSettings(set));
+  const settings = getState().settings;
+  setLocalSettings(settings);
+  const userId = getLocalUserId();
+  if (userId) {
+    const res = await putSettings({ userId, settings });
+    if (!res)
+      dispatch(
+        showNotificationError('Не удалось сохранить настройки на сервере'),
+      );
+  }
 };
 
-export const saveSettings = (level: number): AppThunk => async (
-  dispatch,
-  getState,
-) => {
+export const loadSettings = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  const localSettings = getLocalSettings() as ISettingsState | null;
+  if (localSettings) dispatch(setAllSettings(localSettings));
+  const userId = getLocalUserId();
+  if (userId) {
+    const settings = await getSettings(userId);
+    if (settings) dispatch(setAllSettings(settings));
+  }
   dispatch(setIsLoading(false));
 };
 

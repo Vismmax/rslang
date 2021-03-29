@@ -9,8 +9,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Checkbox from '@material-ui/core/Checkbox';
 import {
   settingsTextbook,
-  setSettings,
-  ISettings,
+  // setSettings,
+  // ISettings,
+  saveSettings,
 } from '../../SettingsPage/settingsSlice';
 import Button from '@material-ui/core/Button';
 
@@ -37,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface Ev {
-  target: {
-    name: string;
-  };
-}
+// interface Ev {
+//   target: {
+//     name: string;
+//   };
+// }
 
 export default function Settings() {
   const classes = useStyles();
@@ -74,7 +75,7 @@ export default function Settings() {
 
   const handleClickShowTranslate = () => {
     dispatch(
-      setSettings({
+      saveSettings({
         nameSettings: 'textbook',
         settings: {
           ...settings,
@@ -86,7 +87,7 @@ export default function Settings() {
 
   const handleClickShowButtons = () => {
     dispatch(
-      setSettings({
+      saveSettings({
         nameSettings: 'textbook',
         settings: {
           ...settings,

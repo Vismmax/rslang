@@ -1,17 +1,17 @@
 const keyUserId = 'user_id';
 
-export const getUserId = (): string | null => {
+export const getLocalUserId = (): string | null => {
   return window.localStorage.getItem(keyUserId);
 };
 
-export const setUserId = (userId: string): void => {
+export const setLocalUserId = (userId: string): void => {
   window.localStorage.setItem(keyUserId, userId);
 };
 
-export const clearUserId = (): void => {
+export const clearLocalUserId = (): void => {
   window.localStorage.removeItem(keyUserId);
 };
 
-export const clearAllUserData = (): void => {
+export const clearLocalAllUserData = (): void => {
   window.localStorage.removeItem(keyUserId);
 };
