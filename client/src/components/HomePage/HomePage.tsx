@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import WrapMain from '../WrapMain/WrapMain';
+import PageLayout from '../PageLayout/PageLayout';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,8 +19,8 @@ export default function HomePage() {
   const classes = useStyles();
 
   return (
-    <WrapMain>
+    <PageLayout>
       <div></div>
-    </WrapMain>
+    </PageLayout>
   );
 }

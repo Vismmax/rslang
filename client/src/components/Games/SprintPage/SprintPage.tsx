@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PageLayout from '../PageLayout/PageLayout';
+import GameLayout from '../GameLayout/GameLayout';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PromoPage() {
+export default function SprintPage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
+    <GameLayout>
       <div></div>
-    </PageLayout>
+    </GameLayout>
   );
 }

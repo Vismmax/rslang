@@ -1,26 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PageLayout from '../PageLayout/PageLayout';
+import ContainerMain from '../PageLayout/ContainerMain';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      width: '100%',
-      height: '100%',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
-    },
+    root: {},
   }),
 );
 
-export default function PromoPage() {
+export default function StatisticsPage() {
   const classes = useStyles();
 
   return (
     <PageLayout>
-      <div></div>
+      <ContainerMain>
+        <div></div>
+      </ContainerMain>
     </PageLayout>
   );
 }

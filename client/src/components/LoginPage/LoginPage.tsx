@@ -12,7 +12,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import WrapMain from '../WrapMain/WrapMain';
+import PageLayout from '../PageLayout/PageLayout';
 import Login from './Login';
 import Registration from './Registration';
 import { userStore } from './userSlice';
@@ -115,7 +115,7 @@ export default function LoginPage() {
   };
 
   return (
-    <WrapMain>
+    <PageLayout>
       <div className={classes.root}>
         <div className={classes.tabs}>
           <AppBar position='static' color='default'>
@@ -145,6 +145,6 @@ export default function LoginPage() {
           </SwipeableViews>
         </div>
       </div>
-    </WrapMain>
+    </PageLayout>
   );
 }

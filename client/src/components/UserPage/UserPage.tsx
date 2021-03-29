@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import { validate } from 'email-validator';
 import UserAvatar from '../LoginPage/UserAvatar';
 import { deleteUser, updateUser, userStore } from '../LoginPage/userSlice';
-import WrapMain from '../WrapMain/WrapMain';
+import PageLayout from '../PageLayout/PageLayout';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -141,7 +141,7 @@ export default function Registration() {
   };
 
   return (
-    <WrapMain>
+    <PageLayout>
       <div className={classes.root}>
         <Paper className={classes.panel}>
           <form className={classes.form} noValidate autoComplete='off'>
@@ -207,6 +207,6 @@ export default function Registration() {
           </form>
         </Paper>
       </div>
-    </WrapMain>
+    </PageLayout>
   );
 }

@@ -14,3 +14,20 @@ export interface IWord {
   textMeaningTranslate: string;
   textExampleTranslate: string;
 }
+
+export const wordEmpty = {
+  id: '',
+  group: NaN,
+  page: NaN,
+  word: '',
+  image: '',
+  audio: '',
+  audioMeaning: '',
+  audioExample: '',
+  textMeaning: '',
+  textExample: '',
+  transcription: '',
+  wordTranslate: '',
+  textMeaningTranslate: '',
+  textExampleTranslate: '',
+};

@@ -11,6 +11,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/Group';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 const useStyles = makeStyles({
   aside: {
@@ -53,7 +56,44 @@ export default function SideBar() {
       onOpen={toggleDrawer(true)}
     >
       <aside className={classes.aside}>
+        <List>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/textbook'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <LocalLibraryIcon />
+            </ListItemIcon>
+            <ListItemText primary='Учебник' />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/dictionary'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <MenuBookIcon />
+            </ListItemIcon>
+            <ListItemText primary='Словарь' />
+          </ListItem>
+        </List>
         <ListGames closeSideBar={closeSideBar} />
+        <List>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/statistics'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <EqualizerIcon />
+            </ListItemIcon>
+            <ListItemText primary='Статистика' />
+          </ListItem>
+        </List>
         <List>
           <ListItem
             button
