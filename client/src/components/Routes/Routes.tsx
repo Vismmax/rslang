@@ -22,7 +22,7 @@ export default function Routes() {
         <Route path='/home' component={HomePage} />
         <Route path='/promo' component={PromoPage} />
         <Route path='/textbook' component={TextbookPage} />
-        <Route path='/dictionary' component={DictionaryPage} />
+        <PrivateRoute path='/dictionary' component={DictionaryPage} />
         <Route path='/savannah' component={SavannahPage} />
         <Route path='/audioChallenge' component={AudioChallengePage} />
         <Route path='/sprint' component={SprintPage} />
@@ -31,7 +31,7 @@ export default function Routes() {
         <PrivateRoute path='/settings' component={SettingsPage} />
         <Route path='/about' component={AboutPage} />
         <Route path='/login' component={LoginPage} />
-        <Route path='/user' component={UserPage} />
+        <PrivateRoute path='/user' component={UserPage} />
         {/*<Route component={NotFound} />*/}
         <Redirect from='/' to='/home' />
       </Switch>

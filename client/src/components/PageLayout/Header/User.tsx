@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function User() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector(userStore);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -44,6 +45,7 @@ export default function User() {
   const handleLogout = () => {
     dispatch(logoutUser());
     setAnchorEl(null);
+    history.push('/');
   };
 
   return (

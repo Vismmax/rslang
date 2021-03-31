@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import sideBarReducer from '../components/SideBar/sideBarSlice';
-import gameReducer from '../components/Games/gameSlice';
 import userReducer from '../components/LoginPage/userSlice';
 import notificationReducer from '../components/common/Notification/notificationSlice';
 import routeReducer from '../components/Routes/routeSlice';
 import settingsReducer from '../components/SettingsPage/settingsSlice';
+import textbookReducer from '../components/TextbookPage/textbookSlice';
+import dictionaryReducer from '../components/DictionaryPage/dictionarySlice';
+import gameReducer from '../components/Games/gameSlice';
 import savannahReducer from '../components/Games/SavannahPage/savannahSlice';
 
 export const store = configureStore({
@@ -14,6 +16,8 @@ export const store = configureStore({
     notification: notificationReducer,
     route: routeReducer,
     settings: settingsReducer,
+    textbook: textbookReducer,
+    dictionary: dictionaryReducer,
     game: gameReducer,
     savannah: savannahReducer,
   },

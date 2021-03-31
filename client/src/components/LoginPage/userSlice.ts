@@ -24,6 +24,9 @@ import {
   showNotificationError,
   showNotificationSuccess,
 } from '../common/Notification/notificationSlice';
+import { clearLocalSettings } from '../../common/helpers/localSettings';
+import { clearCurrentGroupPage } from '../../common/helpers/localCurrentPage';
+import { clearDictionaryDifficultyPage } from '../../common/helpers/localDictionaryPage';
 
 interface User {
   userId: string;
@@ -108,6 +111,9 @@ export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
 export const logoutUser = (): AppThunk => async (dispatch) => {
   clearAllTokens();
   clearLocalAllUserData();
+  clearLocalSettings();
+  clearCurrentGroupPage();
+  clearDictionaryDifficultyPage();
   dispatch(setUser({ userId: '', name: '', avatar: '', email: '' }));
 };
 

@@ -31,3 +31,24 @@ export const wordEmpty = {
   textMeaningTranslate: '',
   textExampleTranslate: '',
 };
+
+export interface IUserWord {
+  difficulty: string;
+  optional: {
+    correctCount: number;
+    errorCount: number;
+  };
+}
+
+export const clearUserWord = {
+  difficulty: '',
+  optional: {
+    correctCount: 0,
+    errorCount: 0,
+  },
+};
+
+export interface IExtWord extends IWord {
+  _id: string;
+  userWord: IUserWord;
+}

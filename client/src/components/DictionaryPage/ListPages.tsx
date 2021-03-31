@@ -4,14 +4,21 @@ import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import CardWord from './CardWord/CardWord';
+// import CardWord from './CardWord';
 import {
   getCurrentPage,
   setCurrentPage,
 } from '../../common/helpers/localCurrentPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { activeWords, fetchActiveWords } from './textbookSlice';
-import { userStore } from '../LoginPage/userSlice';
+import { activeGroup } from '../TextbookPage/textbookSlice';
+import {
+  countPages,
+  dictionaryPage,
+  dictionaryWords,
+  fetchDictionaryWords,
+  saveDictionaryPage,
+} from './dictionarySlice';
+import CardWord from '../TextbookPage/CardWord/CardWord';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,31 +42,24 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface Props {
-  group: number;
-}
-
-export default function ListPages({ group }: Props) {
+export default function ListPages() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const words = useSelector(activeWords);
-
-  const [page, setPage] = useState(getCurrentPage());
+  const words = useSelector(dictionaryWords);
+  const count = useSelector(countPages);
+  const page = useSelector(dictionaryPage);
 
   useEffect(() => {
-    dispatch(fetchActiveWords({ group, page }));
+    dispatch(fetchDictionaryWords());
   }, []);
 
   const handleChangePage = (ev: object, pg: number) => {
-    setPage(pg - 1);
-    setCurrentPage(pg - 1);
-    dispatch(fetchActiveWords({ group, page: pg - 1 }));
+    dispatch(saveDictionaryPage(pg - 1));
   };
 
   return (
     <Container className={classes.root}>
       <div className={classes.page}>
-        {/*<CardWord word={tempWord} />*/}
         <Grid container direction='column' spacing={2}>
           {words.map((word) => (
             <Grid key={word.id} item>
@@ -70,7 +70,7 @@ export default function ListPages({ group }: Props) {
       </div>
       <Pagination
         className={classes.paginator}
-        count={30}
+        count={count}
         color='primary'
         page={page + 1}
         onChange={handleChangePage}
