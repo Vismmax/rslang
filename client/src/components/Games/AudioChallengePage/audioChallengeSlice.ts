@@ -12,7 +12,7 @@ import {
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
 
-interface SavannahState {
+interface AudioChallengeState {
   isLoading: boolean;
   words: IWord[];
   baseWords: IWord[];
@@ -21,7 +21,7 @@ interface SavannahState {
   userId: string | null;
 }
 
-const initialState: SavannahState = {
+const initialState: AudioChallengeState = {
   isLoading: false,
   words: [],
   baseWords: [],
@@ -30,16 +30,13 @@ const initialState: SavannahState = {
   userId: null,
 };
 
-export const savannahSlice = createSlice({
-  name: 'savannah',
+export const audioChallengeSlice = createSlice({
+  name: 'audioChallenge',
   initialState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    // addWords: (state, action: PayloadAction<IWord[]>) => {
-    //   state.words.push(...action.payload);
-    // },
     setWords: (state, action: PayloadAction<IWord[]>) => {
       state.words = action.payload;
     },
@@ -58,7 +55,7 @@ export const savannahSlice = createSlice({
     setUserId: (state, action: PayloadAction<string | null>) => {
       state.userId = action.payload;
     },
-    clearSavannah: (state) => {
+    clearAudioChallenge: (state) => {
       return initialState;
     },
   },
@@ -66,44 +63,56 @@ export const savannahSlice = createSlice({
 
 export const {
   setIsLoading,
-  // addWords,
   setWords,
   setBaseWords,
   nextActiveWord,
   setActiveWord,
   setActiveVariants,
   setUserId,
-  clearSavannah,
-} = savannahSlice.actions;
+  clearAudioChallenge,
+} = audioChallengeSlice.actions;
 
-export const initSavannah = (): AppThunk => async (dispatch, getState) => {
+export const initAudioChallenge = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   dispatch(setUserId(userId));
   const data = getState().game.data;
-  console.log('initSavannah :', userId, data);
-  const words = await loadWords({ data, userId, count: 30 });
+  console.log('initAudioChallenge :', userId, data);
+  const words = await loadWords({
+    data,
+    userId,
+    count: getState().settings.audioChallenge.countWords,
+  });
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
 };
 
-export const nextWordSavannah = (): AppThunk => async (dispatch, getState) => {
+export const nextWordAudioChallenge = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
   dispatch(nextActiveWord());
   const variants = [
     ...shuffleArrayCount(
-      [...getState().savannah.baseWords],
-      getState().settings.savannah.countVariants - 1,
+      [...getState().audioChallenge.baseWords],
+      getState().settings.audioChallenge.countVariants - 1,
     ),
-    getState().savannah.activeWord,
+    getState().audioChallenge.activeWord,
   ];
   dispatch(setActiveVariants(shuffleArray(variants)));
 };
 
-export const isLoadingSavannah = (state: RootState) => state.savannah.isLoading;
-export const activeWordSavannah = (state: RootState) =>
-  state.savannah.activeWord;
-export const activeVariantsSavannah = (state: RootState) =>
-  state.savannah.activeVariants;
+export const isLoadingAudioChallenge = (state: RootState) =>
+  state.audioChallenge.isLoading;
+export const activeWordAudioChallenge = (state: RootState) =>
+  state.audioChallenge.activeWord;
+export const activeVariantsAudioChallenge = (state: RootState) =>
+  state.audioChallenge.activeVariants;
+export const allWordsAudioChallenge = (state: RootState) =>
+  state.audioChallenge.baseWords;
 
-export default savannahSlice.reducer;
+export default audioChallengeSlice.reducer;

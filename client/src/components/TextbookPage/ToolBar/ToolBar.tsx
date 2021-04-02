@@ -7,7 +7,10 @@ import Settings from './Settings';
 import Games from './Games';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
+  root: {
+    position: 'sticky',
+    top: 0,
+  },
   title: {
     flexGrow: 1,
     marginLeft: theme.spacing(2),

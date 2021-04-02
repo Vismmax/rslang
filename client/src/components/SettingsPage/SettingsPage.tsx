@@ -96,28 +96,28 @@ export default function SettingsPage() {
               Настройки игр
             </Typography>
             <Grid container spacing={10}>
-              <Grid item xs={12} sm={6}>
+              <Grid item container xs={12} sm={6}>
                 <SettingsSavannah
                   settings={savannah}
                   // onChange={handleOnChangeSettingsSavannah}
                   onChange={handleChangeSettings}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item container xs={12} sm={6}>
                 <SettingsAudioChallenge
                   settings={audioChallenge}
                   // onChange={handleOnChangeSettingsAudioChallenge}
                   onChange={handleChangeSettings}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item container xs={12} sm={6}>
                 <SettingsSprint
                   settings={sprint}
                   // onChange={handleOnChangeSettingsSprint}
                   onChange={handleChangeSettings}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item container xs={12} sm={6}>
                 <SettingsFindCouple
                   settings={findCouple}
                   // onChange={handleOnChangeSettingsFindCouple}

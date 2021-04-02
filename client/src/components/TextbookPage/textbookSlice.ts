@@ -9,7 +9,7 @@ import {
   createUserWord,
   getActiveWords,
   getActiveWordsByUser,
-  getRandomWordsByGroup,
+  // getRandomWordsByGroup,
   IUserWordResponse,
   updateUserWord,
 } from '../../api/services/wordsService';
@@ -19,6 +19,7 @@ import {
   getCurrentGroup,
   getCurrentPage,
   setCurrentGroup,
+  setCurrentPage,
 } from '../../common/helpers/localCurrentPage';
 
 interface TextbookState {
@@ -50,22 +51,22 @@ export const textbookSlice = createSlice({
     setActiveWords: (state, action: PayloadAction<IExtWord[]>) => {
       state.activeWords = action.payload;
     },
-    setUserWord: (
-      state,
-      action: PayloadAction<{ id: string; userWord: IUserWord }>,
-    ) => {
-      if (action.payload.userWord.difficulty === 'delete') {
-        state.activeWords = state.activeWords.filter(
-          (word) => word.id !== action.payload.id,
-        );
-      } else {
-        state.activeWords = state.activeWords.map((word) =>
-          word.id === action.payload.id
-            ? { ...word, userWord: action.payload.userWord }
-            : word,
-        );
-      }
-    },
+    // setUserWord: (
+    //   state,
+    //   action: PayloadAction<{ id: string; userWord: IUserWord }>,
+    // ) => {
+    //   if (action.payload.userWord.difficulty === 'delete') {
+    //     state.activeWords = state.activeWords.filter(
+    //       (word) => word.id !== action.payload.id,
+    //     );
+    //   } else {
+    //     state.activeWords = state.activeWords.map((word) =>
+    //       word.id === action.payload.id
+    //         ? { ...word, userWord: action.payload.userWord }
+    //         : word,
+    //     );
+    //   }
+    // },
     setActiveGroup: (state, action: PayloadAction<number>) => {
       state.activeGroup = action.payload;
     },
@@ -78,20 +79,16 @@ export const textbookSlice = createSlice({
 export const {
   setIsLoading,
   setActiveWords,
-  setUserWord,
+  // setUserWord,
   setIdLoadingWord,
   setActiveGroup,
   setActivePage,
 } = textbookSlice.actions;
 
-export const fetchActiveWords = ({
-  group,
-  page,
-}: {
-  group: number;
-  page: number;
-}): AppThunk => async (dispatch, getState) => {
+export const fetchActiveWords = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  const group = getState().textbook.activeGroup;
+  const page = getState().textbook.activePage;
   const userId = getLocalUserId();
   if (userId) {
     const words = await getActiveWordsByUser({ userId, group, page });
@@ -103,6 +100,7 @@ export const fetchActiveWords = ({
   }
 
   dispatch(setIsLoading(false));
+  dispatch(setIdLoadingWord(''));
 };
 
 export const fetchSetUserWord = ({
@@ -118,28 +116,24 @@ export const fetchSetUserWord = ({
   dispatch(setIdLoadingWord(id));
   const userId = getLocalUserId();
   if (userId) {
-    let newUserWordResponse = {} as IUserWordResponse;
     const param = {
       userId,
       wordId: id,
       userWord,
     };
-    if (create) {
-      newUserWordResponse = (await createUserWord(param)) as IUserWordResponse;
-    } else {
-      newUserWordResponse = (await updateUserWord(param)) as IUserWordResponse;
-    }
+    const newUserWordResponse = create
+      ? await createUserWord(param)
+      : await updateUserWord(param);
     if (newUserWordResponse.error) {
       dispatch(showNotificationError('Невожможно произвести действие'));
-      // dispatch(setIsLoading(false));
       dispatch(setIdLoadingWord(''));
       return;
     }
-    const { difficulty, optional } = { ...newUserWordResponse };
-    dispatch(setUserWord({ id, userWord: { difficulty, optional } }));
+    // const { difficulty, optional } = { ...newUserWordResponse };
+    // dispatch(setUserWord({ id, userWord: { difficulty, optional } }));
+    dispatch(fetchActiveWords());
   }
-  // dispatch(setIsLoading(false));
-  dispatch(setIdLoadingWord(''));
+  // dispatch(setIdLoadingWord(''));
 };
 
 export const fetchWordSetDifficulty = ({
@@ -163,6 +157,7 @@ export const saveActiveGroup = (group: number): AppThunk => async (
 ) => {
   dispatch(setActiveGroup(group));
   setCurrentGroup(group);
+  dispatch(saveActivePage(0));
 };
 
 export const saveActivePage = (page: number): AppThunk => async (
@@ -170,6 +165,8 @@ export const saveActivePage = (page: number): AppThunk => async (
   getState,
 ) => {
   dispatch(setActivePage(page));
+  setCurrentPage(page);
+  dispatch(fetchActiveWords());
 };
 
 export const loadActivePage = (): AppThunk => async (dispatch, getState) => {

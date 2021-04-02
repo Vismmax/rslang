@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import EcoIcon from '@material-ui/icons/Eco';
@@ -12,6 +12,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import { useDispatch } from 'react-redux';
+import { setRouteGame } from '../../Games/gameSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +45,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Games() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -57,6 +61,7 @@ export default function Games() {
   };
 
   const handleClick = (rout: string) => () => {
+    dispatch(setRouteGame(location.pathname));
     history.push(rout);
     setAnchorEl(null);
   };

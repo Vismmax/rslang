@@ -8,6 +8,7 @@ import textbookReducer from '../components/TextbookPage/textbookSlice';
 import dictionaryReducer from '../components/DictionaryPage/dictionarySlice';
 import gameReducer from '../components/Games/gameSlice';
 import savannahReducer from '../components/Games/SavannahPage/savannahSlice';
+import audioChallengeReducer from '../components/Games/AudioChallengePage/audioChallengeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     dictionary: dictionaryReducer,
     game: gameReducer,
     savannah: savannahReducer,
+    audioChallenge: audioChallengeReducer,
   },
 });
 

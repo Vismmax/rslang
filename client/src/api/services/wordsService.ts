@@ -47,13 +47,13 @@ export const getWords = async ({
   return words;
 };
 
-export const getRandomWordsByGroup = async (
-  group: number,
-): Promise<IWord[]> => {
-  const page = getRandomNumber(0, 29);
-  const words = (await webApi.get(URL, { group, page })) as IWord[];
-  return words;
-};
+// export const getRandomWordsByGroup = async (
+//   group: number,
+// ): Promise<IWord[]> => {
+//   const page = getRandomNumber(0, 29);
+//   const words = (await webApi.get(URL, { group, page })) as IWord[];
+//   return words;
+// };
 
 export const getWordById = async (id: string): Promise<IWord> => {
   const word = (await webApi.get(`${URL}/${id}`)) as IWord;
@@ -120,6 +120,17 @@ export const updateUserWord = async ({
   return (await webApi.put(url, userWord)) as IUserWordResponse;
 };
 
+export const deleteUserWord = async ({
+  userId,
+  wordId,
+}: {
+  userId: string;
+  wordId: string;
+}): Promise<{ error?: any }> => {
+  const url = `/users/${userId}/words/${wordId}`;
+  return await webApi.delete(url);
+};
+
 export const getDictionaryWords = async ({
   userId,
   group,
@@ -133,7 +144,7 @@ export const getDictionaryWords = async ({
 }): Promise<ExtWordsResponseObj> => {
   const url = `/users/${userId}/aggregatedWords`;
   const filter = `{"$or":[{"userWord.difficulty":"${difficulty}"}${
-    difficulty === 'hard' ? ',{"userWord.difficulty":"work"}' : ''
+    difficulty === 'work' ? ',{"userWord.difficulty":"hard"}' : ''
   }]}`;
   const params = {
     group,

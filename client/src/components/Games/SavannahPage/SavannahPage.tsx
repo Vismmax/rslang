@@ -5,6 +5,8 @@ import SavannahGame from './SavannahGame';
 import { useSelector } from 'react-redux';
 import { isLoadingSavannah } from './savannahSlice';
 import Spinner from '../../common/Spinner';
+import { isStartGame } from '../gameSlice';
+import SavannahInit from './SavannahInit';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,11 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SavannahPage() {
   const classes = useStyles();
   const isLoading = useSelector(isLoadingSavannah);
+  const isStart = useSelector(isStartGame);
 
   return (
     <GameLayout className={classes.background}>
-      {isLoading && <Spinner />}
-      <SavannahGame />
+      <SavannahInit>
+        {isStart && !isLoading && <SavannahGame />}
+        {isStart && isLoading && <Spinner />}
+      </SavannahInit>
     </GameLayout>
   );
 }

@@ -10,7 +10,12 @@ import {
   setCurrentPage,
 } from '../../common/helpers/localCurrentPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { activeWords, fetchActiveWords } from './textbookSlice';
+import {
+  activePage,
+  activeWords,
+  fetchActiveWords,
+  saveActivePage,
+} from './textbookSlice';
 import { userStore } from '../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     page: {
       flexGrow: 1,
+      paddingBottom: theme.spacing(3),
     },
     paginator: {
       display: 'flex',
@@ -43,17 +49,17 @@ export default function ListPages({ group }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const words = useSelector(activeWords);
-
-  const [page, setPage] = useState(getCurrentPage());
+  const page = useSelector(activePage);
 
   useEffect(() => {
-    dispatch(fetchActiveWords({ group, page }));
+    dispatch(fetchActiveWords());
   }, []);
 
   const handleChangePage = (ev: object, pg: number) => {
-    setPage(pg - 1);
-    setCurrentPage(pg - 1);
-    dispatch(fetchActiveWords({ group, page: pg - 1 }));
+    // setPage(pg - 1);
+    // setCurrentPage(pg - 1);
+    dispatch(saveActivePage(pg - 1));
+    // dispatch(fetchActiveWords({ group, page: pg - 1 }));
   };
 
   return (

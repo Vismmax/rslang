@@ -5,18 +5,23 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    backdrop: {
+    root: {
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
+    },
+    inner: {
+      position: 'absolute',
     },
   }),
 );
 
-export default function Spinner({ open = true }) {
+export default function Spinner({ open = true, inner = false }) {
   const classes = useStyles();
 
+  const classRoot = inner ? classes.root + ' ' + classes.inner : classes.root;
+
   return (
-    <Backdrop className={classes.backdrop} open={open}>
+    <Backdrop className={classRoot} open={open}>
       <CircularProgress size={80} color='inherit' />
     </Backdrop>
   );

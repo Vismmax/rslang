@@ -1,21 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useDispatch } from 'react-redux';
-import { loadWords, resetGame } from '../gameSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,24 +29,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   open: boolean;
+  onChange: (level: number) => void;
+  onCancel: () => void;
 }
 
-export default function SettingsGame({ open = false }: Props) {
+export default function SettingsGame({ open, onChange, onCancel }: Props) {
   const classes = useStyles();
 
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const [level, setLevel] = React.useState('');
 
   const handleStart = () => {
-    dispatch(loadWords(Number(level)));
+    onChange(Number(level));
   };
 
   const handleClose = () => {
-    dispatch(resetGame());
-    history.goBack();
+    onCancel();
   };
-
-  const [level, setLevel] = React.useState('');
 
   const handleChangeLevel = (event: React.ChangeEvent<{ value: unknown }>) => {
     setLevel(event.target.value as string);
@@ -101,7 +92,7 @@ export default function SettingsGame({ open = false }: Props) {
             variant='contained'
             onClick={handleStart}
             color='primary'
-            disabled={!level}
+            disabled={level === ''}
           >
             Старт
           </Button>

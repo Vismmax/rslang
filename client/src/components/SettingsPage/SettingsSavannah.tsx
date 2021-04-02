@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { ISettingsSavannah } from './settingsSlice';
 import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,7 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3),
     },
     input: {
-      margin: theme.spacing(3, 0),
+      width: '100%',
+      margin: theme.spacing(2, 0),
     },
   }),
 );
@@ -42,19 +48,14 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
     });
   };
 
-  // const handleChangeTimeWord = (ev: Ev) => {
-  //   onChange({
-  //     ...settings,
-  //     timeWord: Number(ev.target.value),
-  //   });
-  // };
-
-  // const handleChangeCountError = (ev: Ev) => {
-  //   onChange({
-  //     ...settings,
-  //     countError: Number(ev.target.value),
-  //   });
-  // };
+  const handleSelectChange = (
+    ev: ChangeEvent<{ value: unknown; name?: string | undefined }>,
+  ) => {
+    onChange('savannah', {
+      ...settings,
+      [ev.target.name as string]: ev.target.value as number,
+    });
+  };
 
   return (
     <Paper elevation={3} className={classes.root}>
@@ -62,33 +63,66 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
         Саванна
       </Typography>
       <div>
-        <TextField
-          className={classes.input}
-          label='Время'
-          helperText='Время показа одного слова'
-          type='number'
-          fullWidth
-          InputProps={{
-            endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,
-          }}
-          name='timeWord'
-          value={settings.timeWord}
-          // onChange={handleChangeTimeWord}
-          onChange={handleChange}
-        />
-        <TextField
-          label='Количество ошибок'
-          helperText='Количество возможных ошибок'
-          type='number'
-          fullWidth
-          InputProps={{
-            endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,
-          }}
-          name='countError'
-          value={settings.countError}
-          // onChange={handleChangeCountError}
-          onChange={handleChange}
-        />
+        {/*<TextField*/}
+        {/*  className={classes.input}*/}
+        {/*  label='Время'*/}
+        {/*  helperText='Время показа одного слова'*/}
+        {/*  type='number'*/}
+        {/*  fullWidth*/}
+        {/*  InputProps={{*/}
+        {/*    endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,*/}
+        {/*  }}*/}
+        {/*  name='timeWord'*/}
+        {/*  value={settings.timeWord}*/}
+        {/*  onChange={handleChange}*/}
+        {/*/>*/}
+
+        <FormControl className={classes.input}>
+          <InputLabel id='timeWordSavannah'>Время</InputLabel>
+          <Select
+            labelId='timeWordSavannah'
+            name='timeWord'
+            value={settings.timeWord}
+            onChange={handleSelectChange}
+          >
+            <MenuItem value={4}>Я Спиди Гонзалес</MenuItem>
+            {new Array(14).fill(1).map((n, id) => (
+              <MenuItem value={id + 5}>{id + 5} сек</MenuItem>
+            ))}
+          </Select>
+          <FormHelperText>Время показа одного слова в секундах</FormHelperText>
+        </FormControl>
+
+        <FormControl className={classes.input}>
+          <InputLabel id='countErrorSavannah'>Количество ошибок</InputLabel>
+          <Select
+            labelId='countErrorSavannah'
+            name='countError'
+            value={settings.countError}
+            onChange={handleSelectChange}
+          >
+            <MenuItem value={0}>Без права на ошибку</MenuItem>
+            {new Array(9).fill(1).map((n, id) => (
+              <MenuItem value={id + 1}>{id + 1}</MenuItem>
+            ))}
+          </Select>
+          <FormHelperText>Количество возможных ошибок</FormHelperText>
+        </FormControl>
+
+        <FormControl className={classes.input}>
+          <InputLabel id='countVariantsSavannah'>Количество ответов</InputLabel>
+          <Select
+            labelId='countVariantsSavannah'
+            name='countVariants'
+            value={settings.countVariants}
+            onChange={handleSelectChange}
+          >
+            {new Array(8).fill(1).map((n, id) => (
+              <MenuItem value={id + 2}>{id + 2}</MenuItem>
+            ))}
+          </Select>
+          <FormHelperText>Количество вариантов ответов</FormHelperText>
+        </FormControl>
       </div>
     </Paper>
   );

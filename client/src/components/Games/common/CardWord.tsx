@@ -50,9 +50,18 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   isOpen: boolean;
   word: IWord;
+  questionContent: JSX.Element;
+  showTranslate?: boolean;
+  paper?: boolean;
 }
 
-export default function CardWord({ isOpen, word }: Props) {
+export default function CardWord({
+  isOpen,
+  word,
+  questionContent,
+  showTranslate = true,
+  paper = false,
+}: Props) {
   const classes = useStyles();
 
   const [speak] = useSound(word.audio);
@@ -64,12 +73,19 @@ export default function CardWord({ isOpen, word }: Props) {
   return (
     <div className={classes.root}>
       <ReactCardFlip isFlipped={isOpen} flipDirection='horizontal'>
-        <Paper
-          className={`${classes.card} ${classes.cardQuestion}`}
-          elevation={3}
-        >
-          <Typography variant='h3'>{word.word}</Typography>
-        </Paper>
+        {paper ? (
+          <Paper
+            className={`${classes.card} ${classes.cardQuestion}`}
+            elevation={3}
+          >
+            {questionContent}
+            {/*<Typography variant='h3'>{word.word}</Typography>*/}
+          </Paper>
+        ) : (
+          <div className={`${classes.card} ${classes.cardQuestion}`}>
+            {questionContent}
+          </div>
+        )}
 
         <Paper
           className={`${classes.card} ${classes.cardAnswer}`}
@@ -107,14 +123,20 @@ export default function CardWord({ isOpen, word }: Props) {
                   <Grid item container justify='center' alignItems='center'>
                     <Typography variant='h5'>{word.word}</Typography>
                   </Grid>
-                  <Grid item container justify='center' alignItems='center'>
-                    <Typography variant='subtitle1'>
-                      {word.transcription}
-                    </Typography>
-                  </Grid>
-                  <Grid item container justify='center' alignItems='center'>
-                    <Typography variant='h6'>{word.wordTranslate}</Typography>
-                  </Grid>
+                  {showTranslate && (
+                    <>
+                      <Grid item container justify='center' alignItems='center'>
+                        <Typography variant='subtitle1'>
+                          {word.transcription}
+                        </Typography>
+                      </Grid>
+                      <Grid item container justify='center' alignItems='center'>
+                        <Typography variant='h6'>
+                          {word.wordTranslate}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
                 </Grid>
               </Grid>
             </Grid>

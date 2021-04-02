@@ -9,7 +9,10 @@ import {
   setLocalDictionaryPage,
 } from '../../common/helpers/localDictionaryPage';
 import { getLocalUserId } from '../../common/helpers/userHelper';
-import { getDictionaryWords } from '../../api/services/wordsService';
+import {
+  deleteUserWord,
+  getDictionaryWords,
+} from '../../api/services/wordsService';
 
 interface TextbookState {
   isLoading: boolean;
@@ -42,22 +45,6 @@ export const dictionarySlice = createSlice({
     setDictionaryWords: (state, action: PayloadAction<IExtWord[]>) => {
       state.dictionaryWords = action.payload;
     },
-    // setUserWord: (
-    //   state,
-    //   action: PayloadAction<{ id: string; userWord: IUserWord }>,
-    // ) => {
-    //   if (action.payload.userWord.difficulty === 'delete') {
-    //     state.dictionaryWords = state.dictionaryWords.filter(
-    //       (word) => word.id !== action.payload.id,
-    //     );
-    //   } else {
-    //     state.dictionaryWords = state.dictionaryWords.map((word) =>
-    //       word.id === action.payload.id
-    //         ? { ...word, userWord: action.payload.userWord }
-    //         : word,
-    //     );
-    //   }
-    // },
     setDictionaryDifficulty: (state, action: PayloadAction<DifficultyEnum>) => {
       state.dictionaryDifficulty = action.payload;
     },
@@ -101,59 +88,24 @@ export const fetchDictionaryWords = (): AppThunk => async (
   }
 
   dispatch(setIsLoading(false));
+  dispatch(setIdLoadingWord(''));
 };
 
-// export const fetchSetUserWord = ({
-//   id,
-//   userWord,
-//   create,
-// }: {
-//   id: string;
-//   userWord: IUserWord;
-//   create: boolean;
-// }): AppThunk => async (dispatch, getState) => {
-//   // dispatch(setIsLoading(true));
-//   dispatch(setIdLoadingWord(id));
-//   const userId = getLocalUserId();
-//   if (userId) {
-//     let newUserWordResponse = {} as IUserWordResponse;
-//     const param = {
-//       userId,
-//       wordId: id,
-//       userWord,
-//     };
-//     if (create) {
-//       newUserWordResponse = (await createUserWord(param)) as IUserWordResponse;
-//     } else {
-//       newUserWordResponse = (await updateUserWord(param)) as IUserWordResponse;
-//     }
-//     if (newUserWordResponse.error) {
-//       dispatch(showNotificationError('Невожможно произвести действие'));
-//       // dispatch(setIsLoading(false));
-//       dispatch(setIdLoadingWord(''));
-//       return;
-//     }
-//     const { difficulty, optional } = { ...newUserWordResponse };
-//     dispatch(setUserWord({ id, userWord: { difficulty, optional } }));
-//   }
-//   // dispatch(setIsLoading(false));
-//   dispatch(setIdLoadingWord(''));
-// };
-
-// export const fetchWordSetDifficulty = ({
-//   id,
-//   difficulty,
-// }: {
-//   id: string;
-//   difficulty: string;
-// }): AppThunk => async (dispatch, getState) => {
-//   const word = getState().dictionary.dictionaryWords.find(
-//     (word) => word.id === id,
-//   ) as IExtWord;
-//   const userWord: IUserWord = { ...word.userWord, difficulty };
-//   const create = !word.userWord.difficulty;
-//   dispatch(fetchSetUserWord({ id, userWord, create }));
-// };
+export const fetchDeleteUserWord = (wordId: string): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  dispatch(setIdLoadingWord(wordId));
+  const userId = getLocalUserId();
+  if (userId) {
+    const res = await deleteUserWord({ userId, wordId });
+    if (res.error) {
+      dispatch(setIdLoadingWord(''));
+      return;
+    }
+    dispatch(fetchDictionaryWords());
+  }
+};
 
 export const saveDictionaryDifficulty = (
   difficulty: DifficultyEnum,

@@ -18,7 +18,7 @@ import {
   fetchDictionaryWords,
   saveDictionaryPage,
 } from './dictionarySlice';
-import CardWord from '../TextbookPage/CardWord/CardWord';
+import CardDictionary from './CardDictionary/CardDictionary';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     page: {
       flexGrow: 1,
+      paddingBottom: theme.spacing(3),
     },
     paginator: {
       display: 'flex',
@@ -63,7 +64,7 @@ export default function ListPages() {
         <Grid container direction='column' spacing={2}>
           {words.map((word) => (
             <Grid key={word.id} item>
-              <CardWord word={word} />
+              <CardDictionary word={word} />
             </Grid>
           ))}
         </Grid>

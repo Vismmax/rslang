@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../redux/store';
-import { getRandomWordsByGroup } from '../../api/services/wordsService';
-import {
-  setIsLoading,
-  setIsRunning,
-  setLevel,
-  setWords,
-} from '../Games/gameSlice';
+import { setIsLoading } from '../Games/gameSlice';
 import {
   getLocalSettings,
   setLocalSettings,
@@ -22,11 +16,12 @@ export interface ISettingsTextbook {
 export interface ISettingsSavannah {
   timeWord: number;
   countError: number;
-  countVariants?: number;
+  countVariants: number;
 }
 export interface ISettingsAudioChallenge {
-  timeWord: number;
-  countError: number;
+  countWords: number;
+  countVariants: number;
+  showTranslate: boolean;
 }
 export interface ISettingsSprint {
   timeWord: number;
@@ -62,13 +57,14 @@ const initialState: ISettingsState = {
     showButtons: true,
   },
   savannah: {
-    timeWord: 5,
+    timeWord: 10,
     countError: 5,
     countVariants: 4,
   },
   audioChallenge: {
-    timeWord: 5,
-    countError: 5,
+    countWords: 10,
+    countVariants: 5,
+    showTranslate: true,
   },
   sprint: {
     timeWord: 5,

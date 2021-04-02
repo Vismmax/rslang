@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+      zIndex: theme.zIndex.drawer - 1,
       // width: '100%',
       // [theme.breakpoints.up('sm')]: {
       //   bottom: theme.spacing(8),
@@ -46,10 +47,16 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   words: IWord[];
   trueWord: IWord;
+  show?: boolean;
   onClick: (isTrue: boolean) => void;
 }
 
-export default function ButtonsWords({ words, trueWord, onClick }: Props) {
+export default function ButtonsWords({
+  words,
+  trueWord,
+  onClick,
+  show = false,
+}: Props) {
   const classes = useStyles();
   const [isShowTrue, setIsShowTrue] = useState(false);
   const [clickButtonId, setClickButtonId] = useState('');
@@ -58,6 +65,10 @@ export default function ButtonsWords({ words, trueWord, onClick }: Props) {
     setIsShowTrue(false);
     setClickButtonId('');
   }, [words, trueWord]);
+
+  useEffect(() => {
+    if (show && !isShowTrue) setIsShowTrue(true);
+  }, [show]);
 
   const handleClick = (word: IWord) => () => {
     if (isShowTrue) return;
