@@ -36,7 +36,7 @@ interface Props {
 
 export default function AudioChallengeCard({ isOpen, word }: Props) {
   const classes = useStyles();
-  const showTranslate = useSelector(settingsAudioChallenge);
+  const settings = useSelector(settingsAudioChallenge);
 
   // @ts-ignore
   const [speak] = useSound(word.audio, { autoplay: true });
@@ -49,7 +49,7 @@ export default function AudioChallengeCard({ isOpen, word }: Props) {
     <CardWord
       isOpen={isOpen}
       word={word}
-      showTranslate={showTranslate.showTranslate}
+      showTranslate={settings.showTranslate}
       questionContent={
         // <div className={classes.root}>
         <Fab className={classes.button} onClick={handleSpeak}>

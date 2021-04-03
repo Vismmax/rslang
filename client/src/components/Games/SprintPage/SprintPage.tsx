@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
       // backgroundSize: 'cover',
       // backgroundPosition: 'center',
     },
+    background: {
+      backgroundImage: 'url("/img/sprint.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
   }),
 );
 
@@ -19,7 +24,7 @@ export default function SprintPage() {
   const classes = useStyles();
 
   return (
-    <GameLayout>
+    <GameLayout className={classes.background}>
       <div></div>
     </GameLayout>
   );

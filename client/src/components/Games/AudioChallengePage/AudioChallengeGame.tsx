@@ -85,8 +85,6 @@ export default function AudioChallengeGame() {
       finishGame();
       return;
     }
-    // setIsOpenCard(false);
-    // setShowTrueButton(false);
   }, [word]);
 
   const handleResult = (result: boolean) => {

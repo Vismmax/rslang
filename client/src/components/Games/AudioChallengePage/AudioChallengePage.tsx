@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: '100%',
     },
-
     background: {
       backgroundImage: 'url("/img/audiochallenge.jpg")',
       backgroundSize: 'cover',
