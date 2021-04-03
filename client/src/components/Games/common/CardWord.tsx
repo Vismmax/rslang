@@ -141,8 +141,6 @@ export default function CardWord({
               </Grid>
             </Grid>
           )}
-
-          {/*<div></div>*/}
         </Paper>
       </ReactCardFlip>
     </div>

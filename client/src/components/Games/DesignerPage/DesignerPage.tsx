@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function FindCouplePage() {
+export default function DesignerPage() {
   const classes = useStyles();
 
   return (

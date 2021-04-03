@@ -96,9 +96,13 @@ export const nextWordAudioChallenge = (): AppThunk => async (
   getState,
 ) => {
   dispatch(nextActiveWord());
+  const activeWord = getState().audioChallenge.activeWord;
+  const words = getState().audioChallenge.baseWords.filter(
+    (word) => word.id !== activeWord.id,
+  );
   const variants = [
     ...shuffleArrayCount(
-      [...getState().audioChallenge.baseWords],
+      words,
       getState().settings.audioChallenge.countVariants - 1,
     ),
     getState().audioChallenge.activeWord,
@@ -114,5 +118,7 @@ export const activeVariantsAudioChallenge = (state: RootState) =>
   state.audioChallenge.activeVariants;
 export const allWordsAudioChallenge = (state: RootState) =>
   state.audioChallenge.baseWords;
+export const countWordsAudioChallenge = (state: RootState) =>
+  state.audioChallenge.baseWords.length;
 
 export default audioChallengeSlice.reducer;

@@ -90,11 +90,12 @@ export const initSavannah = (): AppThunk => async (dispatch, getState) => {
 
 export const nextWordSavannah = (): AppThunk => async (dispatch, getState) => {
   dispatch(nextActiveWord());
+  const activeWord = getState().audioChallenge.activeWord;
+  const words = getState().audioChallenge.baseWords.filter(
+    (word) => word.id !== activeWord.id,
+  );
   const variants = [
-    ...shuffleArrayCount(
-      [...getState().savannah.baseWords],
-      getState().settings.savannah.countVariants - 1,
-    ),
+    ...shuffleArrayCount(words, getState().settings.savannah.countVariants - 1),
     getState().savannah.activeWord,
   ];
   dispatch(setActiveVariants(shuffleArray(variants)));

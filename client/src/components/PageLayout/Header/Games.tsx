@@ -95,11 +95,11 @@ export default function Games() {
           </ListItemIcon>
           Спринт
         </MenuItem>
-        <MenuItem component={RouterLink} to='/couple'>
+        <MenuItem component={RouterLink} to='/designer'>
           <ListItemIcon>
             <ViewModuleIcon />
           </ListItemIcon>
-          Найди пару
+          Конструктор
         </MenuItem>
       </Menu>
     </div>

@@ -38,7 +38,8 @@ export default function AudioChallengeCard({ isOpen, word }: Props) {
   const classes = useStyles();
   const showTranslate = useSelector(settingsAudioChallenge);
 
-  const [speak] = useSound(word.audio);
+  // @ts-ignore
+  const [speak] = useSound(word.audio, { autoplay: true });
 
   const handleSpeak = () => {
     speak();

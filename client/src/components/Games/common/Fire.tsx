@@ -14,15 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       justifyContent: 'flex-end',
-      // position: 'absolute',
-      // top: theme.spacing(7),
-      // right: theme.spacing(1),
-      // [theme.breakpoints.up('sm')]: {
-      //   right: theme.spacing(2),
-      // },
-      // [theme.breakpoints.up('md')]: {
-      //   right: theme.spacing(3),
-      // },
     },
     icon: {
       fontSize: theme.typography.h6.fontSize,

@@ -94,13 +94,13 @@ export default function ListGames({ closeSideBar }: Props) {
             button
             className={classes.nested}
             component={RouterLink}
-            to='/couple'
+            to='/designer'
             onClick={closeSideBar}
           >
             <ListItemIcon>
               <ViewModuleIcon />
             </ListItemIcon>
-            <ListItemText primary='Найди пару' />
+            <ListItemText primary='Конструктор' />
           </ListItem>
         </List>
       </Collapse>

@@ -97,9 +97,9 @@ export default function Games() {
           className={classes.link}
           color='inherit'
           startIcon={<ViewModuleIcon />}
-          onClick={handleClick('/couple')}
+          onClick={handleClick('/designer')}
         >
-          Найди пару
+          Конструктор
         </Button>
       </div>
 
@@ -128,7 +128,7 @@ export default function Games() {
         <IconButton
           aria-label='settings'
           color='inherit'
-          onClick={handleClick('/couple')}
+          onClick={handleClick('/designer')}
         >
           <ViewModuleIcon />
         </IconButton>
@@ -177,11 +177,11 @@ export default function Games() {
             </ListItemIcon>
             Спринт
           </MenuItem>
-          <MenuItem onClick={handleClick('/couple')}>
+          <MenuItem onClick={handleClick('/designer')}>
             <ListItemIcon>
               <ViewModuleIcon />
             </ListItemIcon>
-            Найди пару
+            Конструктор
           </MenuItem>
         </Menu>
       </div>

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     background: {
-      backgroundImage: 'url("/img/g1.jpg")',
+      backgroundImage: 'url("/img/savannah.jpg")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },

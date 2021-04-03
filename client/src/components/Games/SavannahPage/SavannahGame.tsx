@@ -77,7 +77,7 @@ export default function SavannahGame() {
 
   const [reserveErrors, setReserveErrors] = useState(countError);
   const [showWord, setShowWord] = useState(false);
-  const [showTrueButton, setTrueShowButton] = useState(false);
+  const [showTrueButton, setShowTrueButton] = useState(false);
   const [start, setStart] = useState(false);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export default function SavannahGame() {
       finishGame();
       return;
     }
-    setTrueShowButton(false);
+    setShowTrueButton(false);
     setShowWord(true);
   }, [word]);
 
@@ -118,7 +118,7 @@ export default function SavannahGame() {
   };
 
   const handleEnteredWord = () => {
-    setTrueShowButton(true);
+    setShowTrueButton(true);
     handleResult(false);
   };
 

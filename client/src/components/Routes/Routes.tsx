@@ -6,7 +6,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import SavannahPage from '../Games/SavannahPage/SavannahPage';
 import AudioChallengePage from '../Games/AudioChallengePage/AudioChallengePage';
 import SprintPage from '../Games/SprintPage/SprintPage';
-import FindCouplePage from '../Games/FindCouplePage/FindCouplePage';
+import DesignerPage from '../Games/DesignerPage/DesignerPage';
 import SettingsPage from '../SettingsPage/SettingsPage';
 import LoginPage from '../LoginPage/LoginPage';
 import UserPage from '../UserPage/UserPage';
@@ -26,7 +26,7 @@ export default function Routes() {
         <Route path='/savannah' component={SavannahPage} />
         <Route path='/audioChallenge' component={AudioChallengePage} />
         <Route path='/sprint' component={SprintPage} />
-        <Route path='/couple' component={FindCouplePage} />
+        <Route path='/designer' component={DesignerPage} />
         <Route path='/statistics' component={StatisticsPage} />
         <PrivateRoute path='/settings' component={SettingsPage} />
         <Route path='/about' component={AboutPage} />

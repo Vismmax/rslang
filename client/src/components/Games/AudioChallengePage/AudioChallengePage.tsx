@@ -13,9 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       height: '100%',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
+    },
+
+    background: {
+      backgroundImage: 'url("/img/audiochallenge.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
     },
   }),
 );
@@ -26,7 +29,7 @@ export default function AudioChallengePage() {
   const isStart = useSelector(isStartGame);
 
   return (
-    <GameLayout>
+    <GameLayout className={classes.background}>
       <AudioChallengeInit>
         {isStart && !isLoading && <AudioChallengeGame />}
         {isStart && isLoading && <Spinner />}
