@@ -12,7 +12,7 @@ import {
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
 
-interface SavannahState {
+interface DesignerState {
   isLoading: boolean;
   words: IWord[];
   baseWords: IWord[];
@@ -20,7 +20,7 @@ interface SavannahState {
   activeVariants: IWord[];
 }
 
-const initialState: SavannahState = {
+const initialState: DesignerState = {
   isLoading: false,
   words: [],
   baseWords: [],
@@ -28,8 +28,8 @@ const initialState: SavannahState = {
   activeVariants: [],
 };
 
-export const savannahSlice = createSlice({
-  name: 'savannah',
+export const designerSlice = createSlice({
+  name: 'designer',
   initialState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -50,7 +50,7 @@ export const savannahSlice = createSlice({
     setActiveVariants: (state, action: PayloadAction<IWord[]>) => {
       state.activeVariants = action.payload;
     },
-    clearSavannah: (state) => {
+    clearDesigner: (state) => {
       return initialState;
     },
   },
@@ -63,38 +63,38 @@ export const {
   nextActiveWord,
   setActiveWord,
   setActiveVariants,
-  clearSavannah,
-} = savannahSlice.actions;
+  clearDesigner,
+} = designerSlice.actions;
 
-export const initSavannah = (): AppThunk => async (dispatch, getState) => {
+export const initDesigner = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   const data = getState().game.data;
-  console.log('initSavannah :', userId, data);
+  console.log('initDesigner :', userId, data);
   const words = await loadWords({ data, userId, count: 30 });
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
 };
 
-export const nextWordSavannah = (): AppThunk => async (dispatch, getState) => {
+export const nextWordDesigner = (): AppThunk => async (dispatch, getState) => {
   dispatch(nextActiveWord());
-  const activeWord = getState().savannah.activeWord;
-  const words = getState().savannah.baseWords.filter(
+  const activeWord = getState().designer.activeWord;
+  const words = getState().designer.baseWords.filter(
     (word) => word.id !== activeWord.id,
   );
   console.log('words: ', words);
-  const variants = [
-    ...shuffleArrayCount(words, getState().settings.savannah.countVariants - 1),
-    getState().savannah.activeWord,
-  ];
-  dispatch(setActiveVariants(shuffleArray(variants)));
+  // const variants = [
+  //   ...shuffleArrayCount(words, getState().settings.designer.countVariants - 1),
+  //   getState().designer.activeWord,
+  // ];
+  // dispatch(setActiveVariants(shuffleArray(variants)));
 };
 
-export const isLoadingSavannah = (state: RootState) => state.savannah.isLoading;
-export const activeWordSavannah = (state: RootState) =>
-  state.savannah.activeWord;
-export const activeVariantsSavannah = (state: RootState) =>
-  state.savannah.activeVariants;
+export const isLoadingDesigner = (state: RootState) => state.designer.isLoading;
+export const activeWordDesigner = (state: RootState) =>
+  state.designer.activeWord;
+export const activeVariantsDesigner = (state: RootState) =>
+  state.designer.activeVariants;
 
-export default savannahSlice.reducer;
+export default designerSlice.reducer;

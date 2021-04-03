@@ -24,18 +24,18 @@ export interface ISettingsAudioChallenge {
   showTranslate: boolean;
 }
 export interface ISettingsSprint {
-  timeWord: number;
-  countError: number;
+  timeGame: number;
+  showHelp: boolean;
 }
-export interface ISettingsFindCouple {
-  timeWord: number;
-  countError: number;
+export interface ISettingsDesigner {
+  countWords: number;
+  showTranslate: boolean;
 }
 export type ISettings =
   | ISettingsSavannah
   | ISettingsAudioChallenge
   | ISettingsSprint
-  | ISettingsFindCouple
+  | ISettingsDesigner
   | ISettingsTextbook;
 
 export interface IOneSettings {
@@ -48,7 +48,7 @@ export interface ISettingsState {
   savannah: ISettingsSavannah;
   audioChallenge: ISettingsAudioChallenge;
   sprint: ISettingsSprint;
-  findCouple: ISettingsFindCouple;
+  designer: ISettingsDesigner;
 }
 
 const initialState: ISettingsState = {
@@ -67,12 +67,12 @@ const initialState: ISettingsState = {
     showTranslate: true,
   },
   sprint: {
-    timeWord: 5,
-    countError: 5,
+    timeGame: 60,
+    showHelp: false,
   },
-  findCouple: {
-    timeWord: 5,
-    countError: 5,
+  designer: {
+    countWords: 10,
+    showTranslate: true,
   },
 };
 
@@ -102,11 +102,11 @@ export const settingsSlice = createSlice({
     // setSettingsSprint: (state, action: PayloadAction<ISettingsSprint>) => {
     //   state.sprint = action.payload;
     // },
-    // setSettingsFindCouple: (
+    // setSettingsDesigner: (
     //   state,
-    //   action: PayloadAction<ISettingsFindCouple>,
+    //   action: PayloadAction<ISettingsDesigner>,
     // ) => {
-    //   state.findCouple = action.payload;
+    //   state.designer = action.payload;
     // },
   },
 });
@@ -118,7 +118,7 @@ export const {
   // setSettingsSavannah,
   // setSettingsAudioChallenge,
   // setSettingsSprint,
-  // setSettingsFindCouple,
+  // setSettingsDesigner,
 } = settingsSlice.actions;
 
 export const saveSettings = (set: IOneSettings): AppThunk => async (
@@ -155,7 +155,6 @@ export const settingsSavannah = (state: RootState) => state.settings.savannah;
 export const settingsAudioChallenge = (state: RootState) =>
   state.settings.audioChallenge;
 export const settingsSprint = (state: RootState) => state.settings.sprint;
-export const settingsFindCouple = (state: RootState) =>
-  state.settings.findCouple;
+export const settingsDesigner = (state: RootState) => state.settings.designer;
 
 export default settingsSlice.reducer;

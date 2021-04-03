@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ISettingsAudioChallenge, ISettingsSavannah } from './settingsSlice';
+import { ISettingsDesigner, ISettingsSavannah } from './settingsSlice';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -22,8 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3),
     },
     input: {
-      width: '100%',
-      margin: theme.spacing(2, 0),
+      margin: theme.spacing(3, 0),
     },
   }),
 );
@@ -37,15 +36,15 @@ interface Ev {
 }
 
 interface Props {
-  settings: ISettingsAudioChallenge;
-  onChange: (nameSettings: string, settings: ISettingsAudioChallenge) => void;
+  settings: ISettingsDesigner;
+  onChange: (nameSettings: string, settings: ISettingsDesigner) => void;
 }
 
-export default function SettingsAudioChallenge({ settings, onChange }: Props) {
+export default function SettingsDesigner({ settings, onChange }: Props) {
   const classes = useStyles();
 
   const handleChange = (ev: Ev) => {
-    onChange('audioChallenge', {
+    onChange('designer', {
       ...settings,
       [ev.target.name]: Number(ev.target.value),
     });
@@ -54,14 +53,14 @@ export default function SettingsAudioChallenge({ settings, onChange }: Props) {
   const handleSelectChange = (
     ev: ChangeEvent<{ value: unknown; name?: string | undefined }>,
   ) => {
-    onChange('audioChallenge', {
+    onChange('designer', {
       ...settings,
       [ev.target.name as string]: ev.target.value as number,
     });
   };
 
   const handleCheckboxChange = (ev: Ev) => {
-    onChange('audioChallenge', {
+    onChange('designer', {
       ...settings,
       [ev.target.name]: ev.target.checked,
     });
@@ -70,13 +69,13 @@ export default function SettingsAudioChallenge({ settings, onChange }: Props) {
   return (
     <Paper elevation={3} className={classes.root}>
       <Typography className={classes.title} variant='h6' component='h3'>
-        Аудиовызов
+        Конструктор
       </Typography>
       <div>
         <FormControl className={classes.input}>
-          <InputLabel id='countWordsAudioChallenge'>Количество слов</InputLabel>
+          <InputLabel id='countWordsDesigner'>Количество слов</InputLabel>
           <Select
-            labelId='countWordsAudioChallenge'
+            labelId='countWordsDesigner'
             name='countWords'
             value={settings.countWords}
             onChange={handleSelectChange}
@@ -86,23 +85,6 @@ export default function SettingsAudioChallenge({ settings, onChange }: Props) {
             ))}
           </Select>
           <FormHelperText>Количество слов в игре</FormHelperText>
-        </FormControl>
-
-        <FormControl className={classes.input}>
-          <InputLabel id='countVariantsAudioChallenge'>
-            Количество ответов
-          </InputLabel>
-          <Select
-            labelId='countVariantsAudioChallenge'
-            name='countVariants'
-            value={settings.countVariants}
-            onChange={handleSelectChange}
-          >
-            {new Array(8).fill(1).map((n, id) => (
-              <MenuItem value={id + 2}>{id + 2}</MenuItem>
-            ))}
-          </Select>
-          <FormHelperText>Количество вариантов ответов</FormHelperText>
         </FormControl>
 
         <FormControlLabel

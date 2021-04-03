@@ -9,6 +9,8 @@ import dictionaryReducer from '../components/DictionaryPage/dictionarySlice';
 import gameReducer from '../components/Games/gameSlice';
 import savannahReducer from '../components/Games/SavannahPage/savannahSlice';
 import audioChallengeReducer from '../components/Games/AudioChallengePage/audioChallengeSlice';
+import sprintReducer from '../components/Games/SprintPage/sprintSlice';
+import designerReducer from '../components/Games/DesignerPage/designerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +24,8 @@ export const store = configureStore({
     game: gameReducer,
     savannah: savannahReducer,
     audioChallenge: audioChallengeReducer,
+    sprint: sprintReducer,
+    designer: designerReducer,
   },
 });
 

@@ -9,25 +9,25 @@ import Grid from '@material-ui/core/Grid';
 import SettingsSavannah from './SettingsSavannah';
 import SettingsSprint from './SettingsSprint';
 import SettingsAudioChallenge from './SettingsAudioChallenge';
-import SettingsFindCouple from './SettingsFindCouple';
+import SettingsDesigner from './SettingsDesigner';
 import Container from '@material-ui/core/Container';
 import {
   // ISettingsTextbook,
   // ISettingsSavannah,
   // ISettingsAudioChallenge,
   // ISettingsSprint,
-  // ISettingsFindCouple,
+  // ISettingsDesigner,
   ISettings,
   settingsTextbook,
   settingsAudioChallenge,
-  settingsFindCouple,
+  settingsDesigner,
   settingsSavannah,
   settingsSprint,
   // setSettingsTextbook,
   // setSettingsSavannah,
   // setSettingsAudioChallenge,
   // setSettingsSprint,
-  // setSettingsFindCouple,
+  // setSettingsDesigner,
   // setSettings,
   saveSettings,
 } from './settingsSlice';
@@ -51,7 +51,7 @@ export default function SettingsPage() {
   const savannah = useSelector(settingsSavannah);
   const audioChallenge = useSelector(settingsAudioChallenge);
   const sprint = useSelector(settingsSprint);
-  const findCouple = useSelector(settingsFindCouple);
+  const designer = useSelector(settingsDesigner);
 
   const handleChangeSettings = (nameSettings: string, settings: ISettings) => {
     console.log('nameSettings: ', nameSettings);
@@ -71,8 +71,8 @@ export default function SettingsPage() {
   // const handleOnChangeSettingsSprint = (settings: ISettingsSprint) => {
   //   dispatch(setSettingsSprint(settings));
   // };
-  // const handleOnChangeSettingsFindCouple = (settings: ISettingsFindCouple) => {
-  //   dispatch(setSettingsFindCouple(settings));
+  // const handleOnChangeSettingsDesigner = (settings: ISettingsDesigner) => {
+  //   dispatch(setSettingsDesigner(settings));
   // };
 
   return (
@@ -118,9 +118,9 @@ export default function SettingsPage() {
                 />
               </Grid>
               <Grid item container xs={12} sm={6}>
-                <SettingsFindCouple
-                  settings={findCouple}
-                  // onChange={handleOnChangeSettingsFindCouple}
+                <SettingsDesigner
+                  settings={designer}
+                  // onChange={handleOnChangeSettingsDesigner}
                   onChange={handleChangeSettings}
                 />
               </Grid>

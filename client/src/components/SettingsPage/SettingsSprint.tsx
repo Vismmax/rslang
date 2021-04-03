@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ISettingsSavannah, ISettingsSprint } from './settingsSlice';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +31,7 @@ interface Ev {
   target: {
     value: string;
     name: string;
+    checked: boolean;
   };
 }
 
@@ -42,19 +50,21 @@ export default function SettingsSprint({ settings, onChange }: Props) {
     });
   };
 
-  // const handleChangeTimeWord = (ev: Ev) => {
-  //   onChange({
-  //     ...settings,
-  //     timeWord: Number(ev.target.value),
-  //   });
-  // };
+  const handleSelectChange = (
+    ev: ChangeEvent<{ value: unknown; name?: string | undefined }>,
+  ) => {
+    onChange('sprint', {
+      ...settings,
+      [ev.target.name as string]: ev.target.value as number,
+    });
+  };
 
-  // const handleChangeCountError = (ev: Ev) => {
-  //   onChange({
-  //     ...settings,
-  //     countError: Number(ev.target.value),
-  //   });
-  // };
+  const handleCheckboxChange = (ev: Ev) => {
+    onChange('sprint', {
+      ...settings,
+      [ev.target.name]: ev.target.checked,
+    });
+  };
 
   return (
     <Paper elevation={3} className={classes.root}>
@@ -62,32 +72,32 @@ export default function SettingsSprint({ settings, onChange }: Props) {
         Спринт
       </Typography>
       <div>
-        <TextField
+        <FormControl className={classes.input}>
+          <InputLabel id='timeGameSprint'>Время игры</InputLabel>
+          <Select
+            labelId='timeGameSprint'
+            name='timeGame'
+            value={settings.timeGame}
+            onChange={handleSelectChange}
+          >
+            {new Array(5).fill(1).map((n, id) => (
+              <MenuItem value={id * 15 + 30}>{id * 15 + 30} сек</MenuItem>
+            ))}
+          </Select>
+          <FormHelperText>Время выделенное на игру</FormHelperText>
+        </FormControl>
+
+        <FormControlLabel
           className={classes.input}
-          label='Время'
-          helperText='Время показа одного слова'
-          type='number'
-          fullWidth
-          InputProps={{
-            endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,
-          }}
-          name='timeWord'
-          value={settings.timeWord}
-          // onChange={handleChangeTimeWord}
-          onChange={handleChange}
-        />
-        <TextField
-          label='Количество ошибок'
-          helperText='Количество возможных ошибок'
-          type='number'
-          fullWidth
-          InputProps={{
-            endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,
-          }}
-          name='countError'
-          value={settings.countError}
-          // onChange={handleChangeCountError}
-          onChange={handleChange}
+          control={
+            <Checkbox
+              color='primary'
+              checked={settings.showHelp}
+              onChange={handleCheckboxChange}
+              name='showHelp'
+            />
+          }
+          label='Отображать подсказки ввиде картинок к словам'
         />
       </div>
     </Paper>

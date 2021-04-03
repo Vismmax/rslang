@@ -18,7 +18,6 @@ interface AudioChallengeState {
   baseWords: IWord[];
   activeWord: IWord;
   activeVariants: IWord[];
-  userId: string | null;
 }
 
 const initialState: AudioChallengeState = {
@@ -27,7 +26,6 @@ const initialState: AudioChallengeState = {
   baseWords: [],
   activeWord: { ...wordEmpty },
   activeVariants: [],
-  userId: null,
 };
 
 export const audioChallengeSlice = createSlice({
@@ -52,9 +50,6 @@ export const audioChallengeSlice = createSlice({
     setActiveVariants: (state, action: PayloadAction<IWord[]>) => {
       state.activeVariants = action.payload;
     },
-    setUserId: (state, action: PayloadAction<string | null>) => {
-      state.userId = action.payload;
-    },
     clearAudioChallenge: (state) => {
       return initialState;
     },
@@ -68,7 +63,6 @@ export const {
   nextActiveWord,
   setActiveWord,
   setActiveVariants,
-  setUserId,
   clearAudioChallenge,
 } = audioChallengeSlice.actions;
 
@@ -78,7 +72,6 @@ export const initAudioChallenge = (): AppThunk => async (
 ) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
-  dispatch(setUserId(userId));
   const data = getState().game.data;
   console.log('initAudioChallenge :', userId, data);
   const words = await loadWords({
