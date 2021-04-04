@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import DesignerCard from './DesignerCard';
 import DesignerEditor from './DesignerEditor';
+import { addAnswerGame, stopGame } from '../gameSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,6 +68,7 @@ export default function DesignerGame() {
   const handleResult = (result: boolean) => {
     setIsOpenCard(true);
     setDisableEditor(true);
+    dispatch(addAnswerGame({ word, result }));
   };
 
   const fetchNewWord = () => {
@@ -89,6 +91,7 @@ export default function DesignerGame() {
 
   const finishGame = () => {
     setStart(false);
+    dispatch(stopGame());
     console.log('finish');
   };
 

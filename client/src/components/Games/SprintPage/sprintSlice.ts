@@ -6,6 +6,7 @@ import {
   wordEmpty,
 } from '../../../common/interfaces/WordInterfaces';
 import {
+  randomInteger,
   shuffleArray,
   shuffleArrayCount,
 } from '../../../common/helpers/randomHelper';
@@ -17,7 +18,7 @@ interface SprintState {
   words: IWord[];
   baseWords: IWord[];
   activeWord: IWord;
-  activeVariants: IWord[];
+  activeVariant: IWord;
 }
 
 const initialState: SprintState = {
@@ -25,7 +26,7 @@ const initialState: SprintState = {
   words: [],
   baseWords: [],
   activeWord: { ...wordEmpty },
-  activeVariants: [],
+  activeVariant: { ...wordEmpty },
 };
 
 export const sprintSlice = createSlice({
@@ -47,8 +48,16 @@ export const sprintSlice = createSlice({
     setActiveWord: (state, action: PayloadAction<IWord>) => {
       state.activeWord = action.payload;
     },
-    setActiveVariants: (state, action: PayloadAction<IWord[]>) => {
-      state.activeVariants = action.payload;
+    setActiveVariant: (state, action: PayloadAction<IWord>) => {
+      state.activeVariant = action.payload;
+    },
+    setNextWords: (
+      state,
+      action: PayloadAction<{ word: IWord; variant: IWord }>,
+    ) => {
+      state.activeWord = action.payload.word;
+      state.activeVariant = action.payload.variant;
+      state.words.pop();
     },
     clearSprint: (state) => {
       return initialState;
@@ -62,7 +71,8 @@ export const {
   setBaseWords,
   nextActiveWord,
   setActiveWord,
-  setActiveVariants,
+  setActiveVariant,
+  setNextWords,
   clearSprint,
 } = sprintSlice.actions;
 
@@ -71,29 +81,26 @@ export const initSprint = (): AppThunk => async (dispatch, getState) => {
   const userId = getLocalUserId();
   const data = getState().game.data;
   console.log('initSprint :', userId, data);
-  const words = await loadWords({ data, userId, count: 30 });
+  const words = await loadWords({
+    data,
+    userId,
+    count: getState().settings.sprint.timeGame * 2,
+  });
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
 };
 
 export const nextWordSprint = (): AppThunk => async (dispatch, getState) => {
-  dispatch(nextActiveWord());
-  const activeWord = getState().sprint.activeWord;
-  const words = getState().sprint.baseWords.filter(
-    (word) => word.id !== activeWord.id,
-  );
-  console.log('words: ', words);
-  // const variants = [
-  //   ...shuffleArrayCount(words, getState().settings.sprint.countVariants - 1),
-  //   getState().sprint.activeWord,
-  // ];
-  // dispatch(setActiveVariants(shuffleArray(variants)));
+  const word = getState().sprint.words[getState().sprint.words.length - 1];
+  const id = randomInteger(0, getState().sprint.baseWords.length - 1);
+  const variant = Math.random() < 0.4 ? word : getState().sprint.baseWords[id];
+  dispatch(setNextWords({ word, variant }));
 };
 
 export const isLoadingSprint = (state: RootState) => state.sprint.isLoading;
 export const activeWordSprint = (state: RootState) => state.sprint.activeWord;
-export const activeVariantsSprint = (state: RootState) =>
-  state.sprint.activeVariants;
+export const activeVariantSprint = (state: RootState) =>
+  state.sprint.activeVariant;
 
 export default sprintSlice.reducer;

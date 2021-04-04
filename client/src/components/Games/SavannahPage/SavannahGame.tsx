@@ -24,9 +24,8 @@ import {
 } from './savannahSlice';
 import Spinner from '../../common/Spinner';
 import { settingsSavannah } from '../../SettingsPage/settingsSlice';
-import { useTimer } from './useTimer';
-import { useInterval } from './useInterval';
 import Typography from '@material-ui/core/Typography';
+import { addAnswerGame, stopGame } from '../gameSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,6 +106,7 @@ export default function SavannahGame() {
     setTimeout(() => {
       fetchNewWord();
     }, 700);
+    dispatch(addAnswerGame({ word, result }));
   };
 
   const fetchNewWord = () => {
@@ -124,6 +124,7 @@ export default function SavannahGame() {
 
   const finishGame = () => {
     setStart(false);
+    dispatch(stopGame());
     console.log('finish');
   };
 

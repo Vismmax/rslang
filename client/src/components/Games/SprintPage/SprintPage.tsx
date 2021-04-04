@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import GameLayout from '../GameLayout/GameLayout';
+import Spinner from '../../common/Spinner';
+import { isStartGame } from '../gameSlice';
+import { isLoadingSprint } from './sprintSlice';
+import SprintInit from './SprintInit';
+import SprintGame from './SprintGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
       height: '100%',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
     background: {
       backgroundImage: 'url("/img/sprint.jpg")',
@@ -22,10 +24,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SprintPage() {
   const classes = useStyles();
+  const isLoading = useSelector(isLoadingSprint);
+  const isStart = useSelector(isStartGame);
 
   return (
     <GameLayout className={classes.background}>
-      <div></div>
+      <SprintInit>
+        {isStart && !isLoading && <SprintGame />}
+        {isStart && isLoading && <Spinner />}
+      </SprintInit>
     </GameLayout>
   );
 }

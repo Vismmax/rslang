@@ -9,7 +9,7 @@ import {
 import GameLayout from '../GameLayout/GameLayout';
 import Spinner from '../../common/Spinner';
 import AudioChallengeInit from '../AudioChallengePage/AudioChallengeInit';
-import { isStartGame } from '../gameSlice';
+import { addAnswerGame, isStartGame, stopGame } from '../gameSlice';
 import {
   activeVariantsAudioChallenge,
   activeWordAudioChallenge,
@@ -89,6 +89,7 @@ export default function AudioChallengeGame() {
 
   const handleResult = (result: boolean) => {
     setIsOpenCard(true);
+    dispatch(addAnswerGame({ word, result }));
   };
 
   const fetchNewWord = () => {
@@ -122,6 +123,7 @@ export default function AudioChallengeGame() {
 
   const finishGame = () => {
     setStart(false);
+    dispatch(stopGame());
     console.log('finish');
   };
 

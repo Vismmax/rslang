@@ -5,6 +5,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { shuffleArray } from '../../../common/helpers/randomHelper';
 import Button from '@material-ui/core/Button';
+import { Zoom } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,6 +94,7 @@ export default function DesignerEditor({
       >
         {letters.map((letter) => (
           <Grid item>
+            {/*<Zoom in={true}>*/}
             <Button
               className={classes.letter}
               key={letter.id}
@@ -103,6 +105,7 @@ export default function DesignerEditor({
             >
               {letter.letter}
             </Button>
+            {/*</Zoom>*/}
           </Grid>
         ))}
       </Grid>
@@ -113,8 +116,9 @@ export default function DesignerEditor({
         spacing={1}
         justify='center'
       >
-        {buttons.map((btn) => (
+        {buttons.map((btn, id) => (
           <Grid item>
+            {/*<Zoom in={true}>*/}
             <Button
               className={classes.button}
               key={btn.id}
@@ -125,6 +129,7 @@ export default function DesignerEditor({
             >
               {btn.letter}
             </Button>
+            {/*</Zoom>*/}
           </Grid>
         ))}
       </Grid>
