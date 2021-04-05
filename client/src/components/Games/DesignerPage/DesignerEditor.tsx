@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     wrapLetters: {
-      minHeight: 75,
+      minHeight: 91,
     },
     letter: {
       // minWidth: theme.spacing(4.5),
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textShadow: '0px 0px 8px rgb(255 255 255)',
     },
     wrapButtons: {
-      minHeight: 50,
+      minHeight: 66,
     },
     button: {
       // minWidth: theme.spacing(4.5),

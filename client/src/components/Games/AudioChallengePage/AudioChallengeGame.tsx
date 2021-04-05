@@ -80,7 +80,10 @@ export default function AudioChallengeGame() {
   }, []);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start) {
+      setStart(true);
+      return;
+    }
     if (!word.id) {
       finishGame();
       return;
@@ -93,6 +96,7 @@ export default function AudioChallengeGame() {
   };
 
   const fetchNewWord = () => {
+    console.log('fetchNewWord');
     dispatch(nextWordAudioChallenge());
   };
 

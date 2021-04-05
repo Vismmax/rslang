@@ -58,7 +58,10 @@ export default function DesignerGame() {
   }, []);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start) {
+      setStart(true);
+      return;
+    }
     if (!word.id) {
       finishGame();
       return;

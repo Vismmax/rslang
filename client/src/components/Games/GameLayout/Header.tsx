@@ -24,9 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
   fullscreen: boolean;
   onFullscreen: () => void;
+  onClose: () => void;
 }
 
-export default function Header({ fullscreen, onFullscreen }: IProps) {
+export default function Header({ fullscreen, onFullscreen, onClose }: IProps) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function Header({ fullscreen, onFullscreen }: IProps) {
   };
 
   const handleClickClose = () => {
-    dispatch(setIsOpenSideBar(true));
+    onClose();
   };
 
   return (

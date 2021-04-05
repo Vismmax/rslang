@@ -12,6 +12,8 @@ import {
   isBeginGame,
   isLoadingGame,
   isStartGame,
+  isStopGame,
+  resetGame,
   // isRunningGame,
   routeGame,
   setLevelGame,
@@ -20,6 +22,7 @@ import {
 import { clearCurrentGroupPage } from '../../../common/helpers/localCurrentPage';
 import { useHistory } from 'react-router-dom';
 import { Starter } from '../common/Starter';
+import ResultGame from './ResultGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +53,7 @@ export default function GameLayout({ children, className = '' }: Props) {
   const isLoading = useSelector(isLoadingGame);
   const isBegin = useSelector(isBeginGame);
   const isStart = useSelector(isStartGame);
+  const isStop = useSelector(isStopGame);
   const route = useSelector(routeGame);
 
   // const isRunning = useSelector(isRunningGame);
@@ -78,12 +82,17 @@ export default function GameLayout({ children, className = '' }: Props) {
     history.push(route);
   };
 
+  const handleReset = () => {
+    dispatch(resetGame());
+  };
+
   return (
     <FullScreen handle={fullscreen}>
       <div className={`${classes.root} ${className}`}>
         <Header
           fullscreen={fullscreen.active}
           onFullscreen={handleFullScreen}
+          onClose={handleExit}
         />
 
         <SettingsGame
@@ -92,11 +101,13 @@ export default function GameLayout({ children, className = '' }: Props) {
           onCancel={handleExit}
         />
 
+        <ResultGame open={isStop} onReset={handleReset} onCancel={handleExit} />
+
         {/*{isLoading && <Spinner />}*/}
-        {isBegin && !isStart && <Starter onStop={handleStartGame} />}
+        {isBegin && !isStart && !isStop && <Starter onStop={handleStartGame} />}
         {/*{isBegin && <Starter onStop={handleStartGame} />}*/}
         {/*<Starter onStop={handleStartGame} open={true} />*/}
-        {isBegin && children}
+        {isBegin && !isStop && children}
       </div>
     </FullScreen>
   );

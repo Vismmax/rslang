@@ -5,6 +5,7 @@ import PageLayout from '../PageLayout/PageLayout';
 import { Starter } from '../Games/common/Starter';
 import Button from '@material-ui/core/Button';
 import { Paper, Slide } from '@material-ui/core';
+import ResultGame from '../Games/GameLayout/ResultGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,9 @@ export default function HomePage() {
 
   return (
     <PageLayout>
-      <div></div>
+      <div>
+        <ResultGame open={false} onCancel={() => {}} onReset={() => {}} />
+      </div>
     </PageLayout>
   );
 }

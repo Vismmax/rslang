@@ -1,6 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../redux/store';
-import { IWord } from '../../common/interfaces/WordInterfaces';
+import {
+  IExtWord,
+  IUserWord,
+  IWord,
+} from '../../common/interfaces/WordInterfaces';
+import { getLocalUserId } from '../../common/helpers/userHelper';
+import {
+  createUserWord,
+  updateUserWord,
+} from '../../api/services/wordsService';
 
 export interface IGameData {
   group: number;
@@ -24,6 +33,8 @@ interface GameState {
   level: number | null;
   data: IGameData;
   score: IScore;
+  wordsTrue: IWord[];
+  wordsFalse: IWord[];
 }
 
 const initialState: GameState = {
@@ -44,6 +55,8 @@ const initialState: GameState = {
     score: 0,
     experience: 0,
   },
+  wordsTrue: [],
+  wordsFalse: [],
 };
 
 export const seriesValues = [10, 20, 40, 80];
@@ -76,8 +89,22 @@ export const gameSlice = createSlice({
     setScore: (state, action: PayloadAction<IScore>) => {
       state.score = action.payload;
     },
+    addWordsTrue: (state, action: PayloadAction<IWord>) => {
+      state.wordsTrue.push(action.payload);
+    },
+    addWordsFalse: (state, action: PayloadAction<IWord>) => {
+      state.wordsFalse.push(action.payload);
+    },
     clearGame: (state) => {
       return initialState;
+    },
+    reset: (state) => {
+      return {
+        ...state,
+        score: { ...initialState.score },
+        wordsTrue: [],
+        wordsFalse: [],
+      };
     },
   },
 });
@@ -91,7 +118,10 @@ export const {
   setLevel,
   setData,
   setScore,
+  addWordsTrue,
+  addWordsFalse,
   clearGame,
+  reset,
 } = gameSlice.actions;
 
 export const initGame = (): AppThunk => async (dispatch, getState) => {
@@ -166,6 +196,66 @@ export const addAnswerGame = ({
     series = 0;
   }
   dispatch(setScore({ episode, series, score, experience }));
+
+  if (getState().game.level === null) {
+    const extWord = word as IExtWord;
+    const { difficulty, optional } = extWord.userWord;
+    const { correctCount, errorCount } = optional;
+    const create = difficulty === '';
+    const userWord = {
+      ...extWord.userWord,
+      difficulty: difficulty === '' ? 'work' : difficulty,
+      optional: {
+        ...optional,
+        correctCount: result ? correctCount + 1 : correctCount,
+        errorCount: !result ? errorCount + 1 : errorCount,
+      },
+    };
+    const newWord = { ...extWord, userWord };
+    result ? dispatch(addWordsTrue(newWord)) : dispatch(addWordsFalse(newWord));
+
+    dispatch(fetchSetUserWord({ wordId: newWord.id, userWord, create }));
+  } else {
+    result ? dispatch(addWordsTrue(word)) : dispatch(addWordsFalse(word));
+  }
+};
+
+export const fetchSetUserWord = ({
+  wordId,
+  userWord,
+  create = false,
+}: {
+  wordId: string;
+  userWord: IUserWord;
+  create?: boolean;
+}): AppThunk => async (dispatch, getState) => {
+  const userId = getLocalUserId();
+  if (userId) {
+    const param = {
+      userId,
+      wordId,
+      userWord,
+    };
+    const newUserWordResponse = create
+      ? await createUserWord(param)
+      : await updateUserWord(param);
+    if (newUserWordResponse.error) {
+      console.log('Невожможно сохранить слово');
+      return;
+    }
+  }
+};
+
+export const fetchWordSetDifficulty = ({
+  word,
+  difficulty,
+}: {
+  word: IWord;
+  difficulty: string;
+}): AppThunk => async (dispatch, getState) => {
+  const extWord = word as IExtWord;
+  const userWord: IUserWord = { ...extWord.userWord, difficulty };
+  dispatch(fetchSetUserWord({ wordId: extWord.id, userWord }));
 };
 
 export const stopGame = (): AppThunk => async (dispatch, getState) => {
@@ -173,11 +263,26 @@ export const stopGame = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsStop(true));
 };
 
+export const resetGame = (): AppThunk => async (dispatch, getState) => {
+  dispatch(reset());
+  dispatch(setIsStop(false));
+};
+
 export const isLoadingGame = (state: RootState) => state.game.isLoading;
 export const isBeginGame = (state: RootState) => state.game.isBegin;
 export const isStartGame = (state: RootState) => state.game.isStart;
+export const isStopGame = (state: RootState) => state.game.isStop;
 export const routeGame = (state: RootState) => state.game.route;
+export const levelGame = (state: RootState) => state.game.level;
 export const gameData = (state: RootState) => state.game.data;
 export const scoreGame = (state: RootState) => state.game.score;
+export const wordsTrueGame = (state: RootState) => state.game.wordsTrue;
+export const wordsFalseGame = (state: RootState) => state.game.wordsFalse;
+export const resultGame = (state: RootState) => ({
+  score: state.game.score.score,
+  experience: state.game.score.experience,
+  wordsTrue: state.game.wordsTrue,
+  wordsFalse: state.game.wordsFalse,
+});
 
 export default gameSlice.reducer;

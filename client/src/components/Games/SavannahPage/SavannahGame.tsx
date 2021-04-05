@@ -85,7 +85,10 @@ export default function SavannahGame() {
   }, []);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start) {
+      setStart(true);
+      return;
+    }
     if (!word.id) {
       finishGame();
       return;
