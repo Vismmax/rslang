@@ -27,6 +27,7 @@ import 'react-awesome-slider/dist/styles.css';
 import './AudioChallenge.css';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { Paper, Slide } from '@material-ui/core';
+import ButtonNext from '../common/ButtonNext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,10 +56,10 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(6, 0),
       },
     },
-    button: {
-      width: theme.spacing(20),
-      opacity: 0.8,
-    },
+    // button: {
+    //   width: theme.spacing(20),
+    //   opacity: 0.8,
+    // },
   }),
 );
 
@@ -158,13 +159,7 @@ export default function AudioChallengeGame() {
             />
           </Grid>
           <Grid item container justify='center'>
-            <Button
-              className={classes.button}
-              variant='contained'
-              onClick={handleClickNext}
-            >
-              {isOpenCard ? <ArrowRightAltIcon /> : 'Не знаю'}
-            </Button>
+            <ButtonNext isOpenCard={isOpenCard} onClick={handleClickNext} />
           </Grid>
         </Grid>
       </Slide>

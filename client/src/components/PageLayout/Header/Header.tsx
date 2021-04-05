@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Header() {
   const classes = useStyles();
+  const { pathname } = useLocation();
 
   return (
     <AppBar position='static'>
@@ -65,9 +66,11 @@ export default function Header() {
         >
           Словарь
         </Button>
-        <div className={classes.menuBar}>
-          <Games />
-        </div>
+        {pathname !== '/textbook' && pathname !== '/dictionary' && (
+          <div className={classes.menuBar}>
+            <Games />
+          </div>
+        )}
         <Button
           className={classes.link}
           color='inherit'

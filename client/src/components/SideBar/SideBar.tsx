@@ -6,7 +6,7 @@ import { isOpenSideBarStore, setIsOpenSideBar } from './sideBarSlice';
 import ListGames from './ListGames';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -14,6 +14,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles({
   aside: {
@@ -26,8 +27,8 @@ const useStyles = makeStyles({
 
 export default function SideBar() {
   const classes = useStyles();
-
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const isOpen = useSelector(isOpenSideBarStore);
 
   const toggleDrawer = (open: boolean) => (
@@ -57,6 +58,14 @@ export default function SideBar() {
     >
       <aside className={classes.aside}>
         <List>
+          <ListItem button component={RouterLink} to='/' onClick={closeSideBar}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary='Домой' />
+          </ListItem>
+        </List>
+        <List>
           <ListItem
             button
             component={RouterLink}
@@ -80,7 +89,9 @@ export default function SideBar() {
             <ListItemText primary='Словарь' />
           </ListItem>
         </List>
-        <ListGames closeSideBar={closeSideBar} />
+        {pathname !== '/textbook' && pathname !== '/dictionary' && (
+          <ListGames closeSideBar={closeSideBar} />
+        )}
         <List>
           <ListItem
             button
