@@ -17,6 +17,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles({
+  root: {},
   aside: {
     minWidth: 250,
   },
@@ -52,6 +53,7 @@ export default function SideBar() {
 
   return (
     <SwipeableDrawer
+      className={classes.root}
       open={isOpen}
       onClose={toggleDrawer(false)}
       onOpen={toggleDrawer(true)}

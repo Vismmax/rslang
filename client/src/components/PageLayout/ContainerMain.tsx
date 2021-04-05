@@ -8,6 +8,10 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       // flexDirection: 'column',
       flexGrow: 1,
+      [theme.breakpoints.down('md')]: {
+        paddingLeft: 0,
+        paddingRight: 0,
+      },
     },
   }),
 );
