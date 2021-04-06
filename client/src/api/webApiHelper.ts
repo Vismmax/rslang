@@ -1,8 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { getToken } from '../common/helpers/tokenHelper';
 
-// const BASE_URL = process.env.REACT_APP_API_URL || '';
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = process.env.REACT_APP_API_URL || '';
 
 class Api {
   baseUrl: string;

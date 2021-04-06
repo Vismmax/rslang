@@ -31,19 +31,20 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
+app.use('/', express.static(path.join(__dirname, '../client')));
+
 app.use('/files', express.static(path.join(__dirname, '../files')));
 
 app.use(checkAuthentication);
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
-app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
-});
+// app.use('/', (req, res, next) => {
+//   if (req.originalUrl === '/') {
+//     res.send('Service is running!');
+//     return;
+//   }
+//   next();
+// });
 
 app.use(
   morgan(
