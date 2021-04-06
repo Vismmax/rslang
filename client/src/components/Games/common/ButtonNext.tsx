@@ -25,7 +25,7 @@ export default function ButtonNext({ isOpenCard, onClick }: Props) {
     onClick();
   };
 
-  useHotkeys('enter,space,right', handleClick, [isOpenCard]);
+  useHotkeys('enter,space,right', handleClick, [isOpenCard, onClick]);
 
   return (
     <Button className={classes.root} variant='contained' onClick={handleClick}>

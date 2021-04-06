@@ -5,6 +5,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { shuffleArray } from '../../../common/helpers/randomHelper';
 import Button from '@material-ui/core/Button';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { Zoom } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -82,6 +83,17 @@ export default function DesignerEditor({
     setButtons(buttons.filter((btn) => btn.id !== letter.id));
     setLetters([...letters, letter]);
   };
+
+  const handleKey = (event: KeyboardEvent, handler: { key: string }) => {
+    const letter = buttons.find((btn) => btn.letter === handler.key);
+    if (letter) handleClickButtons(letter)();
+  };
+
+  useHotkeys(Array.from(new Set(word.word.split(''))).join(','), handleKey, [
+    word,
+    buttons,
+    letters,
+  ]);
 
   return (
     <Grid container spacing={2}>
