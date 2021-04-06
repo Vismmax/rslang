@@ -12,8 +12,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setRouteGame } from '../../Games/gameSlice';
+import { activeWordsLength } from '../textbookSlice';
+import { dictionaryWordsLength } from '../../DictionaryPage/dictionarySlice';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,14 +46,47 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface PropsMenuTooltip {
+  children: JSX.Element;
+  disabled: boolean | undefined;
+}
+
+const MenuTooltip = ({ children, disabled }: PropsMenuTooltip) => (
+  <Tooltip
+    title={
+      disabled
+        ? 'В этом разделе нет слов для игры'
+        : 'Запустить игру со словами из данного раздела'
+    }
+    enterDelay={disabled ? 100 : 700}
+  >
+    <span>{children}</span>
+  </Tooltip>
+);
+
+const ButtonTooltip = (props: any) => (
+  <MenuTooltip disabled={props?.disabled}>
+    <Button {...props}>{props.children}</Button>
+  </MenuTooltip>
+);
+
+const IconButtonTooltip = (props: any) => (
+  <MenuTooltip disabled={props?.disabled}>
+    <IconButton {...props}>{props.children}</IconButton>
+  </MenuTooltip>
+);
+
 export default function Games() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const textbookLength = useSelector(activeWordsLength);
+  const dictionaryLength = useSelector(dictionaryWordsLength);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const disabled = !textbookLength && !dictionaryLength;
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -69,82 +105,87 @@ export default function Games() {
   return (
     <>
       <div className={classes.links}>
-        <Button
+        <ButtonTooltip
           className={classes.link}
           color='inherit'
           startIcon={<EcoIcon />}
+          disabled={disabled}
           onClick={handleClick('/savannah')}
         >
           Саванна
-        </Button>
-        <Button
+        </ButtonTooltip>
+        <ButtonTooltip
           className={classes.link}
           color='inherit'
           startIcon={<HeadsetIcon />}
+          disabled={disabled}
           onClick={handleClick('/audioChallenge')}
         >
           Аудиовызов
-        </Button>
-        <Button
+        </ButtonTooltip>
+        <ButtonTooltip
           className={classes.link}
           color='inherit'
           startIcon={<DirectionsRunIcon />}
+          disabled={disabled}
           onClick={handleClick('/sprint')}
         >
           Спринт
-        </Button>
-        <Button
+        </ButtonTooltip>
+        <ButtonTooltip
           className={classes.link}
           color='inherit'
           startIcon={<ViewModuleIcon />}
+          disabled={disabled}
           onClick={handleClick('/designer')}
         >
           Конструктор
-        </Button>
+        </ButtonTooltip>
       </div>
 
       <div className={classes.icons}>
-        <IconButton
-          aria-label='settings'
+        <IconButtonTooltip
           color='inherit'
+          disabled={disabled}
           onClick={handleClick('/savannah')}
         >
           <EcoIcon />
-        </IconButton>
-        <IconButton
-          aria-label='settings'
+        </IconButtonTooltip>
+        <IconButtonTooltip
           color='inherit'
+          disabled={disabled}
           onClick={handleClick('/audioChallenge')}
         >
           <HeadsetIcon />
-        </IconButton>
-        <IconButton
-          aria-label='settings'
+        </IconButtonTooltip>
+        <IconButtonTooltip
           color='inherit'
+          disabled={disabled}
           onClick={handleClick('/sprint')}
         >
           <DirectionsRunIcon />
-        </IconButton>
-        <IconButton
-          aria-label='settings'
+        </IconButtonTooltip>
+        <IconButtonTooltip
           color='inherit'
+          disabled={disabled}
           onClick={handleClick('/designer')}
         >
           <ViewModuleIcon />
-        </IconButton>
+        </IconButtonTooltip>
       </div>
 
       <div className={classes.menu}>
-        <Button
+        <ButtonTooltip
           aria-controls='menu-appbar'
           aria-haspopup='true'
-          onClick={handleMenu}
           color='inherit'
           startIcon={<SportsEsportsIcon />}
           endIcon={<ExpandMoreIcon />}
+          disabled={disabled}
+          onClick={handleMenu}
         >
           Игры
-        </Button>
+        </ButtonTooltip>
         <Menu
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -159,25 +200,28 @@ export default function Games() {
           open={open}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClick('/savannah')}>
+          <MenuItem disabled={disabled} onClick={handleClick('/savannah')}>
             <ListItemIcon>
               <EcoIcon />
             </ListItemIcon>
             Саванна
           </MenuItem>
-          <MenuItem onClick={handleClick('/audioChallenge')}>
+          <MenuItem
+            disabled={disabled}
+            onClick={handleClick('/audioChallenge')}
+          >
             <ListItemIcon>
               <HeadsetIcon />
             </ListItemIcon>
             Аудиовызов
           </MenuItem>
-          <MenuItem onClick={handleClick('/sprint')}>
+          <MenuItem disabled={disabled} onClick={handleClick('/sprint')}>
             <ListItemIcon>
               <DirectionsRunIcon />
             </ListItemIcon>
             Спринт
           </MenuItem>
-          <MenuItem onClick={handleClick('/designer')}>
+          <MenuItem disabled={disabled} onClick={handleClick('/designer')}>
             <ListItemIcon>
               <ViewModuleIcon />
             </ListItemIcon>

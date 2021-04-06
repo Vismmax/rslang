@@ -176,9 +176,20 @@ export const loadActivePage = (): AppThunk => async (dispatch, getState) => {
   dispatch(setActivePage(page));
 };
 
+export const clearTextbookWords = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  dispatch(setActiveWords([]));
+};
+
+export const loadingTextbookWords = (state: RootState) =>
+  state.textbook.isLoading;
 export const idLoadingWord = (state: RootState) => state.textbook.idLoadingWord;
 export const activeWords = (state: RootState) => state.textbook.activeWords;
 export const activeGroup = (state: RootState) => state.textbook.activeGroup;
 export const activePage = (state: RootState) => state.textbook.activePage;
+export const activeWordsLength = (state: RootState) =>
+  state.textbook.activeWords.length;
 
 export default textbookSlice.reducer;

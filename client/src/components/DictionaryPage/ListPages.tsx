@@ -12,17 +12,21 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { activeGroup } from '../TextbookPage/textbookSlice';
 import {
+  clearDictionaryWords,
   countPages,
   dictionaryPage,
   dictionaryWords,
   fetchDictionaryWords,
+  isLoadingDictionaryWords,
   saveDictionaryPage,
 } from './dictionarySlice';
 import CardDictionary from './CardDictionary/CardDictionary';
+import Spinner from '../common/Spinner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       paddingTop: theme.spacing(3),
@@ -46,12 +50,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ListPages() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const loading = useSelector(isLoadingDictionaryWords);
   const words = useSelector(dictionaryWords);
   const count = useSelector(countPages);
   const page = useSelector(dictionaryPage);
 
   useEffect(() => {
     dispatch(fetchDictionaryWords());
+    return () => {
+      dispatch(clearDictionaryWords());
+    };
   }, []);
 
   const handleChangePage = (ev: object, pg: number) => {
@@ -60,6 +68,7 @@ export default function ListPages() {
 
   return (
     <Container className={classes.root}>
+      <Spinner open={loading} inner={true} />
       <div className={classes.page}>
         <Grid container direction='column' spacing={2}>
           {words.map((word) => (

@@ -134,11 +134,22 @@ export const loadDictionaryPage = (): AppThunk => async (
   dispatch(setDictionaryPage(page));
 };
 
-export const isLoading = (state: RootState) => state.dictionary.isLoading;
+export const clearDictionaryWords = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  dispatch(setDictionaryWords([]));
+};
+
+// export const isLoading = (state: RootState) => state.dictionary.isLoading;
+export const isLoadingDictionaryWords = (state: RootState) =>
+  state.dictionary.isLoading;
 export const idLoadingWord = (state: RootState) =>
   state.dictionary.idLoadingWord;
 export const dictionaryWords = (state: RootState) =>
   state.dictionary.dictionaryWords;
+export const dictionaryWordsLength = (state: RootState) =>
+  state.dictionary.dictionaryWords.length;
 export const dictionaryDifficulty = (state: RootState) =>
   state.dictionary.dictionaryDifficulty;
 export const dictionaryPage = (state: RootState) =>

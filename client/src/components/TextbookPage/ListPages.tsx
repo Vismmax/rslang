@@ -13,14 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   activePage,
   activeWords,
+  clearTextbookWords,
   fetchActiveWords,
+  loadingTextbookWords,
   saveActivePage,
 } from './textbookSlice';
 import { userStore } from '../LoginPage/userSlice';
+import Spinner from '../common/Spinner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       paddingTop: theme.spacing(3),
@@ -48,11 +52,15 @@ interface Props {
 export default function ListPages({ group }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const loading = useSelector(loadingTextbookWords);
   const words = useSelector(activeWords);
   const page = useSelector(activePage);
 
   useEffect(() => {
     dispatch(fetchActiveWords());
+    return () => {
+      dispatch(clearTextbookWords());
+    };
   }, []);
 
   const handleChangePage = (ev: object, pg: number) => {
@@ -64,6 +72,7 @@ export default function ListPages({ group }: Props) {
 
   return (
     <Container className={classes.root}>
+      <Spinner open={loading} inner={true} />
       <div className={classes.page}>
         {/*<CardWord word={tempWord} />*/}
         <Grid container direction='column' spacing={2}>
