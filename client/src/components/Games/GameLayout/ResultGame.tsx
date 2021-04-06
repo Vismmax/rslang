@@ -1,5 +1,5 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -13,6 +13,9 @@ import ResultItem from './ResultItem';
 import { IWord } from '../../../common/interfaces/WordInterfaces';
 import Grid from '@material-ui/core/Grid';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import useSound from 'use-sound';
+import endSfx from '../../../assets/end.mp3';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,6 +76,15 @@ export default function ResultGame({ open, onCancel, onReset }: Props) {
   const { score, experience, wordsTrue, wordsFalse } = useSelector(resultGame);
   const level = useSelector(levelGame);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const [endSound] = useSound(endSfx);
+
+  useEffect(() => {
+    if (open) endSound();
+  }, [open]);
+
   const handleStart = () => {
     onReset();
   };
@@ -93,6 +105,7 @@ export default function ResultGame({ open, onCancel, onReset }: Props) {
     <Dialog
       className={classes.root}
       classes={{ paper: classes.paper }}
+      fullScreen={fullScreen}
       open={open}
       onClose={handleClose}
       disableBackdropClick

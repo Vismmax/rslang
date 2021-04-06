@@ -26,6 +26,9 @@ import Spinner from '../../common/Spinner';
 import { settingsSavannah } from '../../SettingsPage/settingsSlice';
 import Typography from '@material-ui/core/Typography';
 import { addAnswerGame, stopGame } from '../gameSlice';
+import useSound from 'use-sound';
+import trueSfx from '../../../assets/true.mp3';
+import falseSfx from '../../../assets/false.mp3';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +82,9 @@ export default function SavannahGame() {
   const [showTrueButton, setShowTrueButton] = useState(false);
   const [start, setStart] = useState(false);
 
+  const [trueSound] = useSound(trueSfx);
+  const [falseSound] = useSound(falseSfx);
+
   useEffect(() => {
     dispatch(nextWordSavannah());
     setStart(true);
@@ -98,6 +104,10 @@ export default function SavannahGame() {
   }, [word]);
 
   const handleResult = (result: boolean) => {
+    if (result) {
+      trueSound();
+    } else falseSound();
+
     setShowWord(false);
     if (!result) {
       if (reserveErrors === 0) {

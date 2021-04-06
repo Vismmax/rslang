@@ -13,6 +13,9 @@ import DesignerCard from './DesignerCard';
 import DesignerEditor from './DesignerEditor';
 import { addAnswerGame, stopGame } from '../gameSlice';
 import ButtonNext from '../common/ButtonNext';
+import useSound from 'use-sound';
+import trueSfx from '../../../assets/true.mp3';
+import falseSfx from '../../../assets/false.mp3';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +57,9 @@ export default function DesignerGame() {
   const [start, setStart] = useState(false);
   const [disableEditor, setDisableEditor] = useState(false);
 
+  const [trueSound] = useSound(trueSfx);
+  const [falseSound] = useSound(falseSfx);
+
   useEffect(() => {
     dispatch(nextWordDesigner());
   }, []);
@@ -70,6 +76,9 @@ export default function DesignerGame() {
   }, [word]);
 
   const handleResult = (result: boolean) => {
+    if (result) {
+      trueSound();
+    } else falseSound();
     setIsOpenCard(true);
     setDisableEditor(true);
     dispatch(addAnswerGame({ word, result }));

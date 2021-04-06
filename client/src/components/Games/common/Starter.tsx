@@ -4,6 +4,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Backdrop from '@material-ui/core/Backdrop';
+import useSound from 'use-sound';
+import tickSfx from '../../../assets/tick.mp3';
+import gongSfx from '../../../assets/gong.mp3';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,11 +23,21 @@ interface Props {
   onStop: () => void;
 }
 
-export function Starter({ open = true, time = 3, onStop }: Props) {
+export function Starter({ open = true, time = 5, onStop }: Props) {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
 
+  // @ts-ignore
+  // const [tick] = useSound('/sounds/tick.mp3', { autoplay: true });
+  // const [tick] = useSound('/sounds/tick.mp3');
+  // const [gong] = useSound('/sounds/gong.mp3');
+  // @ts-ignore
+  // const [tick] = useSound(tickSfx, { autoplay: true });
+  const [tick] = useSound(tickSfx);
+  const [gong] = useSound(gongSfx);
+
   useEffect(() => {
+    tick();
     const timer = setInterval(() => {
       setProgress((prevProgress) => prevProgress + 1);
     }, 1000);
@@ -36,10 +49,13 @@ export function Starter({ open = true, time = 3, onStop }: Props) {
   useEffect(() => {
     let timer: number;
     if (progress === time) {
+      gong();
       timer = window.setTimeout(() => {
         onStop();
+        return;
       }, 500);
     }
+    tick();
     return () => {
       clearTimeout(timer);
     };

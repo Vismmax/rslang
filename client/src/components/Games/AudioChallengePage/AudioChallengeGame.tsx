@@ -28,6 +28,11 @@ import './AudioChallenge.css';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { Paper, Slide } from '@material-ui/core';
 import ButtonNext from '../common/ButtonNext';
+import useSound from 'use-sound';
+import trueSfx from '../../../assets/true.mp3';
+import falseSfx from '../../../assets/false.mp3';
+import tickSfx from '../../../assets/tick.mp3';
+import gongSfx from '../../../assets/gong.mp3';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,6 +80,9 @@ export default function AudioChallengeGame() {
   const [showSlide, setShowSlide] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('left');
 
+  const [trueSound] = useSound(trueSfx);
+  const [falseSound] = useSound(falseSfx);
+
   useEffect(() => {
     dispatch(nextWordAudioChallenge());
     setShowSlide(true);
@@ -92,6 +100,9 @@ export default function AudioChallengeGame() {
   }, [word]);
 
   const handleResult = (result: boolean) => {
+    if (result) {
+      trueSound();
+    } else falseSound();
     setIsOpenCard(true);
     dispatch(addAnswerGame({ word, result }));
   };

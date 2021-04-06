@@ -19,6 +19,9 @@ import {
 } from '../../SettingsPage/settingsSlice';
 import { SprintProgress } from './SprintProgress';
 import { addAnswerGame, scoreGame, stopGame } from '../gameSlice';
+import useSound from 'use-sound';
+import trueSfx from '../../../assets/true.mp3';
+import falseSfx from '../../../assets/false.mp3';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,6 +67,9 @@ export default function SprintGame() {
 
   const { episode, series, score } = useSelector(scoreGame);
 
+  const [trueSound] = useSound(trueSfx);
+  const [falseSound] = useSound(falseSfx);
+
   useEffect(() => {
     dispatch(nextWordSprint());
     const interval = setInterval(() => {
@@ -91,6 +97,10 @@ export default function SprintGame() {
   }, [word]);
 
   const handleResult = (result: boolean) => {
+    if (result) {
+      trueSound();
+    } else falseSound();
+
     console.log('result game: ', result);
     // if (result) {
     //   setScore(score + seriesValues[series]);

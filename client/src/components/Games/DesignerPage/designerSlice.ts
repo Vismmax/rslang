@@ -71,7 +71,7 @@ export const initDesigner = (): AppThunk => async (dispatch, getState) => {
   const userId = getLocalUserId();
   const data = getState().game.data;
   console.log('initDesigner :', userId, data);
-  const words = await loadWords({ data, userId, count: 30 });
+  const words = await loadWords({ data, userId, count: getState().settings.designer.countWords });
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
