@@ -42,7 +42,7 @@ export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <AppBar position='static'>
+    <AppBar id='app-header' position='static'>
       <Toolbar>
         <div className={classes.menuButton}>
           <MenuButton />

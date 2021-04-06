@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
 import Grid from '@material-ui/core/Grid';
@@ -15,11 +16,13 @@ import {
   activeWords,
   clearTextbookWords,
   fetchActiveWords,
+  idLoadingWord,
   loadingTextbookWords,
   saveActivePage,
 } from './textbookSlice';
 import { userStore } from '../LoginPage/userSlice';
 import Spinner from '../common/Spinner';
+import EmptyPage from '../common/EmptyPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,8 +56,11 @@ export default function ListPages({ group }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const loading = useSelector(loadingTextbookWords);
+  const loadingWord = useSelector(idLoadingWord);
   const words = useSelector(activeWords);
   const page = useSelector(activePage);
+
+  const matches = useMediaQuery('(min-width:420px)');
 
   useEffect(() => {
     dispatch(fetchActiveWords());
@@ -64,15 +70,19 @@ export default function ListPages({ group }: Props) {
   }, []);
 
   const handleChangePage = (ev: object, pg: number) => {
-    // setPage(pg - 1);
-    // setCurrentPage(pg - 1);
     dispatch(saveActivePage(pg - 1));
-    // dispatch(fetchActiveWords({ group, page: pg - 1 }));
+    const anchor = document.querySelector('#app-header');
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   return (
     <Container className={classes.root}>
-      <Spinner open={loading} inner={true} />
+      <Spinner open={loading && !loadingWord} inner={true} />
+      {!words.length && !loading && (
+        <EmptyPage text='На этой странице больше нет слов' />
+      )}
       <div className={classes.page}>
         {/*<CardWord word={tempWord} />*/}
         <Grid container direction='column' spacing={2}>
@@ -85,8 +95,9 @@ export default function ListPages({ group }: Props) {
       </div>
       <Pagination
         className={classes.paginator}
+        // color='primary'
+        size={matches ? 'medium' : 'small'}
         count={30}
-        color='primary'
         page={page + 1}
         onChange={handleChangePage}
       />

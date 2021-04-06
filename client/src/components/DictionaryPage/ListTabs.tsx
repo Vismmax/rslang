@@ -15,6 +15,7 @@ import ListPages from './ListPages';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    position: 'relative',
     flexGrow: 1,
     // backgroundColor: theme.palette.background.paper,
   },
