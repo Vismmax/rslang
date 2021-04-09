@@ -104,7 +104,7 @@ export default function DesignerGame() {
 
   const finishGame = () => {
     setStart(false);
-    dispatch(stopGame());
+    dispatch(stopGame('designer'));
     console.log('finish');
   };
 

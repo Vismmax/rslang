@@ -137,7 +137,7 @@ export default function SavannahGame() {
 
   const finishGame = () => {
     setStart(false);
-    dispatch(stopGame());
+    dispatch(stopGame('savannah'));
     console.log('finish');
   };
 

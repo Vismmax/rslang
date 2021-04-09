@@ -11,6 +11,7 @@ import savannahReducer from '../components/Games/SavannahPage/savannahSlice';
 import audioChallengeReducer from '../components/Games/AudioChallengePage/audioChallengeSlice';
 import sprintReducer from '../components/Games/SprintPage/sprintSlice';
 import designerReducer from '../components/Games/DesignerPage/designerSlice';
+import statisticsReducer from '../components/StatisticsPage/statisticsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     audioChallenge: audioChallengeReducer,
     sprint: sprintReducer,
     designer: designerReducer,
+    statistics: statisticsReducer,
   },
 });
 

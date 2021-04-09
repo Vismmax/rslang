@@ -27,6 +27,13 @@ import {
 import { clearLocalSettings } from '../../common/helpers/localSettings';
 import { clearCurrentGroupPage } from '../../common/helpers/localCurrentPage';
 import { clearDictionaryDifficultyPage } from '../../common/helpers/localDictionaryPage';
+import {
+  clearStatistics,
+  loadStatistics,
+} from '../StatisticsPage/statisticsSlice';
+import { loadSettings } from '../SettingsPage/settingsSlice';
+import { loadActivePage } from '../TextbookPage/textbookSlice';
+import { loadDictionaryPage } from '../DictionaryPage/dictionarySlice';
 
 interface User {
   userId: string;
@@ -106,6 +113,10 @@ export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
   const { userId, name, avatar } = { ...loginUser };
   dispatch(setUser({ userId, name, avatar, email: user.email }));
   dispatch(setIsLoading(false));
+  // dispatch(loadActivePage());
+  // dispatch(loadDictionaryPage());
+  dispatch(loadSettings());
+  dispatch(loadStatistics());
 };
 
 export const logoutUser = (): AppThunk => async (dispatch) => {
@@ -114,6 +125,7 @@ export const logoutUser = (): AppThunk => async (dispatch) => {
   clearLocalSettings();
   clearCurrentGroupPage();
   clearDictionaryDifficultyPage();
+  dispatch(clearStatistics());
   dispatch(setUser({ userId: '', name: '', avatar: '', email: '' }));
 };
 

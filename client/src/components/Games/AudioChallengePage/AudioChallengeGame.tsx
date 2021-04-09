@@ -139,7 +139,7 @@ export default function AudioChallengeGame() {
 
   const finishGame = () => {
     setStart(false);
-    dispatch(stopGame());
+    dispatch(stopGame('audioChallenge'));
     console.log('finish');
   };
 

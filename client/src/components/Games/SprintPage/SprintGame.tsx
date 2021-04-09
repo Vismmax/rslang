@@ -141,7 +141,7 @@ export default function SprintGame() {
 
   const finishGame = () => {
     setStart(false);
-    dispatch(stopGame());
+    dispatch(stopGame('sprint'));
     console.log('finish');
   };
 

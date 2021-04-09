@@ -10,6 +10,7 @@ import {
   createUserWord,
   updateUserWord,
 } from '../../api/services/wordsService';
+import { addStatisticsGame } from '../StatisticsPage/statisticsSlice';
 
 export interface IGameData {
   group: number;
@@ -35,6 +36,11 @@ interface GameState {
   score: IScore;
   wordsTrue: IWord[];
   wordsFalse: IWord[];
+  seriesTrueAnswers: {
+    value: number;
+    temp: number;
+  };
+  timeStart: Date | null;
 }
 
 const initialState: GameState = {
@@ -57,6 +63,11 @@ const initialState: GameState = {
   },
   wordsTrue: [],
   wordsFalse: [],
+  seriesTrueAnswers: {
+    value: 0,
+    temp: 0,
+  },
+  timeStart: null,
 };
 
 export const seriesValues = [10, 20, 40, 80];
@@ -95,6 +106,18 @@ export const gameSlice = createSlice({
     addWordsFalse: (state, action: PayloadAction<IWord>) => {
       state.wordsFalse.push(action.payload);
     },
+    setSeriesTrueAnswers: (
+      state,
+      action: PayloadAction<{
+        value: number;
+        temp: number;
+      }>,
+    ) => {
+      state.seriesTrueAnswers = action.payload;
+    },
+    setTimeStart: (state, action: PayloadAction<Date>) => {
+      state.timeStart = action.payload;
+    },
     clearGame: (state) => {
       return initialState;
     },
@@ -104,6 +127,11 @@ export const gameSlice = createSlice({
         score: { ...initialState.score },
         wordsTrue: [],
         wordsFalse: [],
+        seriesTrueAnswers: {
+          value: 0,
+          temp: 0,
+        },
+        timeStart: null,
       };
     },
   },
@@ -120,6 +148,8 @@ export const {
   setScore,
   addWordsTrue,
   addWordsFalse,
+  setSeriesTrueAnswers,
+  setTimeStart,
   clearGame,
   reset,
 } = gameSlice.actions;
@@ -170,6 +200,7 @@ export const setLevelGame = (level: number): AppThunk => async (
 
 export const startGame = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsStart(true));
+  dispatch(setTimeStart(new Date()));
 };
 
 export const addAnswerGame = ({
@@ -180,6 +211,7 @@ export const addAnswerGame = ({
   result: boolean;
 }): AppThunk => async (dispatch, getState) => {
   let { episode, series, score, experience } = getState().game.score;
+  const { value, temp } = getState().game.seriesTrueAnswers;
   if (result) {
     score = score + seriesValues[series];
     if (episode < 3) episode++;
@@ -191,9 +223,18 @@ export const addAnswerGame = ({
       series++;
     }
     experience++;
+
+    dispatch(setSeriesTrueAnswers({ value, temp: temp + 1 }));
   } else {
     episode = 0;
     series = 0;
+
+    dispatch(
+      setSeriesTrueAnswers({
+        value: value > temp ? value : temp,
+        temp: 0,
+      }),
+    );
   }
   dispatch(setScore({ episode, series, score, experience }));
 
@@ -258,9 +299,25 @@ export const fetchWordSetDifficulty = ({
   dispatch(fetchSetUserWord({ wordId: extWord.id, userWord }));
 };
 
-export const stopGame = (): AppThunk => async (dispatch, getState) => {
+export const stopGame = (name: string): AppThunk => async (
+  dispatch,
+  getState,
+) => {
   dispatch(setIsStart(false));
   dispatch(setIsStop(true));
+  if (getState().game.level === null) {
+    const statistics = {
+      name,
+      timeStart: getState().game.timeStart as Date,
+      timeStop: new Date(),
+      wordsTrueIds: getState().game.wordsTrue.map((word) => word.id),
+      wordsFalseIds: getState().game.wordsFalse.map((word) => word.id),
+      seriesTrueAnswers: getState().game.seriesTrueAnswers.value,
+      score: getState().game.score.score,
+      experience: getState().game.score.experience,
+    };
+    dispatch(addStatisticsGame(statistics));
+  }
 };
 
 export const resetGame = (): AppThunk => async (dispatch, getState) => {

@@ -8,6 +8,7 @@ import Routes from './Routes/Routes';
 import { loadSettings } from './SettingsPage/settingsSlice';
 import { loadActivePage } from './TextbookPage/textbookSlice';
 import { loadDictionaryPage } from './DictionaryPage/dictionarySlice';
+import { loadStatistics } from './StatisticsPage/statisticsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,7 @@ function App() {
     dispatch(loadSettings());
     dispatch(loadActivePage());
     dispatch(loadDictionaryPage());
+    dispatch(loadStatistics());
   }, []);
 
   return (
