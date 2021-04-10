@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Header from './Header/Header';
 import Footer from './Footer';
-import SideBar from '../SideBar/SideBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       flexGrow: 1,
       width: '100%',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center top',
     },
     container: {
       display: 'flex',
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[] | null;
   className?: string;
   background?: string;
 }
@@ -52,10 +53,9 @@ export default function PageLayout({
   return (
     <Container className={classes.root} maxWidth={false} disableGutters>
       <Header />
-      {/*<main className={`${classes.main} ${className}`}>*/}
       <main className={`${classes.main} ${background}`}>
         <Container className={`${classes.container} ${className}`}>
-          {children}
+          <>{children}</>
         </Container>
       </main>
       <Footer />
