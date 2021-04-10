@@ -12,19 +12,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
   },
+  wrap: {
+    padding: 0,
+  },
 }));
 
 export default function TextbookPage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
-      <ContainerMain>
-        <div className={classes.root}>
-          <ToolBar title='Учебник' />
-          <ListGroups ListGroupItem={ListPages} />
-        </div>
-      </ContainerMain>
+    <PageLayout className={classes.wrap}>
+      {/*<ContainerMain>*/}
+      <div className={classes.root}>
+        <ToolBar title='Учебник' />
+        <ListGroups ListGroupItem={ListPages} />
+      </div>
+      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }

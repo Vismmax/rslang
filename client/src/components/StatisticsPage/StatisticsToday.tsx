@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(5),
       padding: theme.spacing(1, 0),
       // padding: theme.spacing(1, 3),
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
     },
   }),
 );

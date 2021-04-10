@@ -77,57 +77,57 @@ export default function SettingsPage() {
 
   return (
     <PageLayout>
-      <ContainerMain>
-        <Paper className={classes.root}>
-          <Container>
-            <Typography className={classes.header} variant='h4' component='h1'>
-              Настройки
-            </Typography>
-            <Typography className={classes.header} variant='h5' component='h1'>
-              Настройки учебника
-            </Typography>
-            <SettingsTextbook
-              settings={textbook}
-              // onChange={handleChangeSettings('textbook')}
-              onChange={handleChangeSettings}
-            />
+      {/*<ContainerMain>*/}
+      <Paper className={classes.root}>
+        <Container>
+          <Typography className={classes.header} variant='h4' component='h1'>
+            Настройки
+          </Typography>
+          <Typography className={classes.header} variant='h5' component='h1'>
+            Настройки учебника
+          </Typography>
+          <SettingsTextbook
+            settings={textbook}
+            // onChange={handleChangeSettings('textbook')}
+            onChange={handleChangeSettings}
+          />
 
-            <Typography className={classes.header} variant='h5' component='h2'>
-              Настройки игр
-            </Typography>
-            <Grid container spacing={10}>
-              <Grid item container xs={12} sm={6}>
-                <SettingsSavannah
-                  settings={savannah}
-                  // onChange={handleOnChangeSettingsSavannah}
-                  onChange={handleChangeSettings}
-                />
-              </Grid>
-              <Grid item container xs={12} sm={6}>
-                <SettingsAudioChallenge
-                  settings={audioChallenge}
-                  // onChange={handleOnChangeSettingsAudioChallenge}
-                  onChange={handleChangeSettings}
-                />
-              </Grid>
-              <Grid item container xs={12} sm={6}>
-                <SettingsSprint
-                  settings={sprint}
-                  // onChange={handleOnChangeSettingsSprint}
-                  onChange={handleChangeSettings}
-                />
-              </Grid>
-              <Grid item container xs={12} sm={6}>
-                <SettingsDesigner
-                  settings={designer}
-                  // onChange={handleOnChangeSettingsDesigner}
-                  onChange={handleChangeSettings}
-                />
-              </Grid>
+          <Typography className={classes.header} variant='h5' component='h2'>
+            Настройки игр
+          </Typography>
+          <Grid container spacing={10}>
+            <Grid item container xs={12} sm={6}>
+              <SettingsSavannah
+                settings={savannah}
+                // onChange={handleOnChangeSettingsSavannah}
+                onChange={handleChangeSettings}
+              />
             </Grid>
-          </Container>
-        </Paper>
-      </ContainerMain>
+            <Grid item container xs={12} sm={6}>
+              <SettingsAudioChallenge
+                settings={audioChallenge}
+                // onChange={handleOnChangeSettingsAudioChallenge}
+                onChange={handleChangeSettings}
+              />
+            </Grid>
+            <Grid item container xs={12} sm={6}>
+              <SettingsSprint
+                settings={sprint}
+                // onChange={handleOnChangeSettingsSprint}
+                onChange={handleChangeSettings}
+              />
+            </Grid>
+            <Grid item container xs={12} sm={6}>
+              <SettingsDesigner
+                settings={designer}
+                // onChange={handleOnChangeSettingsDesigner}
+                onChange={handleChangeSettings}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      </Paper>
+      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }

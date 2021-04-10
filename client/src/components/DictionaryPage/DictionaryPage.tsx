@@ -14,13 +14,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
   },
+  wrap: {
+    padding: 0,
+  },
 }));
 
 export default function DictionaryPage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
+    <PageLayout className={classes.wrap}>
       <ContainerMain>
         <div className={classes.root}>
           <ToolBar title='Словарь' />

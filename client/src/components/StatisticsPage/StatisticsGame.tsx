@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       padding: theme.spacing(3),
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
     },
     title: {
       marginBottom: theme.spacing(3),

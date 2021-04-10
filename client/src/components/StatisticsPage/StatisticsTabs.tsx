@@ -14,9 +14,12 @@ import StatisticsAll from './StatisticsAll';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
-    // width: 500,
+    // backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
   },
+  // panel: {
+  //   overflow: 'hidden',
+  // },
 }));
 
 interface TabPanelProps {
@@ -65,9 +68,9 @@ export default function StatisticsTabs() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
+  // const handleChangeIndex = (index: number) => {
+  //   setValue(index);
+  // };
 
   return (
     <div className={classes.root}>
@@ -85,18 +88,28 @@ export default function StatisticsTabs() {
           <Tab label='За весь период' {...a11yProps(1)} disabled={!userId} />
         </Tabs>
       </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
+      {/*<SwipeableViews*/}
+      {/*  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}*/}
+      {/*  index={value}*/}
+      {/*  onChangeIndex={handleChangeIndex}*/}
+      {/*>*/}
+      <TabPanel
+        // className={classes.panel}
+        value={value}
+        index={0}
+        dir={theme.direction}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <StatisticsToday />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <StatisticsAll />
-        </TabPanel>
-      </SwipeableViews>
+        <StatisticsToday />
+      </TabPanel>
+      <TabPanel
+        // className={classes.panel}
+        value={value}
+        index={1}
+        dir={theme.direction}
+      >
+        <StatisticsAll />
+      </TabPanel>
+      {/*</SwipeableViews>*/}
     </div>
   );
 }

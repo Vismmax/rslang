@@ -7,6 +7,11 @@ import StatisticsTabs from './StatisticsTabs';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
+    background: {
+      backgroundImage: 'url("/img/statistics.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
   }),
 );
 
@@ -14,10 +19,10 @@ export default function StatisticsPage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
-      <ContainerMain>
-        <StatisticsTabs />
-      </ContainerMain>
+    <PageLayout background={classes.background}>
+      {/*<ContainerMain>*/}
+      <StatisticsTabs />
+      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }
