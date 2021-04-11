@@ -13,6 +13,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
+import MovieIcon from '@material-ui/icons/Movie';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +80,15 @@ export default function Header() {
           to='/statistics'
         >
           Статистика
+        </Button>
+        <Button
+          className={classes.link}
+          color='inherit'
+          startIcon={<MovieIcon />}
+          component={RouterLink}
+          to='/promo'
+        >
+          Обзор
         </Button>
         <Button
           className={classes.link}

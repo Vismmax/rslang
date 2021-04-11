@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import HomeCard from './HomeCard';
 import Typography from '@material-ui/core/Typography';
 import { routesData } from '../Routes/routesData';
-import CardContent from '@material-ui/core/CardContent';
 
 const {
   textbook,

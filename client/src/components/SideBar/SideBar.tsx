@@ -15,6 +15,7 @@ import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import HomeIcon from '@material-ui/icons/Home';
+import MovieIcon from '@material-ui/icons/Movie';
 
 const useStyles = makeStyles({
   root: {},
@@ -111,17 +112,6 @@ export default function SideBar() {
           <ListItem
             button
             component={RouterLink}
-            to='/about'
-            onClick={closeSideBar}
-          >
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <ListItemText primary='Команда' />
-          </ListItem>
-          <ListItem
-            button
-            component={RouterLink}
             to='/settings'
             onClick={closeSideBar}
           >
@@ -129,6 +119,28 @@ export default function SideBar() {
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary='Настройки' />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/promo'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <MovieIcon />
+            </ListItemIcon>
+            <ListItemText primary='Обзор' />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            to='/about'
+            onClick={closeSideBar}
+          >
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary='Команда' />
           </ListItem>
         </List>
       </aside>

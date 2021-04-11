@@ -10,7 +10,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import InfoIcon from '@material-ui/icons/Info';
+import MovieIcon from '@material-ui/icons/Movie';
 import homeImg from '../../assets/home.jpg';
 import homeBg from '../../assets/home.jpg';
 import textbookImg from '../../assets/textbook.jpg';
@@ -141,11 +141,11 @@ export const routesData: IRoutesData = {
     route: '/about',
   },
   promo: {
-    title: 'Обзор приложения',
+    title: 'Обзор',
     description: '',
     image: promoImg,
     background: promoBg,
-    icon: <InfoIcon />,
+    icon: <MovieIcon />,
     route: '/promo',
   },
 };

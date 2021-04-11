@@ -36,11 +36,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Footer() {
+interface Props {
+  className?: string;
+}
+
+export default function Footer({ className = '' }: Props) {
   const classes = useStyles();
 
   return (
-    <footer className={classes.root}>
+    <footer className={`${classes.root} ${className}`}>
       <Divider />
 
       <Container className={classes.main}>
