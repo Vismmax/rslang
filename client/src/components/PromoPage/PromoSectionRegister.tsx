@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import Footer from '../PageLayout/Footer';
-import background from '../../assets/register.jpg';
+import routesData from '../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundImage: `url(${background})`,
+      backgroundImage: `url(${routesData.promo.background})`,
     },
     container: {
       display: 'flex',

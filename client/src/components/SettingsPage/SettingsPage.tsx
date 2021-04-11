@@ -21,11 +21,15 @@ import {
   settingsSprint,
   saveSettings,
 } from './settingsSlice';
+import routesData from '../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(3, 0),
+    },
+    background: {
+      backgroundImage: `url(${routesData.settings.background})`,
     },
     header: {
       marginBottom: theme.spacing(3),
@@ -47,7 +51,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout background={classes.background}>
       <Paper className={classes.root}>
         <Container>
           <Typography className={classes.header} variant='h4' component='h1'>

@@ -8,14 +8,13 @@ import Spinner from '../../common/Spinner';
 import SavannahInit from './SavannahInit';
 import { isStartGame } from '../gameSlice';
 import { isLoadingSavannah } from './savannahSlice';
+import routesData from '../../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     background: {
-      backgroundImage: 'url("/img/savannah.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundImage: `url(${routesData.savannah.image})`,
     },
   }),
 );

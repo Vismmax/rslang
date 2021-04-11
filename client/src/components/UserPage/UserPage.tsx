@@ -14,6 +14,7 @@ import { validate } from 'email-validator';
 import UserAvatar from '../LoginPage/UserAvatar';
 import PageLayout from '../PageLayout/PageLayout';
 import { deleteUser, updateUser, userStore } from '../LoginPage/userSlice';
+import routesData from '../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    background: {
+      backgroundImage: `url(${routesData.user.background})`,
     },
     panel: {
       maxWidth: theme.spacing(62),
@@ -139,7 +143,7 @@ export default function Registration() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout background={classes.background}>
       <div className={classes.root}>
         <Paper className={classes.panel}>
           <form className={classes.form} noValidate autoComplete='off'>

@@ -9,6 +9,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import MailIcon from '@material-ui/icons/Mail';
 
 import PageLayout from '../PageLayout/PageLayout';
+import routesData from '../Routes/routesData';
 import foto from '../../assets/autor.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       height: '100%',
+    },
+    background: {
+      backgroundImage: `url(${routesData.about.background})`,
     },
     card: {
       padding: theme.spacing(3),
@@ -47,7 +51,7 @@ export default function AboutPage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
+    <PageLayout background={classes.background}>
       <div>
         <Typography
           className={classes.header}

@@ -11,30 +11,36 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import MovieIcon from '@material-ui/icons/Movie';
-import homeImg from '../../assets/home.jpg';
-import homeBg from '../../assets/home.jpg';
-import textbookImg from '../../assets/textbook.jpg';
-import textbookBg from '../../assets/textbook.jpg';
-import dictionaryImg from '../../assets/dictionary.jpg';
-import dictionaryBg from '../../assets/dictionary.jpg';
-import gamesImg from '../../assets/savannah.jpg';
-import gamesBg from '../../assets/savannah.jpg';
-import savannahImg from '../../assets/savannah.jpg';
-import savannahBg from '../../assets/savannah.jpg';
-import audioChallengeImg from '../../assets/audiochallenge.jpg';
-import audioChallengeBg from '../../assets/audiochallenge.jpg';
-import sprintImg from '../../assets/sprint.jpg';
-import sprintBg from '../../assets/sprint.jpg';
-import designerImg from '../../assets/designer.jpg';
-import designerBg from '../../assets/designer.jpg';
-import statisticsImg from '../../assets/statistics.jpg';
-import statisticsBg from '../../assets/statistics.jpg';
-import settingsImg from '../../assets/settings.jpg';
-import settingsBg from '../../assets/settings.jpg';
-import aboutImg from '../../assets/about.jpg';
-import aboutBg from '../../assets/about.jpg';
-import promoImg from '../../assets/promo.jpg';
-import promoBg from '../../assets/promo.jpg';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from '@material-ui/icons/Person';
+import homeImg from '../../assets/home-th.webp';
+import homeBg from '../../assets/home.webp';
+import textbookImg from '../../assets/textbook-th.webp';
+import textbookBg from '../../assets/textbook.webp';
+import dictionaryImg from '../../assets/dictionary-th.webp';
+import dictionaryBg from '../../assets/dictionary.webp';
+import gamesImg from '../../assets/sprint-th.webp';
+import gamesBg from '../../assets/sprint.webp';
+import savannahImg from '../../assets/savannah-th.webp';
+import savannahBg from '../../assets/savannah.webp';
+import audioChallengeImg from '../../assets/audiochallenge-th.webp';
+import audioChallengeBg from '../../assets/audiochallenge.webp';
+import sprintImg from '../../assets/sprint-th.webp';
+import sprintBg from '../../assets/sprint.webp';
+import designerImg from '../../assets/designer-th.webp';
+import designerBg from '../../assets/designer.webp';
+import statisticsImg from '../../assets/statistics-th.webp';
+import statisticsBg from '../../assets/statistics.webp';
+import settingsImg from '../../assets/settings-th.webp';
+import settingsBg from '../../assets/settings.webp';
+import aboutImg from '../../assets/about-th.webp';
+import aboutBg from '../../assets/about.webp';
+import promoImg from '../../assets/promo-th.webp';
+import promoBg from '../../assets/promo.webp';
+import loginImg from '../../assets/promo-th.webp';
+import loginBg from '../../assets/promo.webp';
+import userImg from '../../assets/promo-th.webp';
+import userBg from '../../assets/promo.webp';
 
 // export enum RoutesEnum {}
 
@@ -48,7 +54,20 @@ interface IRouteInfo {
 }
 
 interface IRoutesData {
-  [propName: string]: IRouteInfo;
+  home: IRouteInfo;
+  textbook: IRouteInfo;
+  dictionary: IRouteInfo;
+  games: IRouteInfo;
+  savannah: IRouteInfo;
+  audioChallenge: IRouteInfo;
+  sprint: IRouteInfo;
+  designer: IRouteInfo;
+  statistics: IRouteInfo;
+  settings: IRouteInfo;
+  about: IRouteInfo;
+  promo: IRouteInfo;
+  login: IRouteInfo;
+  user: IRouteInfo;
 }
 
 export const routesData: IRoutesData = {
@@ -148,4 +167,22 @@ export const routesData: IRoutesData = {
     icon: <MovieIcon />,
     route: '/promo',
   },
+  login: {
+    title: 'Вход',
+    description: '',
+    image: loginImg,
+    background: loginBg,
+    icon: <ExitToAppIcon />,
+    route: '/login',
+  },
+  user: {
+    title: 'Пользователь',
+    description: '',
+    image: userImg,
+    background: userBg,
+    icon: <PersonIcon />,
+    route: '/user',
+  },
 };
+
+export default routesData;

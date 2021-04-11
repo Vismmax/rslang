@@ -3,14 +3,13 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import PageLayout from '../PageLayout/PageLayout';
 import StatisticsTabs from './StatisticsTabs';
+import routesData from '../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     background: {
-      backgroundImage: 'url("/img/statistics.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundImage: `url(${routesData.statistics.background})`,
     },
   }),
 );

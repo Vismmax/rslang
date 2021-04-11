@@ -8,6 +8,7 @@ import SprintInit from './SprintInit';
 import SprintGame from './SprintGame';
 import { isStartGame } from '../gameSlice';
 import { isLoadingSprint } from './sprintSlice';
+import routesData from '../../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,9 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
-      backgroundImage: 'url("/img/sprint.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundImage: `url(${routesData.sprint.image})`,
     },
   }),
 );

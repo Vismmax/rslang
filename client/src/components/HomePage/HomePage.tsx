@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PageLayout from '../PageLayout/PageLayout';
 import HomeProgress from './HomeProgress';
 import HomeCard from './HomeCard';
-import { routesData } from '../Routes/routesData';
+import routesData from '../Routes/routesData';
 
 const {
   textbook,
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: '100%',
     },
+    background: {
+      backgroundImage: `url(${routesData.home.background})`,
+    },
     section: {
       marginBottom: theme.spacing(6),
     },
@@ -38,7 +41,7 @@ export default function HomePage() {
   const classes = useStyles();
 
   return (
-    <PageLayout>
+    <PageLayout background={classes.background}>
       <Typography
         className={classes.header}
         gutterBottom

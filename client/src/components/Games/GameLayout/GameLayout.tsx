@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
     },
   }),
 );

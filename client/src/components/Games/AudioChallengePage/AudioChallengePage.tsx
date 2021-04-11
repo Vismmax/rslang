@@ -8,6 +8,7 @@ import AudioChallengeInit from '../AudioChallengePage/AudioChallengeInit';
 import AudioChallengeGame from './AudioChallengeGame';
 import { isStartGame } from '../gameSlice';
 import { isLoadingAudioChallenge } from './audioChallengeSlice';
+import routesData from '../../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,9 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
-      backgroundImage: 'url("/img/audiochallenge.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundImage: `url(${routesData.audioChallenge.image})`,
     },
   }),
 );

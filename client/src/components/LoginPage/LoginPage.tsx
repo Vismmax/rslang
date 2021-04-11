@@ -14,6 +14,7 @@ import Login from './Login';
 import Registration from './Registration';
 import { userStore } from './userSlice';
 import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
+import routesData from '../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  background: {
+    backgroundImage: `url(${routesData.login.background})`,
   },
   tabs: {
     backgroundColor: theme.palette.background.paper,
@@ -108,7 +112,7 @@ export default function LoginPage() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout background={classes.background}>
       <div className={classes.root}>
         <div className={classes.tabs}>
           <AppBar position='static' color='default'>

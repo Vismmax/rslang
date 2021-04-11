@@ -8,6 +8,7 @@ import DesignerInit from './DesignerInit';
 import DesignerGame from './DesignerGame';
 import { isStartGame } from '../gameSlice';
 import { isLoadingDesigner } from './designerSlice';
+import routesData from '../../Routes/routesData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,9 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
-      backgroundImage: 'url("/img/designer.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundImage: `url(${routesData.designer.image})`,
     },
   }),
 );
