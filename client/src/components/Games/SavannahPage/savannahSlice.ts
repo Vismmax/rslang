@@ -72,6 +72,7 @@ export const initSavannah = (): AppThunk => async (dispatch, getState) => {
   const data = getState().game.data;
   console.log('initSavannah :', userId, data);
   const words = await loadWords({ data, userId, count: 30 });
+  console.log('wordswords: ', words);
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));

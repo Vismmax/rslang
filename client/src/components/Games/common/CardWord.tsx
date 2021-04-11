@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
         width: 'auto',
         minWidth: theme.spacing(36),
       },
+      [theme.breakpoints.down('xs')]: {
+        width: theme.spacing(34),
+        height: theme.spacing(28),
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+      },
     },
     cardQuestion: {
       display: 'flex',
@@ -43,6 +49,10 @@ const useStyles = makeStyles((theme: Theme) =>
     image: {
       width: theme.spacing(16),
       height: theme.spacing(16),
+      [theme.breakpoints.down('xs')]: {
+        width: theme.spacing(12),
+        height: theme.spacing(12),
+      },
     },
   }),
 );

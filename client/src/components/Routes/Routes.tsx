@@ -14,6 +14,7 @@ import PrivateRoute from '../Routes/PrivateRoute';
 import TextbookPage from '../TextbookPage/TextbookPage';
 import DictionaryPage from '../DictionaryPage/DictionaryPage';
 import StatisticsPage from '../StatisticsPage/StatisticsPage';
+import RootRoute from './RootRoute';
 
 export default function Routes() {
   return (
@@ -33,7 +34,8 @@ export default function Routes() {
         <Route path='/login' component={LoginPage} />
         <PrivateRoute path='/user' component={UserPage} />
         {/*<Route component={NotFound} />*/}
-        <Redirect from='/' to='/home' />
+        {/*<Redirect from='/' to='/home' />*/}
+        <RootRoute from='/' />
       </Switch>
     </>
   );

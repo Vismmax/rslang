@@ -56,11 +56,11 @@ const loadDictionaryWords = async ({ data, userId, count }: Props) => {
   if (userId) {
     do {
       const res = await getDictionaryWords({ userId, group, page, difficulty });
+      words.push(...res.paginatedResults);
       if (--page < 0) {
         page = 29;
         if (--group < 0) break;
       }
-      words.push(...res.paginatedResults);
     } while (words.length < count);
   }
   return shuffleArrayCount(words, count);
@@ -72,20 +72,20 @@ const loadTextbookWords = async ({ data, userId, count }: Props) => {
   if (userId) {
     do {
       const res = await getActiveWordsByUser({ userId, group, page });
+      words.push(...res);
       if (--page < 0) {
         page = 29;
         if (--group < 0) break;
       }
-      words.push(...res);
     } while (words.length < count);
   } else {
     do {
       const res = await getActiveWords({ group, page });
+      words.push(...res);
       if (--page < 0) {
         page = 29;
         if (--group < 0) break;
       }
-      words.push(...res);
     } while (words.length < count);
   }
   return shuffleArrayCount(words, count);

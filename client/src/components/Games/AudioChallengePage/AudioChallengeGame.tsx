@@ -39,12 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
+      // justifyContent: 'space-evenly',
+      // alignItems: 'center',
       // width: '100%',
       // height: '100%',
-      // flexGrow: 1,
+      flexGrow: 1,
       // padding: theme.spacing(3),
       paddingTop: theme.spacing(8),
+      [theme.breakpoints.down('xs')]: {
+        paddingTop: theme.spacing(3),
+      },
     },
 
     card: {

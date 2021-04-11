@@ -13,6 +13,14 @@ const useStyles = makeStyles((theme: Theme) =>
     text: {
       fontWeight: theme.typography.fontWeightBold,
     },
+    progress: {
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+      [theme.breakpoints.down('xs')]: {
+        width: theme.spacing(8),
+        height: theme.spacing(8),
+      },
+    },
   }),
 );
 
@@ -27,9 +35,10 @@ export function SprintProgress({ timeGame, time }: Props) {
   return (
     <Box className={classes.root} position='relative' display='inline-flex'>
       <CircularProgress
+        className={classes.progress}
         variant='determinate'
         color='secondary'
-        size={80}
+        // size={80}
         value={(time * 100) / timeGame}
       />
       <Box

@@ -52,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       flexGrow: 2,
+      [theme.breakpoints.down('xs')]: {
+        flexGrow: 1,
+      },
     },
     icon: {
       flexGrow: 1,
