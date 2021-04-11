@@ -11,6 +11,7 @@ import { validate } from 'email-validator';
 
 import UserAvatar from './UserAvatar';
 import { registrationUser } from './userSlice';
+import { showNotificationError } from '../common/Notification/notificationSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -91,10 +92,12 @@ export default function Registration({ onCancel }: Props) {
   const handleAddUser = async () => {
     if (!name.value) {
       setName({ ...name, err: 'Введите имя' });
+      dispatch(showNotificationError('Введите имя'));
       return;
     }
     if (!validate(email.value)) {
       setEmail({ ...email, err: 'Введите коректный адрес почты' });
+      dispatch(showNotificationError('Введите коректный адрес почты'));
       return;
     }
     if (password.value.length < 8) {
@@ -102,6 +105,7 @@ export default function Registration({ onCancel }: Props) {
         ...password,
         err: 'Пароль должен быть не менее 8 символов',
       });
+      dispatch(showNotificationError('Пароль должен быть не менее 8 символов'));
       return;
     }
 

@@ -1,12 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 import { uploadImage } from '../../api/services/imageService';
-import { useDispatch } from 'react-redux';
 import { showNotificationError } from '../common/Notification/notificationSlice';
+import user from '../../assets/user.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,7 +43,7 @@ interface Props {
 
 export default function UserAvatar({
   input = false,
-  value = '/img/user.png',
+  value = user,
   onChange = () => {},
 }: Props) {
   const classes = useStyles();
