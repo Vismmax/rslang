@@ -9,7 +9,8 @@ import HomeCard from '../HomePage/HomeCard';
 import PromoCard from './PromoCard';
 import { routesData } from '../Routes/routesData';
 import Slide from '@material-ui/core/Slide';
-import { Zoom } from '@material-ui/core';
+// import { Zoom } from '@material-ui/core';
+import Zoom from 'react-reveal/Zoom';
 
 const { savannah, audioChallenge, sprint, designer } = routesData;
 
@@ -61,10 +62,11 @@ const useStyles = makeStyles((theme: Theme) =>
 // }
 
 interface Props {
+  show: boolean;
   onNextPage: () => void;
 }
 
-export default function PromoSectionGame({ onNextPage }: Props) {
+export default function PromoSectionGame({ show, onNextPage }: Props) {
   const classes = useStyles();
 
   // useEffect(() => {
@@ -94,7 +96,7 @@ export default function PromoSectionGame({ onNextPage }: Props) {
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
               <Grid item xs={6} sm={4} md={3}>
-                {/*<Zoom in={show} style={{ transitionDelay: '500ms' }}>*/}
+                {/*<Zoom when={show} exit={false} duration={show ? 3000 : -1}>*/}
                 <PromoCard
                   title={savannah.title}
                   description={savannah.description}

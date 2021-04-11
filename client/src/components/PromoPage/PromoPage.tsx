@@ -70,7 +70,7 @@ export default function PromoPage() {
         <PromoSectionTextbook onNextPage={handleNextSection} />
         <PromoSectionGame
           onNextPage={handleNextSection}
-          // show={section === 2 ? true : false}
+          show={section === 2 ? true : false}
         />
         <PromoSectionStatistics onNextPage={handleNextSection} />
         <PromoSectionRegister />

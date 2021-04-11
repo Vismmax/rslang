@@ -6,12 +6,10 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import PromoButtonNext from './PromoButtonNext';
 import HomeCard from '../HomePage/HomeCard';
-import { routesData } from '../Routes/routesData';
 import PromoCard from './PromoCard';
 import Button from '@material-ui/core/Button';
 import Footer from '../PageLayout/Footer';
-
-const { textbook, dictionary } = routesData;
+import background from '../../assets/register.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundImage: `url(${dictionary.background})`,
+      backgroundImage: `url(${background})`,
       // backgroundImage: dictionaryBg,
     },
     container: {
