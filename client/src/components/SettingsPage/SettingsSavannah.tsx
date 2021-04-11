@@ -1,15 +1,14 @@
 import React, { ChangeEvent } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { ISettingsSavannah } from './settingsSlice';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
+
+import { ISettingsSavannah } from './settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,20 +62,6 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
         Саванна
       </Typography>
       <div>
-        {/*<TextField*/}
-        {/*  className={classes.input}*/}
-        {/*  label='Время'*/}
-        {/*  helperText='Время показа одного слова'*/}
-        {/*  type='number'*/}
-        {/*  fullWidth*/}
-        {/*  InputProps={{*/}
-        {/*    endAdornment: <InputAdornment position='end'>Сек</InputAdornment>,*/}
-        {/*  }}*/}
-        {/*  name='timeWord'*/}
-        {/*  value={settings.timeWord}*/}
-        {/*  onChange={handleChange}*/}
-        {/*/>*/}
-
         <FormControl className={classes.input}>
           <InputLabel id='timeWordSavannah'>Время</InputLabel>
           <Select

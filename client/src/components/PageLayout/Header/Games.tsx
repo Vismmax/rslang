@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import MenuIcon from '@material-ui/icons/Menu';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EcoIcon from '@material-ui/icons/Eco';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import { setRouteGame } from '../../Games/gameSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,8 +28,6 @@ interface IEv {
 
 export default function Games() {
   const classes = useStyles();
-  // const history = useHistory();
-  // const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -44,12 +39,6 @@ export default function Games() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // const handleRoute = (rout: string) => () => {
-  //   dispatch(setRouteGame(location.pathname));
-  //   history.push(rout);
-  //   setAnchorEl(null);
-  // };
 
   return (
     <div className={classes.root}>

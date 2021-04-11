@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      // flexDirection: 'column',
       flexGrow: 1,
       [theme.breakpoints.down('md')]: {
         paddingLeft: 0,
@@ -25,11 +24,7 @@ export default function ContainerMain({ children, className = '' }: Props) {
   const classes = useStyles();
 
   return (
-    <Container
-      className={`${classes.root} ${className}`}
-      maxWidth='xl'
-      // disableGutters
-    >
+    <Container className={`${classes.root} ${className}`} maxWidth='xl'>
       {children}
     </Container>
   );

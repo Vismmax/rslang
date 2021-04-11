@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { clearSprint, initSprint } from './sprintSlice';
 
 interface Props {

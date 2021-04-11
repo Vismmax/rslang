@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  withStyles,
-} from '@material-ui/core/styles';
-import GameLayout from '../GameLayout/GameLayout';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Slide from '@material-ui/core/Slide';
+import Typography from '@material-ui/core/Typography';
+import useSound from 'use-sound';
+
 import Fire from '../common/Fire';
-import Timer from '../common/Timer';
 import ButtonsWords from '../common/ButtonsWords';
-import CardWord from '../common/CardWord';
-import Toolbar from '@material-ui/core/Toolbar';
-import { Grid, Paper, Slide } from '@material-ui/core';
+import { settingsSavannah } from '../../SettingsPage/settingsSlice';
+import { addAnswerGame, stopGame } from '../gameSlice';
 import {
   activeVariantsSavannah,
   activeWordSavannah,
-  isLoadingSavannah,
-  // newWord,
   nextWordSavannah,
-  // start,
-  // testTT,
 } from './savannahSlice';
-import Spinner from '../../common/Spinner';
-import { settingsSavannah } from '../../SettingsPage/settingsSlice';
-import Typography from '@material-ui/core/Typography';
-import { addAnswerGame, stopGame } from '../gameSlice';
-import useSound from 'use-sound';
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
 
@@ -35,22 +23,16 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       flexDirection: 'column',
-      // position: 'relative',
       width: '100%',
       height: '100%',
       flexGrow: 1,
       padding: theme.spacing(3),
       paddingTop: theme.spacing(8),
-      // backgroundImage: 'url("/img/g1.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
     grid: {
       flexGrow: 1,
     },
-    header: {
-      // flexGrow: 1,
-    },
+    header: {},
     main: {
       flexGrow: 2,
     },
@@ -143,22 +125,12 @@ export default function SavannahGame() {
 
   return (
     <div className={classes.root}>
-      {/*<Toolbar variant='dense' />*/}
       <Grid className={classes.grid} container direction='column' spacing={3}>
         <Grid className={classes.header} item container justify='flex-end'>
           <Grid item justify='flex-end' alignItems='center'>
             <Fire max={countError} value={reserveErrors} />
           </Grid>
         </Grid>
-        {/*<Grid*/}
-        {/*  className={classes.main}*/}
-        {/*  item*/}
-        {/*  container*/}
-        {/*  justify='center'*/}
-        {/*  alignItems='center'*/}
-        {/*>*/}
-        {/*  /!*<CardWord isOpen={isOpenWord} word={word} />*!/*/}
-        {/*</Grid>*/}
         <Grid
           className={classes.footer}
           item
@@ -174,19 +146,11 @@ export default function SavannahGame() {
           />
         </Grid>
       </Grid>
-      {/*<Typography className={classes.word} variant='h4'>*/}
-      {/*  h1. Заголовок*/}
-      {/*</Typography>*/}
-      {/*<Typography className={classes.word} variant='h3' component='div'>*/}
-      {/*  {word.word}*/}
-      {/*</Typography>*/}
       <Slide
         exit={false}
         direction='down'
         in={showWord}
         timeout={timeWord * 1000}
-        // mountOnEnter
-        // unmountOnExit
         onEntered={handleEnteredWord}
       >
         <Typography className={classes.word} variant='h3' component='div'>

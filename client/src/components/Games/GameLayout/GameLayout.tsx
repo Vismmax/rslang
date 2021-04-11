@@ -1,36 +1,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+
 import Header from './Header';
 import SettingsGame from './SettingsGame';
-import Spinner from '../../common/Spinner';
+import { Starter } from '../common/Starter';
+import ResultGame from './ResultGame';
 import {
   clearGame,
-  // countWordsStore,
   initGame,
   isBeginGame,
-  isLoadingGame,
   isStartGame,
   isStopGame,
   resetGame,
-  // isRunningGame,
   routeGame,
   setLevelGame,
   startGame,
 } from '../gameSlice';
-import { clearCurrentGroupPage } from '../../../common/helpers/localCurrentPage';
-import { useHistory } from 'react-router-dom';
-import { Starter } from '../common/Starter';
-import ResultGame from './ResultGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
       width: '100vw',
-      // height: '100vh',
-      // minWidth: '100vw',
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
@@ -50,13 +44,10 @@ export default function GameLayout({ children, className = '' }: Props) {
   const history = useHistory();
   const fullscreen = useFullScreenHandle();
 
-  const isLoading = useSelector(isLoadingGame);
   const isBegin = useSelector(isBeginGame);
   const isStart = useSelector(isStartGame);
   const isStop = useSelector(isStopGame);
   const route = useSelector(routeGame);
-
-  // const isRunning = useSelector(isRunningGame);
 
   useEffect(() => {
     dispatch(initGame());
@@ -70,7 +61,6 @@ export default function GameLayout({ children, className = '' }: Props) {
   };
 
   const handleChangeLevel = (level: number) => {
-    console.log('ChangeLevel');
     dispatch(setLevelGame(level));
   };
 
@@ -103,10 +93,7 @@ export default function GameLayout({ children, className = '' }: Props) {
 
         <ResultGame open={isStop} onReset={handleReset} onCancel={handleExit} />
 
-        {/*{isLoading && <Spinner />}*/}
         {isBegin && !isStart && !isStop && <Starter onStop={handleStartGame} />}
-        {/*{isBegin && <Starter onStop={handleStartGame} />}*/}
-        {/*<Starter onStop={handleStartGame} open={true} />*/}
         {isBegin && !isStop && children}
       </div>
     </FullScreen>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import video from '../../assets/promo.mp4';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+
 import PromoButtonNext from './PromoButtonNext';
 import PromoHeader from './PromoHeader';
+import video from '../../assets/promo.mp4';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

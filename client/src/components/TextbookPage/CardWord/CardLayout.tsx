@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import Paper from '@material-ui/core/Paper';
-import { useSelector } from 'react-redux';
-import { settingsTextbook } from '../../SettingsPage/settingsSlice';
+
+import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import CardMain from './CardMain';
 import CardBadge from './CardBadge';
 import CardAnswers from './CardAnswers';
+import { settingsTextbook } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,11 +43,7 @@ export default function CardLayout({ word, buttons, className = '' }: Props) {
   const classHard = hard ? ` ${classes.hard}` : '';
 
   return (
-    <Paper
-      elevation={3}
-      className={classes.root + ` ${className}` + classHard}
-      // className={classes.root + ' ' + hard ? classes.hard : ''}
-    >
+    <Paper elevation={3} className={classes.root + ` ${className}` + classHard}>
       <CardMain word={word} />
       <Grid container spacing={3} justify='flex-end' alignItems='center'>
         <CardAnswers optional={word.userWord.optional} />

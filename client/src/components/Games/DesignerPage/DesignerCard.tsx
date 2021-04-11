@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import CardWord from '../common/CardWord';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
-import { settingsDesigner } from '../../SettingsPage/settingsSlice';
 import Typography from '@material-ui/core/Typography';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
+import CardWord from '../common/CardWord';
+import { settingsDesigner } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,6 @@ export default function DesignerCard({ isOpen, word }: Props) {
 
   return (
     <CardWord
-      // paper={true}
       isOpen={isOpen}
       word={word}
       showTranslate={settings.showTranslate}

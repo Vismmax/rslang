@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Backdrop from '@material-ui/core/Backdrop';
 import useSound from 'use-sound';
+
 import tickSfx from '../../../assets/tick.mp3';
 import gongSfx from '../../../assets/gong.mp3';
 
@@ -27,12 +28,6 @@ export function Starter({ open = true, time = 5, onStop }: Props) {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
 
-  // @ts-ignore
-  // const [tick] = useSound('/sounds/tick.mp3', { autoplay: true });
-  // const [tick] = useSound('/sounds/tick.mp3');
-  // const [gong] = useSound('/sounds/gong.mp3');
-  // @ts-ignore
-  // const [tick] = useSound(tickSfx, { autoplay: true });
   const [tick] = useSound(tickSfx);
   const [gong] = useSound(gongSfx);
 
@@ -67,7 +62,6 @@ export function Starter({ open = true, time = 5, onStop }: Props) {
         <CircularProgress
           size={160}
           variant='determinate'
-          // color='secondary'
           value={(100 / time) * progress}
         />
         <Box

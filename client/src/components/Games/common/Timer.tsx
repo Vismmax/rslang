@@ -6,16 +6,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      // position: 'absolute',
-      // left: 0,
-      // top: theme.spacing(8),
-      // display: 'flex',
-      // justifyContent: 'flex-start',
-      // width: '100%',
-      // [theme.breakpoints.up('md')]: {
-      //   top: theme.spacing(9),
-      //   justifyContent: 'center',
-      // },
     },
     wrap: {
       width: '50%',
@@ -40,9 +30,7 @@ export default function Timer({ value, max }: Props) {
 
   return (
     <div className={classes.root}>
-      {/*<div className={classes.wrap}>*/}
       <LinearProgress variant='determinate' value={(value * 100) / max} />
-      {/*</div>*/}
     </div>
   );
 }

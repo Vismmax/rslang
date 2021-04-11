@@ -17,13 +17,10 @@ interface Props {
 
 export const loadWords = async ({ data, userId, count }: Props) => {
   if (data.difficulty !== '') {
-    console.log('dict');
     return loadDictionaryWords({ data, userId, count });
   } else if (data.page !== null) {
-    console.log('book');
     return loadTextbookWords({ data, userId, count });
   } else {
-    console.log('level');
     return loadLevelWords({ data, userId, count });
   }
 };

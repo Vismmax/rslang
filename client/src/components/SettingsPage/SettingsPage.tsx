@@ -1,37 +1,26 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PageLayout from '../PageLayout/PageLayout';
-import ContainerMain from '../PageLayout/ContainerMain';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+
 import SettingsSavannah from './SettingsSavannah';
 import SettingsSprint from './SettingsSprint';
 import SettingsAudioChallenge from './SettingsAudioChallenge';
 import SettingsDesigner from './SettingsDesigner';
-import Container from '@material-ui/core/Container';
+import PageLayout from '../PageLayout/PageLayout';
+import SettingsTextbook from './SettingsTextbook';
 import {
-  // ISettingsTextbook,
-  // ISettingsSavannah,
-  // ISettingsAudioChallenge,
-  // ISettingsSprint,
-  // ISettingsDesigner,
   ISettings,
   settingsTextbook,
   settingsAudioChallenge,
   settingsDesigner,
   settingsSavannah,
   settingsSprint,
-  // setSettingsTextbook,
-  // setSettingsSavannah,
-  // setSettingsAudioChallenge,
-  // setSettingsSprint,
-  // setSettingsDesigner,
-  // setSettings,
   saveSettings,
 } from './settingsSlice';
-import SettingsTextbook from './SettingsTextbook';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,30 +43,11 @@ export default function SettingsPage() {
   const designer = useSelector(settingsDesigner);
 
   const handleChangeSettings = (nameSettings: string, settings: ISettings) => {
-    console.log('nameSettings: ', nameSettings);
     dispatch(saveSettings({ nameSettings, settings }));
   };
-  // const handleOnChangeSettingsTextbook = (settings: ISettingsTextbook) => {
-  //   dispatch(setSettingsTextbook(settings));
-  // };
-  // const handleOnChangeSettingsSavannah = (settings: ISettingsSavannah) => {
-  //   dispatch(setSettingsSavannah(settings));
-  // };
-  // const handleOnChangeSettingsAudioChallenge = (
-  //   settings: ISettingsAudioChallenge,
-  // ) => {
-  //   dispatch(setSettingsAudioChallenge(settings));
-  // };
-  // const handleOnChangeSettingsSprint = (settings: ISettingsSprint) => {
-  //   dispatch(setSettingsSprint(settings));
-  // };
-  // const handleOnChangeSettingsDesigner = (settings: ISettingsDesigner) => {
-  //   dispatch(setSettingsDesigner(settings));
-  // };
 
   return (
     <PageLayout>
-      {/*<ContainerMain>*/}
       <Paper className={classes.root}>
         <Container>
           <Typography className={classes.header} variant='h4' component='h1'>
@@ -88,7 +58,6 @@ export default function SettingsPage() {
           </Typography>
           <SettingsTextbook
             settings={textbook}
-            // onChange={handleChangeSettings('textbook')}
             onChange={handleChangeSettings}
           />
 
@@ -99,35 +68,30 @@ export default function SettingsPage() {
             <Grid item container xs={12} sm={6}>
               <SettingsSavannah
                 settings={savannah}
-                // onChange={handleOnChangeSettingsSavannah}
                 onChange={handleChangeSettings}
               />
             </Grid>
             <Grid item container xs={12} sm={6}>
               <SettingsAudioChallenge
                 settings={audioChallenge}
-                // onChange={handleOnChangeSettingsAudioChallenge}
                 onChange={handleChangeSettings}
               />
             </Grid>
             <Grid item container xs={12} sm={6}>
               <SettingsSprint
                 settings={sprint}
-                // onChange={handleOnChangeSettingsSprint}
                 onChange={handleChangeSettings}
               />
             </Grid>
             <Grid item container xs={12} sm={6}>
               <SettingsDesigner
                 settings={designer}
-                // onChange={handleOnChangeSettingsDesigner}
                 onChange={handleChangeSettings}
               />
             </Grid>
           </Grid>
         </Container>
       </Paper>
-      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }

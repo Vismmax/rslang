@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
-import Paper from '@material-ui/core/Paper';
 import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import green from '@material-ui/core/colors/green';
-import Typography from '@material-ui/core/Typography';
+import yellow from '@material-ui/core/colors/yellow';
 import clsx from 'clsx';
-import { orange, red, yellow } from '@material-ui/core/colors';
+
 import { seriesValues } from './SprintGame';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.warning.main,
     },
     series3: {
-      // backgroundColor: red[500],
       backgroundColor: theme.palette.error.main,
     },
   }),
@@ -55,13 +49,7 @@ export default function HeaderBoard({ episode, series }: Props) {
             max={series === 3 ? 1 : 3}
             value={episode}
             emptyIcon={<Brightness1Icon fontSize='inherit' />}
-            icon={
-              <CheckCircleIcon
-                fontSize='inherit'
-                color='primary'
-                // style={{ color: green[500] }}
-              />
-            }
+            icon={<CheckCircleIcon fontSize='inherit' color='primary' />}
           />
         </Grid>
         <Grid item container justify='center'>

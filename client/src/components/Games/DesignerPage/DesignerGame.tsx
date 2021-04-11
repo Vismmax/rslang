@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {
-  activeVariantsDesigner,
-  activeWordDesigner,
-  nextWordDesigner,
-} from './designerSlice';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import useSound from 'use-sound';
+
 import DesignerCard from './DesignerCard';
 import DesignerEditor from './DesignerEditor';
-import { addAnswerGame, stopGame } from '../gameSlice';
 import ButtonNext from '../common/ButtonNext';
-import useSound from 'use-sound';
+import { addAnswerGame, stopGame } from '../gameSlice';
+import { activeWordDesigner, nextWordDesigner } from './designerSlice';
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
 
@@ -25,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       paddingTop: theme.spacing(8),
     },
-
     card: {
       maxWidth: theme.spacing(40),
       marginLeft: 'auto',
@@ -40,10 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(6, 0),
       },
     },
-    // button: {
-    //   width: theme.spacing(20),
-    //   opacity: 0.8,
-    // },
   }),
 );
 
@@ -51,7 +41,6 @@ export default function DesignerGame() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const word = useSelector(activeWordDesigner);
-  const variants = useSelector(activeVariantsDesigner);
 
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [start, setStart] = useState(false);

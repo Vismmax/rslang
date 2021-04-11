@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
 import HomePage from '../HomePage/HomePage';
 import PromoPage from '../PromoPage/PromoPage';
 import AboutPage from '../AboutPage/AboutPage';
@@ -33,8 +34,6 @@ export default function Routes() {
         <Route path='/about' component={AboutPage} />
         <Route path='/login' component={LoginPage} />
         <PrivateRoute path='/user' component={UserPage} />
-        {/*<Route component={NotFound} />*/}
-        {/*<Redirect from='/' to='/home' />*/}
         <RootRoute from='/' />
       </Switch>
     </>

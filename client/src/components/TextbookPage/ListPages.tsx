@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
+
 import CardWord from './CardWord/CardWord';
-import {
-  getCurrentPage,
-  setCurrentPage,
-} from '../../common/helpers/localCurrentPage';
-import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../common/Spinner';
+import EmptyPage from '../common/EmptyPage';
 import {
   activePage,
   activeWords,
@@ -20,9 +18,6 @@ import {
   loadingTextbookWords,
   saveActivePage,
 } from './textbookSlice';
-import { userStore } from '../LoginPage/userSlice';
-import Spinner from '../common/Spinner';
-import EmptyPage from '../common/EmptyPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,7 +79,6 @@ export default function ListPages({ group }: Props) {
         <EmptyPage text='На этой странице больше нет слов' />
       )}
       <div className={classes.page}>
-        {/*<CardWord word={tempWord} />*/}
         <Grid container direction='column' spacing={2}>
           {words.map((word) => (
             <Grid key={word.id} item>
@@ -95,7 +89,6 @@ export default function ListPages({ group }: Props) {
       </div>
       <Pagination
         className={classes.paginator}
-        // color='primary'
         size={matches ? 'medium' : 'small'}
         count={30}
         page={page + 1}

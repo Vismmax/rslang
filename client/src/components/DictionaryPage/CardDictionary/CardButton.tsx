@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { idLoadingWord } from '../dictionarySlice';
 
 const useStyles = makeStyles((theme: Theme) =>

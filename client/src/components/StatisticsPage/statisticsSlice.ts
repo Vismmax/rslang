@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
-import { getLocalSettings } from '../../common/helpers/localSettings';
 import { getLocalUserId } from '../../common/helpers/userHelper';
-import { getSettings } from '../../api/services/settingService';
-import { ISettingsState, setAllSettings } from '../SettingsPage/settingsSlice';
 import {
   getStatistics,
   putStatistics,
@@ -72,7 +70,6 @@ export const loadStatistics = (): AppThunk => async (dispatch, getState) => {
       dispatch(setStatistics({ learnedWords, statistics }));
     }
   } else {
-    // const localtatistics = getLocalStatistics() as IStatisticsState | null;
   }
   dispatch(setIsLoading(false));
 };

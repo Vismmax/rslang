@@ -1,9 +1,6 @@
 import { createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
 const options: ThemeOptions = {
-  // palette: {
-  //   type: 'dark',
-  // },
   breakpoints: {
     values: {
       xs: 0,

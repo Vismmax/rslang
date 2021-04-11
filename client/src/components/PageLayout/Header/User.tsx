@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import { logoutUser, userStore } from '../../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,12 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       marginLeft: theme.spacing(3),
     },
-    // menuButton: {
-    //   marginRight: theme.spacing(2),
-    // },
-    // title: {
-    //   flexGrow: 1,
-    // },
   }),
 );
 

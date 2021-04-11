@@ -1,12 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import GameLayout from '../GameLayout/GameLayout';
 import SavannahGame from './SavannahGame';
-import { useSelector } from 'react-redux';
-import { isLoadingSavannah } from './savannahSlice';
 import Spinner from '../../common/Spinner';
-import { isStartGame } from '../gameSlice';
 import SavannahInit from './SavannahInit';
+import { isStartGame } from '../gameSlice';
+import { isLoadingSavannah } from './savannahSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

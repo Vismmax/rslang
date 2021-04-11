@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import Paper from '@material-ui/core/Paper';
-import { useDispatch, useSelector } from 'react-redux';
 import useSound from 'use-sound';
+
+import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import { settingsTextbook } from '../../SettingsPage/settingsSlice';
 import { showNotificationWarning } from '../../common/Notification/notificationSlice';
 
@@ -28,9 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: theme.spacing(16),
       height: theme.spacing(16),
     },
-    word: {
-      // fontWeight: theme.typography.fontWeightBold,
-    },
+    word: {},
     transcription: {
       color: theme.palette.text.secondary,
       fontWeight: theme.typography.fontWeightLight,
@@ -136,7 +135,6 @@ export default function CardMain({ word }: Props) {
           <div className={classes.line}>
             <ArrowRightAltIcon />
             <Typography
-              // component='span'
               dangerouslySetInnerHTML={{ __html: word.textExample }}
             />
           </div>

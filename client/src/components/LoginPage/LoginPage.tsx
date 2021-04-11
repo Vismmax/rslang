@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
+import { useHistory } from 'react-router-dom';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import SwipeableViews from 'react-swipeable-views';
+
 import PageLayout from '../PageLayout/PageLayout';
 import Login from './Login';
 import Registration from './Registration';
 import { userStore } from './userSlice';
-import { useHistory } from 'react-router-dom';
 import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -27,9 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundImage: 'url("/img/bg.jpg")',
-    // backgroundSize: 'cover',
-    // backgroundPosition: 'center',
   },
   tabs: {
     backgroundColor: theme.palette.background.paper,
@@ -51,8 +44,8 @@ function TabPanel(props: TabPanelProps) {
     <div
       role='tabpanel'
       hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
+      id={`login-tabpanel-${index}`}
+      aria-labelledby={`login-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -66,8 +59,8 @@ function TabPanel(props: TabPanelProps) {
 
 function a11yProps(index: any) {
   return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    id: `login-tab-${index}`,
+    'aria-controls': `login-tabpanel-${index}`,
   };
 }
 
@@ -125,7 +118,7 @@ export default function LoginPage() {
               indicatorColor='primary'
               textColor='primary'
               variant='fullWidth'
-              aria-label='full width tabs example'
+              aria-label='login tabs'
             >
               <Tab label='Вход' {...a11yProps(0)} />
               <Tab label='Регистрация' {...a11yProps(1)} />

@@ -1,5 +1,6 @@
 import isSameDay from 'date-fns/isSameDay';
 import addDays from 'date-fns/addDays';
+
 import { IStatisticsGame } from './statisticsSlice';
 
 export const countGames = (
@@ -56,23 +57,6 @@ export const percentTrueWords = (
   }
   return Math.round((wordsTrue * 100) / (wordsTrue + wordsFalse)) || 0;
 };
-
-// const getDataChart = (games: IStatisticsGame[]) => {
-//   const data = [];
-//   let currentDay = new Date(
-//     games[0].timeStart.getFullYear(),
-//     games[0].timeStart.getMonth(),
-//     games[0].timeStart.getDate(),
-//   );
-//   let currentData = [];
-//   for (let game of games) {
-//     if (isSameDay(currentDay, game.timeStart)) {
-//       currentData.push(game);
-//     } else {
-//
-//     }
-//   }
-// };
 
 export interface IDataChartItem {
   date: number;

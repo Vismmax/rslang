@@ -6,8 +6,8 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
 import orange from '@material-ui/core/colors/orange';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

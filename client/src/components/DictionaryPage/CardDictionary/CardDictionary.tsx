@@ -1,7 +1,8 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import { useDispatch } from 'react-redux';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import CardLayout from '../../TextbookPage/CardWord/CardLayout';
 import CardButton from './CardButton';
 import { fetchDeleteUserWord } from '../dictionarySlice';

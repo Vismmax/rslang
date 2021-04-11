@@ -22,7 +22,6 @@ export default function SprintButtons({ onClick, disable }: Props) {
 
   const handleClick = (result: boolean) => () => {
     if (disable) return;
-    console.log('result 1: ', result);
     onClick(result);
   };
 

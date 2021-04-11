@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
 import PageLayout from '../PageLayout/PageLayout';
 import HomeProgress from './HomeProgress';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import HomeCard from './HomeCard';
-import Typography from '@material-ui/core/Typography';
 import { routesData } from '../Routes/routesData';
 
 const {
@@ -25,9 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       height: '100%',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
     section: {
       marginBottom: theme.spacing(6),
@@ -40,16 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function HomePage() {
   const classes = useStyles();
-  const {
-    textbook,
-    dictionary,
-    savannah,
-    audioChallenge,
-    sprint,
-    designer,
-    statistics,
-    settings,
-  } = routesData;
 
   return (
     <PageLayout>
@@ -82,8 +68,7 @@ export default function HomePage() {
           <Grid item xs={12} sm={6} md={3}>
             <HomeCard
               title={textbook.title}
-              description='Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica'
+              description={textbook.description}
               image={textbook.image}
               icon={textbook.icon}
               href={textbook.route}
@@ -92,8 +77,7 @@ export default function HomePage() {
           <Grid item xs={12} sm={6} md={3}>
             <HomeCard
               title={dictionary.title}
-              description='Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica'
+              description={dictionary.description}
               image={dictionary.image}
               icon={dictionary.icon}
               href={dictionary.route}

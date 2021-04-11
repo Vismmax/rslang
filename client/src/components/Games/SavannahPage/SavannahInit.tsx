@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { clearSavannah, initSavannah } from './savannahSlice';
 
 interface Props {

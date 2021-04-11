@@ -2,7 +2,7 @@ import {
   IExtWord,
   clearUserWord,
 } from '../../common/interfaces/WordInterfaces';
-import { ExtWordsResponse, ExtWordsResponseObj } from './wordsService';
+import { ExtWordsResponseObj } from './wordsService';
 
 export const extendWords = (words: IExtWord[]): IExtWord[] => {
   const extWords = words.map((word) =>

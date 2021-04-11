@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk, RootState } from '../../../redux/store';
+
 import {
   IExtWord,
   IWord,
   wordEmpty,
 } from '../../../common/interfaces/WordInterfaces';
-import {
-  randomInteger,
-  shuffleArray,
-  shuffleArrayCount,
-} from '../../../common/helpers/randomHelper';
+import { AppThunk, RootState } from '../../../redux/store';
+import { randomInteger } from '../../../common/helpers/randomHelper';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
 
@@ -80,7 +77,6 @@ export const initSprint = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   const data = getState().game.data;
-  console.log('initSprint :', userId, data);
   const words = await loadWords({
     data,
     userId,

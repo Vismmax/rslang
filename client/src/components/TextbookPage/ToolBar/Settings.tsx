@@ -7,13 +7,12 @@ import Menu from '@material-ui/core/Menu';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+
 import {
   settingsTextbook,
-  // setSettings,
-  // ISettings,
   saveSettings,
 } from '../../SettingsPage/settingsSlice';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,12 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-// interface Ev {
-//   target: {
-//     name: string;
-//   };
-// }
-
 export default function Settings() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -59,19 +52,6 @@ export default function Settings() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // const handleClick = (ev: Ev) => {
-  //   dispatch(
-  //     setSettings({
-  //       nameSettings: 'textbook',
-  //       settings: {
-  //         ...settings,
-  //         // @ts-ignore
-  //         [ev.target.name]: !settings[ev.target.name],
-  //       },
-  //     }),
-  //   );
-  // };
 
   const handleClickShowTranslate = () => {
     dispatch(

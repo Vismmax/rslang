@@ -27,7 +27,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'none',
   },
   tabs: {
-    // borderRight: `1px solid ${theme.palette.divider}`,
     borderRight: 'none',
     [theme.breakpoints.down('lg')]: {
       width: theme.spacing(15),

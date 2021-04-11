@@ -3,10 +3,6 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import User from './User';
-import Title from './Title';
-import MenuButton from './MenuButton';
-import Games from './Games';
 import Button from '@material-ui/core/Button';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/Group';
@@ -14,6 +10,11 @@ import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MovieIcon from '@material-ui/icons/Movie';
+
+import User from './User';
+import Title from './Title';
+import MenuButton from './MenuButton';
+import Games from './Games';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

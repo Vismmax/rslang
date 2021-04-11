@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
 import {
   deleteUserService,
@@ -32,8 +33,6 @@ import {
   loadStatistics,
 } from '../StatisticsPage/statisticsSlice';
 import { loadSettings } from '../SettingsPage/settingsSlice';
-import { loadActivePage } from '../TextbookPage/textbookSlice';
-import { loadDictionaryPage } from '../DictionaryPage/dictionarySlice';
 
 interface User {
   userId: string;
@@ -77,7 +76,6 @@ export const registrationUser = (user: RegUserRequest): AppThunk => async (
 ) => {
   dispatch(setIsLoading(true));
   const newUser = await registrationUserService(user);
-  console.log('newUser: ', newUser);
   if (newUser.error) {
     console.log('Регистрация не удалась');
     dispatch(showNotificationError('Регистрация не удалась'));
@@ -91,7 +89,6 @@ export const registrationUser = (user: RegUserRequest): AppThunk => async (
 export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
   dispatch(setIsLoading(true));
   const loginUser = await loginUserService(user);
-  console.log('loginUser: ', loginUser);
 
   if (loginUser.message !== 'Authenticated') {
     if (loginUser.error === 'Forbidden') {
@@ -113,8 +110,6 @@ export const loginUser = (user: LoginRequest): AppThunk => async (dispatch) => {
   const { userId, name, avatar } = { ...loginUser };
   dispatch(setUser({ userId, name, avatar, email: user.email }));
   dispatch(setIsLoading(false));
-  // dispatch(loadActivePage());
-  // dispatch(loadDictionaryPage());
   dispatch(loadSettings());
   dispatch(loadStatistics());
 };

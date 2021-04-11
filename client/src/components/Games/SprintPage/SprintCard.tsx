@@ -1,33 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
 import Paper from '@material-ui/core/Paper';
-import Rating from '@material-ui/lab/Rating';
-import Brightness1Icon from '@material-ui/icons/Brightness1';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import green from '@material-ui/core/colors/green';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+import clsx from 'clsx';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
 import HeaderBoard from './HeaderBoard';
 import SeriesBoard from './SeriesBoard';
-import Divider from '@material-ui/core/Divider';
 import SprintButtons from './SprintButtons';
-import clsx from 'clsx';
-import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      // minWidth: theme.spacing(60),
-      // minHeight: theme.spacing(60),
-      // display: 'flex',
-      // justifyContent: 'center',
-      // alignItems: 'center',
-      // paddingTop: theme.spacing(8),
-    },
+    root: {},
     borderTrue: {
       boxShadow: `0 0 30px 10px ${theme.palette.primary.main}`,
     },
@@ -105,15 +93,8 @@ export default function SprintCard({
     setResult(null);
   }, [word]);
 
-  useEffect(() => {
-    console.log('result use: ', result);
-  }, [result]);
-
   const handleClick = (answer: boolean) => {
-    console.log('answer: ', answer);
-    console.log('word.id === variant.id: ', word.id, variant.id);
     const res = (word.id === variant.id) === answer;
-    console.log('res answer: ', res);
     setResult(res);
     setTimeout(() => {
       onResult(res);
@@ -134,17 +115,13 @@ export default function SprintCard({
         className={classes.main}
         container
         direction='column'
-        // justify='center'
         justify='space-between'
-        // spacing={5}
       >
         <Grid
           className={classes.card}
           container
           direction='column'
-          // justify='center'
           justify='space-between'
-          // spacing={5}
         >
           <Grid item container justify='center'>
             <SeriesBoard series={series} />

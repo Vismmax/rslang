@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
 } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import {
   LineChart,
   AreaChart,
@@ -12,18 +14,16 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { getDataChart } from './statisticsHelpers';
-import { useSelector } from 'react-redux';
-import { statisticsAllDays, statisticsToday } from './statisticsSlice';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
+
 import StatisticsTooltip from './StatisticsTooltip';
-import Typography from '@material-ui/core/Typography';
+import { getDataChart } from './statisticsHelpers';
+import { statisticsAllDays } from './statisticsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,7 +66,6 @@ export default function StatisticsAll() {
             <XAxis dataKey='date' tickFormatter={dateFormatter} />
             <YAxis />
             <Tooltip content={<StatisticsTooltip dataKey='countWords' />} />
-            {/*<Legend formatter={() => 'Количество изученных слов'} />*/}
             <Legend
               formatter={() => (
                 <Typography variant='subtitle2' component='span'>
@@ -94,7 +93,6 @@ export default function StatisticsAll() {
             <XAxis dataKey='date' tickFormatter={dateFormatter} />
             <YAxis />
             <Tooltip content={<StatisticsTooltip dataKey='totalWords' />} />
-            {/*<Legend formatter={() => 'Количество изученных слов'} />*/}
             <Legend
               formatter={() => (
                 <Typography variant='subtitle2' component='span'>

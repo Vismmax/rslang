@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import PageLayout from '../PageLayout/PageLayout';
-import ContainerMain from '../PageLayout/ContainerMain';
 import StatisticsTabs from './StatisticsTabs';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,9 +20,7 @@ export default function StatisticsPage() {
 
   return (
     <PageLayout background={classes.background}>
-      {/*<ContainerMain>*/}
       <StatisticsTabs />
-      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }

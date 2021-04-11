@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
 import Grid from '@material-ui/core/Grid';
-import { useDispatch, useSelector } from 'react-redux';
+
+import CardDictionary from './CardDictionary/CardDictionary';
+import Spinner from '../common/Spinner';
+import EmptyPage from '../common/EmptyPage';
 import {
   clearDictionaryWords,
   countPages,
@@ -14,9 +18,6 @@ import {
   isLoadingDictionaryWords,
   saveDictionaryPage,
 } from './dictionarySlice';
-import CardDictionary from './CardDictionary/CardDictionary';
-import Spinner from '../common/Spinner';
-import EmptyPage from '../common/EmptyPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,7 +85,6 @@ export default function ListPages() {
       {words.length > 20 && (
         <Pagination
           className={classes.paginator}
-          // color='primary'
           size={matches ? 'medium' : 'small'}
           count={count}
           page={page + 1}

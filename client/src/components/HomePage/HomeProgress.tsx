@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PageLayout from '../PageLayout/PageLayout';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { learnedWordsStatistics } from '../StatisticsPage/statisticsSlice';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
+
+import { learnedWordsStatistics } from '../StatisticsPage/statisticsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // width: '100%',
       padding: theme.spacing(3),
     },
     bar: {
@@ -27,7 +26,6 @@ export default function HomeProgress() {
   const count = useSelector(learnedWordsStatistics);
 
   return (
-    // <Grid container justify='center'>
     <Paper className={classes.root} elevation={3}>
       <Grid container justify='center' spacing={3}>
         <Grid item>
@@ -35,15 +33,7 @@ export default function HomeProgress() {
             Изучено слов:
           </Typography>
         </Grid>
-        <Grid
-          item
-          // container
-          // wrap='nowrap'
-          // alignItems='center'
-          // spacing={1}
-          xs={12}
-          sm={6}
-        >
+        <Grid item xs={12} sm={6}>
           <Grid container alignItems='center' wrap='nowrap' spacing={1}>
             <Grid item>
               <Typography variant='h6' component='h2'>
@@ -66,6 +56,5 @@ export default function HomeProgress() {
         </Grid>
       </Grid>
     </Paper>
-    // </Grid>
   );
 }

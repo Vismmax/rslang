@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import GameLayout from '../GameLayout/GameLayout';
 import Spinner from '../../common/Spinner';
-import { isStartGame } from '../gameSlice';
-import { isLoadingSprint } from './sprintSlice';
 import SprintInit from './SprintInit';
 import SprintGame from './SprintGame';
+import { isStartGame } from '../gameSlice';
+import { isLoadingSprint } from './sprintSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

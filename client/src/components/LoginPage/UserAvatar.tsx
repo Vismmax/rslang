@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 import { uploadImage } from '../../api/services/imageService';
+import { useDispatch } from 'react-redux';
+import { showNotificationError } from '../common/Notification/notificationSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,13 +46,14 @@ export default function UserAvatar({
   onChange = () => {},
 }: Props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleChangeAvatar = async (e: any) => {
     const url = await uploadImage(e.target.files[0]);
     if (url) {
       onChange(url);
     } else {
-      // TODO вывод ошибки
+      dispatch(showNotificationError('Не удалось загрузить аватар на сервер'));
       console.log('Не удалось загрузить аватар на сервер');
     }
   };

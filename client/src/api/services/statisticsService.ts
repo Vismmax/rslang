@@ -25,7 +25,6 @@ export const getStatistics = async (
   const res = (await webApi.get(
     `${URL}/${userId}/statistics`,
   )) as StatisticsResponse;
-  console.log('resres: ', res);
   return res.error
     ? res
     : {

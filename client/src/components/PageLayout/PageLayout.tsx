@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
 import Header from './Header/Header';
 import Footer from './Footer';
 
@@ -10,9 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       minHeight: '100vh',
-      //   backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center top',
     },
     main: {
       display: 'flex',

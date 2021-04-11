@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Button from '@material-ui/core/Button';
+
 import UserAvatar from './UserAvatar';
-import { loginUser, userStore } from './userSlice';
-import { showNotification } from '../common/Notification/notificationSlice';
-import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
+import { loginUser } from './userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
     buttons: {
       display: 'flex',
       justifyContent: 'space-between',
-      // marginTop: theme.spacing(5),
       marginTop: theme.spacing(14),
     },
   }),
@@ -45,9 +42,6 @@ interface Ev {
 export default function Login({ onCancel }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
-  const backRoute = useSelector(backRouteStore);
-  const { userId } = useSelector(userStore);
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');

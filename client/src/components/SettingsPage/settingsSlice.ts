@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
 import { setIsLoading } from '../Games/gameSlice';
 import {
@@ -87,39 +88,10 @@ export const settingsSlice = createSlice({
     setAllSettings: (state, action: PayloadAction<ISettingsState>) => {
       return action.payload;
     },
-    // setSettingsTextbook: (state, action: PayloadAction<ISettingsTextbook>) => {
-    //   state.textbook = action.payload;
-    // },
-    // setSettingsSavannah: (state, action: PayloadAction<ISettingsSavannah>) => {
-    //   state.savannah = action.payload;
-    // },
-    // setSettingsAudioChallenge: (
-    //   state,
-    //   action: PayloadAction<ISettingsAudioChallenge>,
-    // ) => {
-    //   state.audioChallenge = action.payload;
-    // },
-    // setSettingsSprint: (state, action: PayloadAction<ISettingsSprint>) => {
-    //   state.sprint = action.payload;
-    // },
-    // setSettingsDesigner: (
-    //   state,
-    //   action: PayloadAction<ISettingsDesigner>,
-    // ) => {
-    //   state.designer = action.payload;
-    // },
   },
 });
 
-export const {
-  setSettings,
-  setAllSettings,
-  // setSettingsTextbook,
-  // setSettingsSavannah,
-  // setSettingsAudioChallenge,
-  // setSettingsSprint,
-  // setSettingsDesigner,
-} = settingsSlice.actions;
+export const { setSettings, setAllSettings } = settingsSlice.actions;
 
 export const saveSettings = (set: IOneSettings): AppThunk => async (
   dispatch,

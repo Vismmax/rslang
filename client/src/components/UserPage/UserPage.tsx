@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,11 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
-import { validate } from 'email-validator';
-import UserAvatar from '../LoginPage/UserAvatar';
-import { deleteUser, updateUser, userStore } from '../LoginPage/userSlice';
-import PageLayout from '../PageLayout/PageLayout';
 import Paper from '@material-ui/core/Paper';
+import { validate } from 'email-validator';
+
+import UserAvatar from '../LoginPage/UserAvatar';
+import PageLayout from '../PageLayout/PageLayout';
+import { deleteUser, updateUser, userStore } from '../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,9 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
     panel: {
       maxWidth: theme.spacing(62),

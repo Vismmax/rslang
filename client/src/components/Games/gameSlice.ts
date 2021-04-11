@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
 import {
   IExtWord,
@@ -157,7 +158,6 @@ export const {
 export const initGame = (): AppThunk => async (dispatch, getState) => {
   const route = getState().game.route;
   if (route) {
-    console.log('route');
     if (route === '/textbook') {
       dispatch(
         setData({

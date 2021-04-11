@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import useSound from 'use-sound';
+
+import SprintCard from './SprintCard';
+import { SprintProgress } from './SprintProgress';
+import { settingsSprint } from '../../SettingsPage/settingsSlice';
+import { addAnswerGame, scoreGame, stopGame } from '../gameSlice';
 import {
   activeVariantSprint,
   activeWordSprint,
   nextWordSprint,
 } from './sprintSlice';
-import Grid from '@material-ui/core/Grid';
-import SprintCard from './SprintCard';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import Typography from '@material-ui/core/Typography';
-import {
-  settingsDesigner,
-  settingsSprint,
-} from '../../SettingsPage/settingsSlice';
-import { SprintProgress } from './SprintProgress';
-import { addAnswerGame, scoreGame, stopGame } from '../gameSlice';
-import useSound from 'use-sound';
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
 
@@ -61,10 +55,6 @@ export default function SprintGame() {
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(0);
 
-  // const [episode, setEpisode] = useState(0);
-  // const [series, setSeries] = useState(0);
-  // const [score, setScore] = useState(0);
-
   const { episode, series, score } = useSelector(scoreGame);
 
   const [trueSound] = useSound(trueSfx);
@@ -101,23 +91,7 @@ export default function SprintGame() {
       trueSound();
     } else falseSound();
 
-    console.log('result game: ', result);
-    // if (result) {
-    //   setScore(score + seriesValues[series]);
-    //   if (episode < 3) setEpisode(episode + 1);
-    //   if (episode === 3 && series < 2) {
-    //     setEpisode(0);
-    //     setSeries(series + 1);
-    //   }
-    //   if (episode === 3 && series < 3) {
-    //     setSeries(series + 1);
-    //   }
-    // } else {
-    //   setEpisode(0);
-    //   setSeries(0);
-    // }
     dispatch(addAnswerGame({ word, result }));
-
     fetchNewWord();
   };
 
@@ -126,18 +100,8 @@ export default function SprintGame() {
   };
 
   const handleClickVariant = (isTrue: boolean) => {
-    console.log('res: ', isTrue);
     handleResult(isTrue);
   };
-
-  // const handleClickNext = () => {
-  //   if (!isOpenCard) {
-  //     handleResult(false);
-  //   } else {
-  //     setIsOpenCard(false);
-  //     fetchNewWord();
-  //   }
-  // };
 
   const finishGame = () => {
     setStart(false);

@@ -1,12 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
-import ListPages from './ListPages';
-import { useDispatch, useSelector } from 'react-redux';
-import { activeGroup, saveActiveGroup } from './textbookSlice';
 import clsx from 'clsx';
+
+import ListPages from './ListPages';
 import { useStyles } from './ListGroupsStyle';
+import { activeGroup, saveActiveGroup } from './textbookSlice';
 
 interface TabPanelProps {
   children?: React.ReactNode;

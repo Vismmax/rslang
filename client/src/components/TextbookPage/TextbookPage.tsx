@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+
 import PageLayout from '../PageLayout/PageLayout';
-import ContainerMain from '../PageLayout/ContainerMain';
 import ToolBar from './ToolBar/ToolBar';
 import ListPages from './ListPages';
 import ListGroups from './ListGroups';
@@ -22,12 +22,10 @@ export default function TextbookPage() {
 
   return (
     <PageLayout className={classes.wrap}>
-      {/*<ContainerMain>*/}
       <div className={classes.root}>
         <ToolBar title='Учебник' />
         <ListGroups ListGroupItem={ListPages} />
       </div>
-      {/*</ContainerMain>*/}
     </PageLayout>
   );
 }

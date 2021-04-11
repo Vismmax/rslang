@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Tooltip from '@material-ui/core/Tooltip';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
-import Tooltip from '@material-ui/core/Tooltip';
 import useSound from 'use-sound';
-import Grid from '@material-ui/core/Grid';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,13 +1,12 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import video from '../../assets/promo.mp4';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+
 import PromoButtonNext from './PromoButtonNext';
-import HomeCard from '../HomePage/HomeCard';
-import { routesData } from '../Routes/routesData';
 import PromoCard from './PromoCard';
+import { routesData } from '../Routes/routesData';
 
 const { textbook, dictionary } = routesData;
 
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundImage: `url(${dictionary.background})`,
-      // backgroundImage: dictionaryBg,
     },
     container: {
       display: 'flex',
@@ -105,7 +103,6 @@ export default function PromoSectionTextbook({ onNextPage }: Props) {
               </Grid>
             </Grid>
           </Grid>
-          {/*<Grid item></Grid>*/}
         </Grid>
         <PromoButtonNext onClick={onNextPage} />
       </Container>

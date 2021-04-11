@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import {
   createStyles,
   makeStyles,
@@ -7,21 +6,12 @@ import {
   useTheme,
 } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
-import Paper from '@material-ui/core/Paper';
-import Rating from '@material-ui/lab/Rating';
-import Brightness1Icon from '@material-ui/icons/Brightness1';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import green from '@material-ui/core/colors/green';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 import FlightIcon from '@material-ui/icons/Flight';
-import { orange, red, yellow } from '@material-ui/core/colors';
+import yellow from '@material-ui/core/colors/yellow';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,7 +53,6 @@ export default function SeriesBoard({ series }: Props) {
         <FlightIcon
           className={clsx(series < 3 && classes.hidden)}
           fontSize='large'
-          // color='secondary'
           style={{ color: theme.palette.error.main }}
         />
       </Grid>

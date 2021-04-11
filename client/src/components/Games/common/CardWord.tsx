@@ -1,30 +1,19 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import ReactCardFlip from 'react-card-flip';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  withStyles,
-} from '@material-ui/core/styles';
+import React from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import ReactCardFlip from 'react-card-flip';
 import useSound from 'use-sound';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      // position: 'absolute',
-      // left: '50%',
-      // top: '50%',
-      // transform: 'translate(-50%,-50%)',
-      // margin: 'auto',
-    },
+    root: {},
     card: {
       width: theme.spacing(34),
       height: theme.spacing(36),
@@ -89,7 +78,6 @@ export default function CardWord({
             elevation={3}
           >
             {questionContent}
-            {/*<Typography variant='h3'>{word.word}</Typography>*/}
           </Paper>
         ) : (
           <div className={`${classes.card} ${classes.cardQuestion}`}>
@@ -126,7 +114,6 @@ export default function CardWord({
                   item
                   container
                   direction='column'
-                  // spacing={1}
                   justify='center'
                   alignItems='center'
                 >

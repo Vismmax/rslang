@@ -73,7 +73,6 @@ export const initAudioChallenge = (): AppThunk => async (
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   const data = getState().game.data;
-  console.log('initAudioChallenge :', userId, data);
   const words = await loadWords({
     data,
     userId,

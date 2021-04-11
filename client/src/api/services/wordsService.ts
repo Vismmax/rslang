@@ -1,11 +1,9 @@
 import webApi from '../webApiHelper';
 import {
-  clearUserWord,
   IExtWord,
   IUserWord,
   IWord,
 } from '../../common/interfaces/WordInterfaces';
-import { getRandomNumber } from '../../helpers/randomNumbers';
 import { addId, extendWords } from './extendWords';
 
 const URL = '/words';
@@ -46,14 +44,6 @@ export const getWords = async ({
   const words = (await webApi.get(URL, { group, page })) as IWord[];
   return words;
 };
-
-// export const getRandomWordsByGroup = async (
-//   group: number,
-// ): Promise<IWord[]> => {
-//   const page = getRandomNumber(0, 29);
-//   const words = (await webApi.get(URL, { group, page })) as IWord[];
-//   return words;
-// };
 
 export const getWordById = async (id: string): Promise<IWord> => {
   const word = (await webApi.get(`${URL}/${id}`)) as IWord;

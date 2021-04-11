@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import { ISettingsTextbook } from './settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,12 +33,6 @@ interface Props {
 export default function SettingsTextbook({ settings, onChange }: Props) {
   const classes = useStyles();
 
-  // const handleChange = (ev: Ev) => {
-  //   onChange({
-  //     ...settings,
-  //     [ev.target.name]: ev.target.checked,
-  //   });
-  // };
   const handleChange = (ev: Ev) => {
     onChange('textbook', {
       ...settings,

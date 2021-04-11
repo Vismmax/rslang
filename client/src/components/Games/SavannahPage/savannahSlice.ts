@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../../redux/store';
 import {
   IExtWord,
@@ -70,9 +71,7 @@ export const initSavannah = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   const data = getState().game.data;
-  console.log('initSavannah :', userId, data);
   const words = await loadWords({ data, userId, count: 30 });
-  console.log('wordswords: ', words);
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
@@ -84,7 +83,6 @@ export const nextWordSavannah = (): AppThunk => async (dispatch, getState) => {
   const words = getState().savannah.baseWords.filter(
     (word) => word.id !== activeWord.id,
   );
-  console.log('words: ', words);
   const variants = [
     ...shuffleArrayCount(words, getState().settings.savannah.countVariants - 1),
     getState().savannah.activeWord,

@@ -1,50 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from '@material-ui/core/styles';
-import GameLayout from '../GameLayout/GameLayout';
-import Spinner from '../../common/Spinner';
-import AudioChallengeInit from '../AudioChallengePage/AudioChallengeInit';
-import { addAnswerGame, isStartGame, stopGame } from '../gameSlice';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Slide from '@material-ui/core/Slide';
+import useSound from 'use-sound';
+import 'react-awesome-slider/dist/styles.css';
+
+import { addAnswerGame, stopGame } from '../gameSlice';
+import AudioChallengeCard from './AudioChallengeCard';
+import ButtonsWords from '../common/ButtonsWords';
+import ButtonNext from '../common/ButtonNext';
 import {
   activeVariantsAudioChallenge,
   activeWordAudioChallenge,
-  allWordsAudioChallenge,
-  countWordsAudioChallenge,
-  isLoadingAudioChallenge,
   nextWordAudioChallenge,
 } from './audioChallengeSlice';
-import Grid from '@material-ui/core/Grid';
-import AudioChallengeCard from './AudioChallengeCard';
-import ButtonsWords from '../common/ButtonsWords';
-import Button from '@material-ui/core/Button';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
-import './AudioChallenge.css';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import { Paper, Slide } from '@material-ui/core';
-import ButtonNext from '../common/ButtonNext';
-import useSound from 'use-sound';
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
-import tickSfx from '../../../assets/tick.mp3';
-import gongSfx from '../../../assets/gong.mp3';
+import './AudioChallenge.css';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
       justifyContent: 'center',
-      // justifyContent: 'space-evenly',
       // alignItems: 'center',
-      // width: '100%',
-      // height: '100%',
       flexGrow: 1,
-      // padding: theme.spacing(3),
       paddingTop: theme.spacing(8),
       [theme.breakpoints.down('xs')]: {
         paddingTop: theme.spacing(3),
@@ -65,10 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(6, 0),
       },
     },
-    // button: {
-    //   width: theme.spacing(20),
-    //   opacity: 0.8,
-    // },
   }),
 );
 
@@ -112,7 +89,6 @@ export default function AudioChallengeGame() {
   };
 
   const fetchNewWord = () => {
-    console.log('fetchNewWord');
     dispatch(nextWordAudioChallenge());
   };
 

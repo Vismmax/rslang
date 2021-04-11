@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Button from '@material-ui/core/Button';
 import { validate } from 'email-validator';
+
 import UserAvatar from './UserAvatar';
 import { registrationUser } from './userSlice';
 
@@ -61,7 +61,6 @@ interface Props {
 export default function Registration({ onCancel }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState({ value: '', err: '' });

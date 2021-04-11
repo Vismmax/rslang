@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { shuffleArray } from '../../../common/helpers/randomHelper';
 import Button from '@material-ui/core/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { Zoom } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
+import { shuffleArray } from '../../../common/helpers/randomHelper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,14 +14,12 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 91,
     },
     letter: {
-      // minWidth: theme.spacing(4.5),
       fontSize: theme.typography.h4.fontSize,
       fontWeight: theme.typography.fontWeightBold,
       minWidth: theme.spacing(4),
       paddingLeft: theme.spacing(0.5),
       paddingRight: theme.spacing(0.5),
       [theme.breakpoints.down('xs')]: {
-        // fontSize: theme.typography.h5.fontSize,
         minWidth: theme.spacing(3),
         paddingLeft: theme.spacing(0.25),
         paddingRight: theme.spacing(0.25),
@@ -33,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 66,
     },
     button: {
-      // minWidth: theme.spacing(4.5),
       minWidth: theme.spacing(5.25),
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
@@ -106,7 +102,6 @@ export default function DesignerEditor({
       >
         {letters.map((letter) => (
           <Grid item>
-            {/*<Zoom in={true}>*/}
             <Button
               className={classes.letter}
               key={letter.id}
@@ -117,7 +112,6 @@ export default function DesignerEditor({
             >
               {letter.letter}
             </Button>
-            {/*</Zoom>*/}
           </Grid>
         ))}
       </Grid>
@@ -130,7 +124,6 @@ export default function DesignerEditor({
       >
         {buttons.map((btn, id) => (
           <Grid item>
-            {/*<Zoom in={true}>*/}
             <Button
               className={classes.button}
               key={btn.id}
@@ -141,7 +134,6 @@ export default function DesignerEditor({
             >
               {btn.letter}
             </Button>
-            {/*</Zoom>*/}
           </Grid>
         ))}
       </Grid>

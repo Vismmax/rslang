@@ -1,16 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
-import {
-  IExtWord,
-  IUserWord,
-  IWord,
-} from '../../common/interfaces/WordInterfaces';
+import { IExtWord, IUserWord } from '../../common/interfaces/WordInterfaces';
 import {
   createUserWord,
   getActiveWords,
   getActiveWordsByUser,
-  // getRandomWordsByGroup,
-  IUserWordResponse,
   updateUserWord,
 } from '../../api/services/wordsService';
 import { getLocalUserId } from '../../common/helpers/userHelper';
@@ -51,22 +46,6 @@ export const textbookSlice = createSlice({
     setActiveWords: (state, action: PayloadAction<IExtWord[]>) => {
       state.activeWords = action.payload;
     },
-    // setUserWord: (
-    //   state,
-    //   action: PayloadAction<{ id: string; userWord: IUserWord }>,
-    // ) => {
-    //   if (action.payload.userWord.difficulty === 'delete') {
-    //     state.activeWords = state.activeWords.filter(
-    //       (word) => word.id !== action.payload.id,
-    //     );
-    //   } else {
-    //     state.activeWords = state.activeWords.map((word) =>
-    //       word.id === action.payload.id
-    //         ? { ...word, userWord: action.payload.userWord }
-    //         : word,
-    //     );
-    //   }
-    // },
     setActiveGroup: (state, action: PayloadAction<number>) => {
       state.activeGroup = action.payload;
     },
@@ -79,7 +58,6 @@ export const textbookSlice = createSlice({
 export const {
   setIsLoading,
   setActiveWords,
-  // setUserWord,
   setIdLoadingWord,
   setActiveGroup,
   setActivePage,
@@ -92,7 +70,6 @@ export const fetchActiveWords = (): AppThunk => async (dispatch, getState) => {
   const userId = getLocalUserId();
   if (userId) {
     const words = await getActiveWordsByUser({ userId, group, page });
-    console.log('fetchActiveWords: ', words);
     dispatch(setActiveWords(words));
   } else {
     const words = await getActiveWords({ group, page });
@@ -112,7 +89,6 @@ export const fetchSetUserWord = ({
   userWord: IUserWord;
   create: boolean;
 }): AppThunk => async (dispatch, getState) => {
-  // dispatch(setIsLoading(true));
   dispatch(setIdLoadingWord(id));
   const userId = getLocalUserId();
   if (userId) {
@@ -129,11 +105,8 @@ export const fetchSetUserWord = ({
       dispatch(setIdLoadingWord(''));
       return;
     }
-    // const { difficulty, optional } = { ...newUserWordResponse };
-    // dispatch(setUserWord({ id, userWord: { difficulty, optional } }));
     dispatch(fetchActiveWords());
   }
-  // dispatch(setIdLoadingWord(''));
 };
 
 export const fetchWordSetDifficulty = ({

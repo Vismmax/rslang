@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import GameLayout from '../GameLayout/GameLayout';
 import Spinner from '../../common/Spinner';
 import AudioChallengeInit from '../AudioChallengePage/AudioChallengeInit';
+import AudioChallengeGame from './AudioChallengeGame';
 import { isStartGame } from '../gameSlice';
 import { isLoadingAudioChallenge } from './audioChallengeSlice';
-import AudioChallengeGame from './AudioChallengeGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

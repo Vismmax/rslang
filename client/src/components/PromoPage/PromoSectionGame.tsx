@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import video from '../../assets/promo.mp4';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import PromoButtonNext from './PromoButtonNext';
-import HomeCard from '../HomePage/HomeCard';
 import PromoCard from './PromoCard';
 import { routesData } from '../Routes/routesData';
-import Slide from '@material-ui/core/Slide';
-// import { Zoom } from '@material-ui/core';
 import Zoom from 'react-reveal/Zoom';
 
 const { savannah, audioChallenge, sprint, designer } = routesData;
@@ -57,10 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-// interface Props {
-//   show: boolean;
-// }
-
 interface Props {
   show: boolean;
   onNextPage: () => void;
@@ -68,10 +60,6 @@ interface Props {
 
 export default function PromoSectionGame({ show, onNextPage }: Props) {
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   console.log('show: ', show);
-  // }, [show]);
 
   return (
     <div className={classes.root}>
@@ -135,7 +123,6 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
               </Grid>
             </Grid>
           </Grid>
-          {/*<Grid item></Grid>*/}
         </Grid>
         <PromoButtonNext onClick={onNextPage} />
       </Container>

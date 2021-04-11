@@ -1,21 +1,27 @@
 import React, { useEffect } from 'react';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchWordSetDifficulty, levelGame, resultGame } from '../gameSlice';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import ResultItem from './ResultItem';
-import { IWord } from '../../../common/interfaces/WordInterfaces';
-import Grid from '@material-ui/core/Grid';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import useSound from 'use-sound';
+
+import { IWord } from '../../../common/interfaces/WordInterfaces';
+import ResultItem from './ResultItem';
+import { fetchWordSetDifficulty, levelGame, resultGame } from '../gameSlice';
 import endSfx from '../../../assets/end.mp3';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

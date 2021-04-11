@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../redux/store';
-import { IExtWord, IUserWord } from '../../common/interfaces/WordInterfaces';
+import { IExtWord } from '../../common/interfaces/WordInterfaces';
 import { DifficultyEnum } from '../../common/enums/DifficultyEnum';
 import {
   getLocalDictionaryDifficulty,
@@ -60,7 +61,6 @@ export const dictionarySlice = createSlice({
 export const {
   setIsLoading,
   setDictionaryWords,
-  // setUserWord,
   setIdLoadingWord,
   setDictionaryDifficulty,
   setDictionaryPage,
@@ -78,7 +78,6 @@ export const fetchDictionaryWords = (): AppThunk => async (
   const userId = getLocalUserId();
   if (userId) {
     const res = await getDictionaryWords({ userId, group, page, difficulty });
-    console.log('res: ', res);
     if (res.totalCount.length) {
       dispatch(setCountPages(Math.ceil(res.totalCount[0].count / 20)));
     } else {
@@ -141,7 +140,6 @@ export const clearDictionaryWords = (): AppThunk => async (
   dispatch(setDictionaryWords([]));
 };
 
-// export const isLoading = (state: RootState) => state.dictionary.isLoading;
 export const isLoadingDictionaryWords = (state: RootState) =>
   state.dictionary.isLoading;
 export const idLoadingWord = (state: RootState) =>

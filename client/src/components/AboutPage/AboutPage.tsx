@@ -1,24 +1,21 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PageLayout from '../PageLayout/PageLayout';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import foto from '../../assets/autor.jpg';
 import Button from '@material-ui/core/Button';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import MailIcon from '@material-ui/icons/Mail';
+
+import PageLayout from '../PageLayout/PageLayout';
+import foto from '../../assets/autor.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
       height: '100%',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
     card: {
       padding: theme.spacing(3),

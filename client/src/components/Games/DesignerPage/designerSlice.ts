@@ -1,14 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppThunk, RootState } from '../../../redux/store';
 import {
   IExtWord,
   IWord,
   wordEmpty,
 } from '../../../common/interfaces/WordInterfaces';
-import {
-  shuffleArray,
-  shuffleArrayCount,
-} from '../../../common/helpers/randomHelper';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
 
@@ -70,8 +67,11 @@ export const initDesigner = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
   const userId = getLocalUserId();
   const data = getState().game.data;
-  console.log('initDesigner :', userId, data);
-  const words = await loadWords({ data, userId, count: getState().settings.designer.countWords });
+  const words = await loadWords({
+    data,
+    userId,
+    count: getState().settings.designer.countWords,
+  });
   dispatch(setWords(words as IExtWord[]));
   dispatch(setBaseWords(words as IExtWord[]));
   dispatch(setIsLoading(false));
@@ -83,12 +83,6 @@ export const nextWordDesigner = (): AppThunk => async (dispatch, getState) => {
   const words = getState().designer.baseWords.filter(
     (word) => word.id !== activeWord.id,
   );
-  console.log('words: ', words);
-  // const variants = [
-  //   ...shuffleArrayCount(words, getState().settings.designer.countVariants - 1),
-  //   getState().designer.activeWord,
-  // ];
-  // dispatch(setActiveVariants(shuffleArray(variants)));
 };
 
 export const isLoadingDesigner = (state: RootState) => state.designer.isLoading;

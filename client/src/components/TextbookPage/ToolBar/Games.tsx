@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import EcoIcon from '@material-ui/icons/Eco';
@@ -12,11 +13,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { useDispatch, useSelector } from 'react-redux';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import { setRouteGame } from '../../Games/gameSlice';
 import { activeWordsLength } from '../textbookSlice';
 import { dictionaryWordsLength } from '../../DictionaryPage/dictionarySlice';
-import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

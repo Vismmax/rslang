@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from '@material-ui/core/styles';
-import format from 'date-fns/format';
-import { ru } from 'date-fns/locale';
-import { IStatisticsGame } from './statisticsSlice';
-import { IDataChartItem } from './statisticsHelpers';
+import React from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import format from 'date-fns/format';
+import { ru } from 'date-fns/locale';
+
+import { IDataChartItem } from './statisticsHelpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // width: '100%',
       padding: theme.spacing(1),
     },
   }),

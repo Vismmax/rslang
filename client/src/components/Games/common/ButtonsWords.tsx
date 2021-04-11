@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { useHotkeys } from 'react-hotkeys-hook';
 import Button from '@material-ui/core/Button';
+import { useHotkeys } from 'react-hotkeys-hook';
+
 import { IWord } from '../../../common/interfaces/WordInterfaces';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // position: 'absolute',
-      // left: 0,
-      // bottom: theme.spacing(3),
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
       zIndex: theme.zIndex.drawer - 1,
-      // width: '100%',
-      // [theme.breakpoints.up('sm')]: {
-      //   bottom: theme.spacing(8),
-      // },
-      // [theme.breakpoints.up('md')]: {
-      //   bottom: theme.spacing(12),
-      // },
     },
     button: {
       margin: theme.spacing(1),
@@ -36,10 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: theme.spacing(3),
       color: theme.palette.text.secondary,
       fontSize: '14px !important',
-      // Вариант в круге
-      // borderRadius: '50%',
-      // backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      // color: 'white',
     },
   }),
 );
@@ -89,7 +76,6 @@ export default function ButtonsWords({
     if (id === clickButtonId) {
       if (id === trueWord.id) return 'primary';
       return 'secondary';
-      // id === trueWord.id? return 'primary': return 'secondary'
     }
     if (id === trueWord.id) return 'primary';
     return 'default';

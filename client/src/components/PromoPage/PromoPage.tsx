@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ReactPageScroller from 'react-page-scroller';
-import PageLayout from '../PageLayout/PageLayout';
 import PromoSectionTitle from './PromoSectionTitle';
 import PromoSectionTextbook from './PromoSectionTextbook';
 import PromoSectionGame from './PromoSectionGame';
@@ -15,25 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: '100%',
       backgroundColor: 'red',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
-    },
-    root1: {
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'green',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
-    },
-    root2: {
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'blue',
-      // backgroundImage: 'url("/img/bg.jpg")',
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'center',
     },
   }),
 );
@@ -43,13 +22,7 @@ export default function PromoPage() {
 
   const [section, setSection] = useState<number>(0);
 
-  useEffect(() => {
-    console.log('section: ', section);
-  }, [section]);
-
-  const handleBeforePageScroll = (number: number) => {
-    // setSection(number);
-  };
+  const handleBeforePageScroll = (number: number) => {};
 
   const handleChange = (number: number) => {
     setSection(number);

@@ -1,10 +1,11 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import { useDispatch } from 'react-redux';
-import { fetchWordSetDifficulty } from '../textbookSlice';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+import { IExtWord } from '../../../common/interfaces/WordInterfaces';
 import CardButtons from './CardButtons';
 import CardLayout from './CardLayout';
+import { fetchWordSetDifficulty } from '../textbookSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
