@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -39,7 +40,7 @@ export default function HomeCard({
 
   return (
     <Card className={classes.root}>
-      <CardActionArea href={href}>
+      <CardActionArea component={RouterLink} to={href}>
         <CardMedia className={classes.media} image={image} title={title} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>

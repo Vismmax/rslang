@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -99,7 +100,8 @@ export default function PromoSectionRegister() {
               size='large'
               variant='contained'
               color='secondary'
-              href='/login'
+              component={RouterLink}
+              to='/login'
             >
               Зарегистрироваться
             </Button>

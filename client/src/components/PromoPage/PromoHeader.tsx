@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -45,7 +46,12 @@ export default function PromoHeader() {
 
         <div className={classes.grow} />
 
-        <Button className={classes.login} href='/login' color='inherit'>
+        <Button
+          className={classes.login}
+          component={RouterLink}
+          to='/login'
+          color='inherit'
+        >
           Войти
         </Button>
       </Toolbar>
