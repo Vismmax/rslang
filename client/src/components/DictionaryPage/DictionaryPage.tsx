@@ -6,6 +6,7 @@ import ToolBar from '../TextbookPage/ToolBar/ToolBar';
 import ListGroups from '../TextbookPage/ListGroups';
 import ListTabs from './ListTabs';
 import routesData from '../Routes/routesData';
+import ButtonUp from '../common/ButtonUp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,6 +31,7 @@ export default function DictionaryPage() {
       <div className={classes.root}>
         <ToolBar title='Словарь' />
         <ListGroups ListGroupItem={ListTabs} />
+        <ButtonUp />
       </div>
     </PageLayout>
   );

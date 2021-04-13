@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 
 import Footer from '../PageLayout/Footer';
 import routesData from '../Routes/routesData';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,10 +61,19 @@ const useStyles = makeStyles((theme: Theme) =>
     footer: {
       backgroundColor: 'rgba(245, 245, 245, 0.5)',
     },
+    buttonUp: {
+      position: 'absolute',
+      bottom: theme.spacing(7),
+      right: theme.spacing(2),
+    },
   }),
 );
 
-export default function PromoSectionRegister() {
+interface Props {
+  onSclollTop: () => void;
+}
+
+export default function PromoSectionRegister({ onSclollTop }: Props) {
   const classes = useStyles();
 
   return (
@@ -112,6 +123,14 @@ export default function PromoSectionRegister() {
       <div className={classes.footerWrap}>
         <Footer className={classes.footer} />
       </div>
+      <Fab
+        className={classes.buttonUp}
+        color='secondary'
+        size='small'
+        onClick={onSclollTop}
+      >
+        <KeyboardArrowUpIcon />
+      </Fab>
     </div>
   );
 }

@@ -32,6 +32,10 @@ export default function PromoPage() {
     setSection(section + 1);
   };
 
+  const handleSclollTop = () => {
+    setSection(0);
+  };
+
   return (
     <>
       <ReactPageScroller
@@ -46,7 +50,7 @@ export default function PromoPage() {
           show={section === 2 ? true : false}
         />
         <PromoSectionStatistics onNextPage={handleNextSection} />
-        <PromoSectionRegister />
+        <PromoSectionRegister onSclollTop={handleSclollTop} />
       </ReactPageScroller>
     </>
   );

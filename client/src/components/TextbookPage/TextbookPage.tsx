@@ -6,6 +6,7 @@ import ToolBar from './ToolBar/ToolBar';
 import ListPages from './ListPages';
 import ListGroups from './ListGroups';
 import routesData from '../Routes/routesData';
+import ButtonUp from '../common/ButtonUp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,6 +31,7 @@ export default function TextbookPage() {
       <div className={classes.root}>
         <ToolBar title='Учебник' />
         <ListGroups ListGroupItem={ListPages} />
+        <ButtonUp />
       </div>
     </PageLayout>
   );
