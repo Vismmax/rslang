@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import school from '../../assets/rs_school.svg';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       textAlign: 'center',
+    },
+    school: {
+      width: theme.spacing(7),
     },
   }),
 );
@@ -60,13 +66,9 @@ export default function Footer({ className = '' }: Props) {
           Создано в <time>2021</time>
         </Typography>
 
-        <Button
-          href='https://github.com/Vismmax'
-          startIcon={<YouTubeIcon />}
-          size='large'
-        >
-          <span className={classes.title}>Demo</span>
-        </Button>
+        <Link className={classes.school} href='https://rs.school/react'>
+          <img src={school} alt='rs school' />
+        </Link>
       </Container>
     </footer>
   );
