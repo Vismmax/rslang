@@ -3,6 +3,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Bounce from 'react-reveal/Bounce';
+import Zoom from 'react-reveal/Zoom';
 
 import PromoButtonNext from './PromoButtonNext';
 import PromoCard from './PromoCard';
@@ -54,10 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  show: boolean;
   onNextPage: () => void;
 }
 
-export default function PromoSectionTextbook({ onNextPage }: Props) {
+export default function PromoSectionTextbook({ show, onNextPage }: Props) {
   const classes = useStyles();
 
   return (
@@ -71,35 +74,47 @@ export default function PromoSectionTextbook({ onNextPage }: Props) {
           alignItems='center'
         >
           <Grid item>
-            <Typography
-              className={classes.header}
-              variant='h2'
-              component='h2'
-              align='center'
-            >
-              Открывай учебник и выбирай нужные слова, все выбранные слова
-              окажуться в словаре.
-            </Typography>
+            {show && (
+              <Zoom top>
+                <Typography
+                  className={classes.header}
+                  variant='h2'
+                  component='h2'
+                  align='center'
+                >
+                  Открывай учебник и выбирай нужные слова, все выбранные слова
+                  окажуться в словаре.
+                </Typography>
+              </Zoom>
+            )}
           </Grid>
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
               <Grid item xs={6} sm={5} md={4}>
-                <PromoCard
-                  title={textbook.title}
-                  description={textbook.description}
-                  image={textbook.image}
-                  icon={textbook.icon}
-                  href={textbook.route}
-                />
+                {show && (
+                  <Bounce left>
+                    <PromoCard
+                      title={textbook.title}
+                      description={textbook.description}
+                      image={textbook.image}
+                      icon={textbook.icon}
+                      href={textbook.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
               <Grid item xs={6} sm={5} md={4}>
-                <PromoCard
-                  title={dictionary.title}
-                  description={dictionary.description}
-                  image={dictionary.image}
-                  icon={dictionary.icon}
-                  href={dictionary.route}
-                />
+                {show && (
+                  <Bounce right>
+                    <PromoCard
+                      title={dictionary.title}
+                      description={dictionary.description}
+                      image={dictionary.image}
+                      icon={dictionary.icon}
+                      href={dictionary.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
             </Grid>
           </Grid>

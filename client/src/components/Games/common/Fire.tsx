@@ -8,6 +8,7 @@ import {
 import Rating from '@material-ui/lab/Rating';
 import orange from '@material-ui/core/colors/orange';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import Flip from 'react-reveal/Flip';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,7 +51,11 @@ export default function Fire({ max, value }: Props) {
         max={max}
         value={max - value}
         readOnly
-        icon={<WhatshotIcon className={classes.icon} />}
+        icon={
+          <Flip>
+            <WhatshotIcon className={classes.icon} />
+          </Flip>
+        }
       />
     </div>
   );

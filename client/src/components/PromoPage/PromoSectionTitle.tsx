@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Fade from 'react-reveal/Fade';
 
 import PromoButtonNext from './PromoButtonNext';
 import PromoHeader from './PromoHeader';
@@ -59,10 +60,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  show: boolean;
   onNextPage: () => void;
 }
 
-export default function PromoSectionTitle({ onNextPage }: Props) {
+export default function PromoSectionTitle({ show, onNextPage }: Props) {
   const classes = useStyles();
 
   return (
@@ -81,24 +83,32 @@ export default function PromoSectionTitle({ onNextPage }: Props) {
             alignItems='center'
           >
             <Grid item>
-              <Typography
-                className={classes.header}
-                variant='h1'
-                component='h1'
-                align='center'
-              >
-                RS Lang
-              </Typography>
+              {show && (
+                <Fade top>
+                  <Typography
+                    className={classes.header}
+                    variant='h1'
+                    component='h1'
+                    align='center'
+                  >
+                    RS Lang
+                  </Typography>
+                </Fade>
+              )}
             </Grid>
             <Grid item>
-              <Typography
-                className={classes.header}
-                variant='h2'
-                component='h2'
-                align='center'
-              >
-                Выучи английский играючи
-              </Typography>
+              {show && (
+                <Fade bottom>
+                  <Typography
+                    className={classes.header}
+                    variant='h2'
+                    component='h2'
+                    align='center'
+                  >
+                    Выучи английский играючи
+                  </Typography>
+                </Fade>
+              )}
             </Grid>
             <Grid item></Grid>
           </Grid>

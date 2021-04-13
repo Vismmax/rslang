@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Roll from 'react-reveal/Roll';
 
 import PromoButtonNext from './PromoButtonNext';
 import PromoCard from './PromoCard';
@@ -55,10 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  show: boolean;
   onNextPage: () => void;
 }
 
-export default function PromoSectionStatistics({ onNextPage }: Props) {
+export default function PromoSectionStatistics({ show, onNextPage }: Props) {
   const classes = useStyles();
 
   return (
@@ -72,34 +74,46 @@ export default function PromoSectionStatistics({ onNextPage }: Props) {
           alignItems='center'
         >
           <Grid item>
-            <Typography
-              className={classes.header}
-              variant='h2'
-              component='h2'
-              align='center'
-            >
-              Просматривай статистику и настраивай приложение под себя.
-            </Typography>
+            {show && (
+              <Roll top cascade>
+                <Typography
+                  className={classes.header}
+                  variant='h2'
+                  component='h2'
+                  align='center'
+                >
+                  Просматривай статистику и настраивай приложение под себя.
+                </Typography>
+              </Roll>
+            )}
           </Grid>
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
               <Grid item xs={6} sm={5} md={4}>
-                <PromoCard
-                  title={statistics.title}
-                  description={statistics.description}
-                  image={statistics.image}
-                  icon={statistics.icon}
-                  href={statistics.route}
-                />
+                {show && (
+                  <Roll left>
+                    <PromoCard
+                      title={statistics.title}
+                      description={statistics.description}
+                      image={statistics.image}
+                      icon={statistics.icon}
+                      href={statistics.route}
+                    />
+                  </Roll>
+                )}
               </Grid>
               <Grid item xs={6} sm={5} md={4}>
-                <PromoCard
-                  title={settings.title}
-                  description={settings.description}
-                  image={settings.image}
-                  icon={settings.icon}
-                  href={settings.route}
-                />
+                {show && (
+                  <Roll right>
+                    <PromoCard
+                      title={settings.title}
+                      description={settings.description}
+                      image={settings.image}
+                      icon={settings.icon}
+                      href={settings.route}
+                    />
+                  </Roll>
+                )}
               </Grid>
             </Grid>
           </Grid>

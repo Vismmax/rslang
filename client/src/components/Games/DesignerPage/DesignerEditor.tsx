@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
 import Grid from '@material-ui/core/Grid';
+import Bounce from 'react-reveal/Bounce';
 
 import { IWord } from '../../../common/interfaces/WordInterfaces';
 import { shuffleArray } from '../../../common/helpers/randomHelper';
@@ -59,10 +60,12 @@ export default function DesignerEditor({
 
   const [buttons, setButtons] = useState<Letter[]>([]);
   const [letters, setLetters] = useState<Letter[]>([]);
+  const [delay, setDelay] = useState(1);
 
   const wordLang = langEn ? word.word : word.wordTranslate;
 
   useEffect(() => {
+    setDelay(1);
     if (word.id) {
       const shuffleLetters = shuffleArray(
         wordLang.split('').map((letter, id) => ({ letter, id })),
@@ -78,6 +81,7 @@ export default function DesignerEditor({
   };
 
   const handleClickButtons = (letter: Letter) => () => {
+    setDelay(0);
     const wrd = [...letters, letter].map((lt) => lt.letter).join('');
     if (wrd === wordLang) onResult(true);
     setButtons(buttons.filter((btn) => btn.id !== letter.id));
@@ -105,17 +109,19 @@ export default function DesignerEditor({
         justify='center'
       >
         {letters.map((letter) => (
-          <Grid item>
-            <Button
-              className={classes.letter}
-              key={letter.id}
-              color='primary'
-              size='large'
-              disabled={disable}
-              onClick={handleClickLetter(letter)}
-            >
-              {letter.letter}
-            </Button>
+          <Grid key={letter.id + letter.letter + wordLang} item>
+            <Bounce>
+              <Button
+                className={classes.letter}
+                key={letter.id}
+                color='primary'
+                size='large'
+                disabled={disable}
+                onClick={handleClickLetter(letter)}
+              >
+                {letter.letter}
+              </Button>
+            </Bounce>
           </Grid>
         ))}
       </Grid>
@@ -127,17 +133,19 @@ export default function DesignerEditor({
         justify='center'
       >
         {buttons.map((btn, id) => (
-          <Grid item>
-            <Button
-              className={classes.button}
-              key={btn.id}
-              variant='contained'
-              size='large'
-              disabled={disable}
-              onClick={handleClickButtons(btn)}
-            >
-              {btn.letter}
-            </Button>
+          <Grid key={btn.id + btn.letter + wordLang} item>
+            <Bounce bottom delay={id * 100 * delay}>
+              <Button
+                className={classes.button}
+                key={btn.id}
+                variant='contained'
+                size='large'
+                disabled={disable}
+                onClick={handleClickButtons(btn)}
+              >
+                {btn.letter}
+              </Button>
+            </Bounce>
           </Grid>
         ))}
       </Grid>

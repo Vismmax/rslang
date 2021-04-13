@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
+import Fade from 'react-reveal/Fade';
 
 import { IWord } from '../../../common/interfaces/WordInterfaces';
 
@@ -86,16 +87,18 @@ export default function ButtonsWords({
   return (
     <div className={classes.root}>
       {words.map((word, id) => (
-        <Button
-          key={word.id}
-          className={classes.button}
-          color={getColor(word.id)}
-          variant='contained'
-          startIcon={<span className={classes.key}>{id + 1}</span>}
-          onClick={handleClick(word)}
-        >
-          {langEn ? word.wordTranslate : word.word}
-        </Button>
+        <Fade>
+          <Button
+            key={word.id}
+            className={classes.button}
+            color={getColor(word.id)}
+            variant='contained'
+            startIcon={<span className={classes.key}>{id + 1}</span>}
+            onClick={handleClick(word)}
+          >
+            {langEn ? word.wordTranslate : word.word}
+          </Button>
+        </Fade>
       ))}
     </div>
   );

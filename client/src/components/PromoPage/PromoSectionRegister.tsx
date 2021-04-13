@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Bounce from 'react-reveal/Bounce';
+import Flip from 'react-reveal/Flip';
 
 import Footer from '../PageLayout/Footer';
 import routesData from '../Routes/routesData';
@@ -70,10 +72,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  show: boolean;
   onSclollTop: () => void;
 }
 
-export default function PromoSectionRegister({ onSclollTop }: Props) {
+export default function PromoSectionRegister({ show, onSclollTop }: Props) {
   const classes = useStyles();
 
   return (
@@ -93,29 +96,42 @@ export default function PromoSectionRegister({ onSclollTop }: Props) {
               component='h2'
               align='center'
             >
-              И всё это бесплатно!
+              {/*И всё это бесплатно!*/}
+              {show && (
+                <Bounce right cascade>
+                  И всё это бесплатно!
+                </Bounce>
+              )}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              className={classes.header}
-              variant='h2'
-              component='h2'
-              align='center'
-            >
-              Начни изучать английский прямо сегодня.
-            </Typography>
+            {show && (
+              <Bounce right cascade delay={700}>
+                <Typography
+                  className={classes.header}
+                  variant='h2'
+                  component='h2'
+                  align='center'
+                >
+                  Начни изучать английский прямо сегодня.
+                </Typography>
+              </Bounce>
+            )}
           </Grid>
           <Grid item>
-            <Button
-              size='large'
-              variant='contained'
-              color='secondary'
-              component={RouterLink}
-              to='/login'
-            >
-              Зарегистрироваться
-            </Button>
+            {show && (
+              <Flip delay={1500}>
+                <Button
+                  size='large'
+                  variant='contained'
+                  color='secondary'
+                  component={RouterLink}
+                  to='/login'
+                >
+                  Зарегистрироваться
+                </Button>
+              </Flip>
+            )}
           </Grid>
           <Grid item></Grid>
         </Grid>

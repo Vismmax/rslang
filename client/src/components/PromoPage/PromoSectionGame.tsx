@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PromoButtonNext from './PromoButtonNext';
 import PromoCard from './PromoCard';
 import { routesData } from '../Routes/routesData';
-import Zoom from 'react-reveal/Zoom';
+import Bounce from 'react-reveal/Bounce';
 
 const { savannah, audioChallenge, sprint, designer } = routesData;
 
@@ -78,48 +78,67 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
               component='h2'
               align='center'
             >
-              Выбирай игру и тренируй слова.
+              {/*Выбирай игру и тренируй слова.*/}
+              {show && (
+                <Bounce top cascade>
+                  Выбирай игру и тренируй слова.
+                </Bounce>
+              )}
             </Typography>
           </Grid>
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
               <Grid item xs={6} sm={4} md={3}>
-                {/*<Zoom when={show} exit={false} duration={show ? 3000 : -1}>*/}
-                <PromoCard
-                  title={savannah.title}
-                  description={savannah.description}
-                  image={savannah.image}
-                  icon={savannah.icon}
-                  href={savannah.route}
-                />
-                {/*</Zoom>*/}
+                {show && (
+                  <Bounce bottom>
+                    <PromoCard
+                      title={savannah.title}
+                      description={savannah.description}
+                      image={savannah.image}
+                      icon={savannah.icon}
+                      href={savannah.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
               <Grid item xs={6} sm={4} md={3}>
-                <PromoCard
-                  title={audioChallenge.title}
-                  description={audioChallenge.description}
-                  image={audioChallenge.image}
-                  icon={audioChallenge.icon}
-                  href={audioChallenge.route}
-                />
+                {show && (
+                  <Bounce bottom delay={100}>
+                    <PromoCard
+                      title={audioChallenge.title}
+                      description={audioChallenge.description}
+                      image={audioChallenge.image}
+                      icon={audioChallenge.icon}
+                      href={audioChallenge.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
               <Grid item xs={6} sm={4} md={3}>
-                <PromoCard
-                  title={sprint.title}
-                  description={sprint.description}
-                  image={sprint.image}
-                  icon={sprint.icon}
-                  href={sprint.route}
-                />
+                {show && (
+                  <Bounce bottom delay={200}>
+                    <PromoCard
+                      title={sprint.title}
+                      description={sprint.description}
+                      image={sprint.image}
+                      icon={sprint.icon}
+                      href={sprint.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
               <Grid item xs={6} sm={4} md={3}>
-                <PromoCard
-                  title={designer.title}
-                  description={designer.description}
-                  image={designer.image}
-                  icon={designer.icon}
-                  href={designer.route}
-                />
+                {show && (
+                  <Bounce bottom delay={300}>
+                    <PromoCard
+                      title={designer.title}
+                      description={designer.description}
+                      image={designer.image}
+                      icon={designer.icon}
+                      href={designer.route}
+                    />
+                  </Bounce>
+                )}
               </Grid>
             </Grid>
           </Grid>

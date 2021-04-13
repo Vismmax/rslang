@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ReactPageScroller from 'react-page-scroller';
 import PromoSectionTitle from './PromoSectionTitle';
@@ -43,14 +43,23 @@ export default function PromoPage() {
         onBeforePageScroll={handleBeforePageScroll}
         pageOnChange={handleChange}
       >
-        <PromoSectionTitle onNextPage={handleNextSection} />
-        <PromoSectionTextbook onNextPage={handleNextSection} />
-        <PromoSectionGame
+        <PromoSectionTitle
+          show={section === 0}
           onNextPage={handleNextSection}
-          show={section === 2 ? true : false}
         />
-        <PromoSectionStatistics onNextPage={handleNextSection} />
-        <PromoSectionRegister onSclollTop={handleSclollTop} />
+        <PromoSectionTextbook
+          show={section === 1}
+          onNextPage={handleNextSection}
+        />
+        <PromoSectionGame show={section === 2} onNextPage={handleNextSection} />
+        <PromoSectionStatistics
+          show={section === 3}
+          onNextPage={handleNextSection}
+        />
+        <PromoSectionRegister
+          show={section === 4}
+          onSclollTop={handleSclollTop}
+        />
       </ReactPageScroller>
     </>
   );
