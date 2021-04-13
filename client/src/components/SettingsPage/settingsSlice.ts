@@ -18,19 +18,23 @@ export interface ISettingsSavannah {
   timeWord: number;
   countError: number;
   countVariants: number;
+  langWordEn: boolean;
 }
 export interface ISettingsAudioChallenge {
   countWords: number;
   countVariants: number;
   showTranslate: boolean;
+  langWordEn: boolean;
 }
 export interface ISettingsSprint {
   timeGame: number;
   showHelp: boolean;
+  langWordEn: boolean;
 }
 export interface ISettingsDesigner {
   countWords: number;
   showTranslate: boolean;
+  langWordEn: boolean;
 }
 export type ISettings =
   | ISettingsSavannah
@@ -61,19 +65,23 @@ const initialState: ISettingsState = {
     timeWord: 10,
     countError: 5,
     countVariants: 4,
+    langWordEn: true,
   },
   audioChallenge: {
     countWords: 10,
     countVariants: 5,
     showTranslate: true,
+    langWordEn: true,
   },
   sprint: {
     timeGame: 60,
     showHelp: false,
+    langWordEn: true,
   },
   designer: {
     countWords: 10,
     showTranslate: true,
+    langWordEn: true,
   },
 };
 
@@ -128,5 +136,6 @@ export const settingsAudioChallenge = (state: RootState) =>
   state.settings.audioChallenge;
 export const settingsSprint = (state: RootState) => state.settings.sprint;
 export const settingsDesigner = (state: RootState) => state.settings.designer;
+export const settingsGame = (state: RootState) => state.settings;
 
 export default settingsSlice.reducer;

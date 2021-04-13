@@ -33,6 +33,7 @@ interface GameState {
   isStop: boolean;
   route: string;
   level: number | null;
+  nameGame: string;
   data: IGameData;
   score: IScore;
   wordsTrue: IWord[];
@@ -51,6 +52,7 @@ const initialState: GameState = {
   isStop: false,
   route: '',
   level: null,
+  nameGame: '',
   data: {
     group: 0,
     page: null,
@@ -95,6 +97,9 @@ export const gameSlice = createSlice({
     setLevel: (state, action: PayloadAction<number>) => {
       state.level = action.payload;
     },
+    setNameGame: (state, action: PayloadAction<string>) => {
+      state.nameGame = action.payload;
+    },
     setData: (state, action: PayloadAction<IGameData>) => {
       state.data = action.payload;
     },
@@ -126,6 +131,7 @@ export const gameSlice = createSlice({
       return {
         ...state,
         score: { ...initialState.score },
+        nameGame: '',
         wordsTrue: [],
         wordsFalse: [],
         seriesTrueAnswers: {
@@ -145,6 +151,7 @@ export const {
   setIsStop,
   setRouteGame,
   setLevel,
+  setNameGame,
   setData,
   setScore,
   addWordsTrue,
@@ -331,6 +338,7 @@ export const isStartGame = (state: RootState) => state.game.isStart;
 export const isStopGame = (state: RootState) => state.game.isStop;
 export const routeGame = (state: RootState) => state.game.route;
 export const levelGame = (state: RootState) => state.game.level;
+export const nameGame = (state: RootState) => state.game.nameGame;
 export const gameData = (state: RootState) => state.game.data;
 export const scoreGame = (state: RootState) => state.game.score;
 export const wordsTrueGame = (state: RootState) => state.game.wordsTrue;

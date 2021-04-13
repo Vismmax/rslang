@@ -9,6 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 
 import { ISettingsSprint } from './settingsSlice';
 
@@ -97,6 +98,21 @@ export default function SettingsSprint({ settings, onChange }: Props) {
             />
           }
           label='Отображать подсказки ввиде картинок к словам'
+        />
+
+        <FormControlLabel
+          className={classes.input}
+          control={
+            <Switch
+              color='primary'
+              checked={settings.langWordEn}
+              onChange={handleCheckboxChange}
+              name='langWordEn'
+            />
+          }
+          label={`Отабражать слово вопрос на ${
+            settings.langWordEn ? 'английском' : 'русском'
+          } языке`}
         />
       </div>
     </Paper>

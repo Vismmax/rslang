@@ -9,6 +9,7 @@ import { AppThunk, RootState } from '../../../redux/store';
 import { randomInteger } from '../../../common/helpers/randomHelper';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
+import { setNameGame } from '../gameSlice';
 
 interface SprintState {
   isLoading: boolean;
@@ -75,6 +76,7 @@ export const {
 
 export const initSprint = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  dispatch(setNameGame('sprint'));
   const userId = getLocalUserId();
   const data = getState().game.data;
   const words = await loadWords({

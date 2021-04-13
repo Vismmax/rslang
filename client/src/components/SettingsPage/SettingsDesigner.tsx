@@ -9,6 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import { ISettingsDesigner } from './settingsSlice';
 
@@ -97,6 +98,21 @@ export default function SettingsDesigner({ settings, onChange }: Props) {
             />
           }
           label='Отображать в правильных ответах перевод и транскрипцию'
+        />
+
+        <FormControlLabel
+          className={classes.input}
+          control={
+            <Switch
+              color='primary'
+              checked={settings.langWordEn}
+              onChange={handleCheckboxChange}
+              name='langWordEn'
+            />
+          }
+          label={`Отабражать слово вопрос на ${
+            settings.langWordEn ? 'английском' : 'русском'
+          } языке`}
         />
       </div>
     </Paper>

@@ -7,6 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import { ISettingsSavannah } from './settingsSlice';
 
@@ -29,6 +31,7 @@ interface Ev {
   target: {
     value: string;
     name: string;
+    checked: boolean;
   };
 }
 
@@ -53,6 +56,13 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
     onChange('savannah', {
       ...settings,
       [ev.target.name as string]: ev.target.value as number,
+    });
+  };
+
+  const handleCheckboxChange = (ev: Ev) => {
+    onChange('savannah', {
+      ...settings,
+      [ev.target.name]: ev.target.checked,
     });
   };
 
@@ -108,6 +118,21 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
           </Select>
           <FormHelperText>Количество вариантов ответов</FormHelperText>
         </FormControl>
+
+        <FormControlLabel
+          className={classes.input}
+          control={
+            <Switch
+              color='primary'
+              checked={settings.langWordEn}
+              onChange={handleCheckboxChange}
+              name='langWordEn'
+            />
+          }
+          label={`Отабражать слово вопрос на ${
+            settings.langWordEn ? 'английском' : 'русском'
+          } языке`}
+        />
       </div>
     </Paper>
   );

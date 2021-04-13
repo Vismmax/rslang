@@ -11,6 +11,7 @@ import {
 } from '../../../common/helpers/randomHelper';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
+import { setNameGame } from '../gameSlice';
 
 interface AudioChallengeState {
   isLoading: boolean;
@@ -71,6 +72,7 @@ export const initAudioChallenge = (): AppThunk => async (
   getState,
 ) => {
   dispatch(setIsLoading(true));
+  dispatch(setNameGame('audioChallenge'));
   const userId = getLocalUserId();
   const data = getState().game.data;
   const words = await loadWords({

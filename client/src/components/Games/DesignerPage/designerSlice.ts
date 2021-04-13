@@ -8,6 +8,7 @@ import {
 } from '../../../common/interfaces/WordInterfaces';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
+import { setNameGame } from '../gameSlice';
 
 interface DesignerState {
   isLoading: boolean;
@@ -65,6 +66,7 @@ export const {
 
 export const initDesigner = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  dispatch(setNameGame('designer'));
   const userId = getLocalUserId();
   const data = getState().game.data;
   const words = await loadWords({

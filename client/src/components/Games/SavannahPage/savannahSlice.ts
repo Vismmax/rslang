@@ -12,6 +12,7 @@ import {
 } from '../../../common/helpers/randomHelper';
 import { getLocalUserId } from '../../../common/helpers/userHelper';
 import { loadWords } from '../gameService';
+import { setNameGame } from '../gameSlice';
 
 interface SavannahState {
   isLoading: boolean;
@@ -69,6 +70,7 @@ export const {
 
 export const initSavannah = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  dispatch(setNameGame('savannah'));
   const userId = getLocalUserId();
   const data = getState().game.data;
   const words = await loadWords({ data, userId, count: 30 });
