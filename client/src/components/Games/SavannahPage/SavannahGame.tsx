@@ -57,7 +57,7 @@ export default function SavannahGame() {
   const dispatch = useDispatch();
   const word = useSelector(activeWordSavannah);
   const variants = useSelector(activeVariantsSavannah);
-  const { timeWord, countError } = useSelector(settingsSavannah);
+  const { timeWord, countError, langWordEn } = useSelector(settingsSavannah);
 
   const [reserveErrors, setReserveErrors] = useState(countError);
   const [showWord, setShowWord] = useState(false);
@@ -142,6 +142,7 @@ export default function SavannahGame() {
             words={variants}
             trueWord={word}
             show={showTrueButton}
+            langEn={langWordEn}
             onClick={handleClickVariant}
           />
         </Grid>
@@ -154,7 +155,7 @@ export default function SavannahGame() {
         onEntered={handleEnteredWord}
       >
         <Typography className={classes.word} variant='h3' component='div'>
-          {word.word}
+          {langWordEn ? word.word : word.wordTranslate}
         </Typography>
       </Slide>
     </div>

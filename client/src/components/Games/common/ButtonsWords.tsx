@@ -35,6 +35,7 @@ interface Props {
   words: IWord[];
   trueWord: IWord;
   show?: boolean;
+  langEn?: boolean;
   onClick: (isTrue: boolean) => void;
 }
 
@@ -43,6 +44,7 @@ export default function ButtonsWords({
   trueWord,
   onClick,
   show = false,
+  langEn = true,
 }: Props) {
   const classes = useStyles();
   const [isShowTrue, setIsShowTrue] = useState(false);
@@ -92,7 +94,7 @@ export default function ButtonsWords({
           startIcon={<span className={classes.key}>{id + 1}</span>}
           onClick={handleClick(word)}
         >
-          {word.wordTranslate}
+          {langEn ? word.wordTranslate : word.word}
         </Button>
       ))}
     </div>

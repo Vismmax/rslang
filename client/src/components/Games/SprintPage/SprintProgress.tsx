@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -13,14 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
     text: {
       fontWeight: theme.typography.fontWeightBold,
     },
-    progress: {
-      width: theme.spacing(10),
-      height: theme.spacing(10),
-      [theme.breakpoints.down('xs')]: {
-        width: theme.spacing(8),
-        height: theme.spacing(8),
-      },
-    },
   }),
 );
 
@@ -31,13 +24,14 @@ interface Props {
 
 export function SprintProgress({ timeGame, time }: Props) {
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Box className={classes.root} position='relative' display='inline-flex'>
       <CircularProgress
-        className={classes.progress}
         variant='determinate'
         color='secondary'
+        size={matches ? 80 : 60}
         value={(time * 100) / timeGame}
       />
       <Box

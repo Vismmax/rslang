@@ -76,6 +76,7 @@ interface Props {
   series: number;
   showImage: boolean;
   onResult: (res: boolean) => void;
+  langEn?: boolean;
 }
 
 export default function SprintCard({
@@ -85,6 +86,7 @@ export default function SprintCard({
   series,
   showImage,
   onResult,
+  langEn = true,
 }: Props) {
   const classes = useStyles();
   const [result, setResult] = useState<boolean | null>(null);
@@ -137,12 +139,12 @@ export default function SprintCard({
           )}
           <Grid item container justify='center'>
             <Typography className={classes.textCenter} variant='h3'>
-              {word?.word}
+              {langEn ? word?.word : word?.wordTranslate}
             </Typography>
           </Grid>
           <Grid item container justify='center'>
             <Typography className={classes.textCenter} variant='h4'>
-              {variant?.wordTranslate}
+              {langEn ? variant?.wordTranslate : variant?.word}
             </Typography>
           </Grid>
         </Grid>

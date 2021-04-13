@@ -11,6 +11,10 @@ import { addAnswerGame, stopGame } from '../gameSlice';
 import { activeWordDesigner, nextWordDesigner } from './designerSlice';
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
+import {
+  settingsAudioChallenge,
+  settingsDesigner,
+} from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +45,7 @@ export default function DesignerGame() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const word = useSelector(activeWordDesigner);
+  const settings = useSelector(settingsDesigner);
 
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [start, setStart] = useState(false);
@@ -110,6 +115,7 @@ export default function DesignerGame() {
             word={word}
             onResult={handleClickVariant}
             disable={disableEditor}
+            langEn={settings.langWordEn}
           />
         </Grid>
         <Grid item container justify='center'>

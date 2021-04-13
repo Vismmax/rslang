@@ -39,7 +39,7 @@ export default function DesignerCard({ isOpen, word }: Props) {
       showTranslate={settings.showTranslate}
       questionContent={
         <Typography className={classes.word} variant='h4'>
-          {word.wordTranslate}
+          {settings.langWordEn ? word.wordTranslate : word.word}
         </Typography>
       }
     />

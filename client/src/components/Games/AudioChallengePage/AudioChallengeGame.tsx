@@ -18,6 +18,7 @@ import {
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
 import './AudioChallenge.css';
+import { settingsAudioChallenge } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +55,7 @@ export default function AudioChallengeGame() {
   const dispatch = useDispatch();
   const word = useSelector(activeWordAudioChallenge);
   const variants = useSelector(activeVariantsAudioChallenge);
+  const settings = useSelector(settingsAudioChallenge);
 
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [showTrueButton, setShowTrueButton] = useState(false);
@@ -146,6 +148,7 @@ export default function AudioChallengeGame() {
               words={variants}
               trueWord={word}
               show={showTrueButton}
+              langEn={settings.langWordEn}
               onClick={handleClickVariant}
             />
           </Grid>

@@ -46,27 +46,31 @@ interface Props {
   word: IWord;
   onResult: (isTrue: boolean) => void;
   disable?: boolean;
+  langEn?: boolean;
 }
 
 export default function DesignerEditor({
   word,
   onResult,
   disable = false,
+  langEn = true,
 }: Props) {
   const classes = useStyles();
 
   const [buttons, setButtons] = useState<Letter[]>([]);
   const [letters, setLetters] = useState<Letter[]>([]);
 
+  const wordLang = langEn ? word.word : word.wordTranslate;
+
   useEffect(() => {
     if (word.id) {
       const shuffleLetters = shuffleArray(
-        word.word.split('').map((letter, id) => ({ letter, id })),
+        wordLang.split('').map((letter, id) => ({ letter, id })),
       );
       setLetters([]);
       setButtons(shuffleLetters);
     }
-  }, [word]);
+  }, [wordLang]);
 
   const handleClickLetter = (letter: Letter) => () => {
     setLetters(letters.filter((lt) => lt.id !== letter.id));
@@ -75,7 +79,7 @@ export default function DesignerEditor({
 
   const handleClickButtons = (letter: Letter) => () => {
     const wrd = [...letters, letter].map((lt) => lt.letter).join('');
-    if (wrd === word.word) onResult(true);
+    if (wrd === wordLang) onResult(true);
     setButtons(buttons.filter((btn) => btn.id !== letter.id));
     setLetters([...letters, letter]);
   };
@@ -85,8 +89,8 @@ export default function DesignerEditor({
     if (letter) handleClickButtons(letter)();
   };
 
-  useHotkeys(Array.from(new Set(word.word.split(''))).join(','), handleKey, [
-    word,
+  useHotkeys(Array.from(new Set(wordLang.split(''))).join(','), handleKey, [
+    wordLang,
     buttons,
     letters,
   ]);

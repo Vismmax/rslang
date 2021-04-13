@@ -144,6 +144,7 @@ export default function SprintGame() {
             episode={episode}
             series={series}
             showImage={settings.showHelp}
+            langEn={settings.langWordEn}
             onResult={handleClickVariant}
           />
         </Grid>
