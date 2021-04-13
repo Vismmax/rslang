@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       height: '100%',
     },
+    item: {
+      '& > div': {
+        height: '100%',
+      },
+    },
     header: {
       fontWeight: theme.typography.fontWeightBold,
       textShadow: '0px 0px 40px rgba(0, 0, 0, 1)',
@@ -88,7 +93,7 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
           </Grid>
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
-              <Grid item xs={6} sm={4} md={3}>
+              <Grid className={classes.item} item xs={6} sm={4} md={3}>
                 {show && (
                   <Bounce bottom>
                     <PromoCard
@@ -101,7 +106,7 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
                   </Bounce>
                 )}
               </Grid>
-              <Grid item xs={6} sm={4} md={3}>
+              <Grid className={classes.item} item xs={6} sm={4} md={3}>
                 {show && (
                   <Bounce bottom delay={100}>
                     <PromoCard
@@ -114,7 +119,7 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
                   </Bounce>
                 )}
               </Grid>
-              <Grid item xs={6} sm={4} md={3}>
+              <Grid className={classes.item} item xs={6} sm={4} md={3}>
                 {show && (
                   <Bounce bottom delay={200}>
                     <PromoCard
@@ -127,7 +132,7 @@ export default function PromoSectionGame({ show, onNextPage }: Props) {
                   </Bounce>
                 )}
               </Grid>
-              <Grid item xs={6} sm={4} md={3}>
+              <Grid className={classes.item} item xs={6} sm={4} md={3}>
                 {show && (
                   <Bounce bottom delay={300}>
                     <PromoCard

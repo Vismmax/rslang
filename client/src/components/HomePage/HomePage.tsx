@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header: {
       marginBottom: theme.spacing(3),
+      textShadow: '0px 0px 6px rgba(255, 255, 255, 1)',
+    },
+    white: {
+      marginBottom: theme.spacing(3),
+      color: 'white',
+      textShadow: '0px 0px 20px rgba(0, 0, 0, 1)',
     },
   }),
 );
@@ -91,7 +97,7 @@ export default function HomePage() {
 
       <section className={classes.section}>
         <Typography
-          className={classes.header}
+          className={classes.white}
           gutterBottom
           variant='h4'
           component='h2'

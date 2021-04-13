@@ -81,7 +81,7 @@ export const routesData: IRoutesData = {
   },
   textbook: {
     title: 'Учебник',
-    description: '',
+    description: 'Содержит псе доступные в приложении слова.',
     image: textbookImg,
     background: textbookBg,
     icon: <LocalLibraryIcon />,
@@ -89,7 +89,7 @@ export const routesData: IRoutesData = {
   },
   dictionary: {
     title: 'Словарь',
-    description: '',
+    description: 'Содержит словы, которые использовал пользователь.',
     image: dictionaryImg,
     background: dictionaryBg,
     icon: <MenuBookIcon />,
@@ -105,7 +105,8 @@ export const routesData: IRoutesData = {
   },
   savannah: {
     title: 'Саванна',
-    description: '',
+    description:
+      'Оттачивает понимание речи и быстрого перевода слов, помагает не забыть выученные слова.',
     image: savannahImg,
     background: savannahBg,
     icon: <EcoIcon />,
@@ -113,7 +114,7 @@ export const routesData: IRoutesData = {
   },
   audioChallenge: {
     title: 'Аудиовызов',
-    description: '',
+    description: 'Улучшает восприятие речи на слух.',
     image: audioChallengeImg,
     background: audioChallengeBg,
     icon: <HeadsetIcon />,
@@ -121,7 +122,7 @@ export const routesData: IRoutesData = {
   },
   sprint: {
     title: 'Спринт',
-    description: '',
+    description: 'Учит быстро переводить на ваш родной язык.',
     image: sprintImg,
     background: sprintBg,
     icon: <DirectionsRunIcon />,
@@ -129,7 +130,7 @@ export const routesData: IRoutesData = {
   },
   designer: {
     title: 'Конструктор',
-    description: '',
+    description: 'Формирует навыки обратного перевода и написания слов.',
     image: designerImg,
     background: designerBg,
     icon: <ViewModuleIcon />,
@@ -137,7 +138,7 @@ export const routesData: IRoutesData = {
   },
   statistics: {
     title: 'Статистика',
-    description: '',
+    description: 'Формирует статистику по всем занятиям.',
     image: statisticsImg,
     background: statisticsBg,
     icon: <EqualizerIcon />,
@@ -145,7 +146,7 @@ export const routesData: IRoutesData = {
   },
   settings: {
     title: 'Настройки',
-    description: '',
+    description: 'Дает возможность настроить приложение под себя.',
     image: settingsImg,
     background: settingsBg,
     icon: <SettingsIcon />,

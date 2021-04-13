@@ -11,7 +11,11 @@ import theme from '../../theme/theme';
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    height: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
+  card: {
+    height: '100%',
   },
   media: {
     width: '100%',
@@ -30,6 +34,11 @@ const useStyles = makeStyles({
   title: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.h6.fontSize,
+    },
+  },
+  description: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 });
@@ -53,7 +62,7 @@ export default function PromoCard({
 
   return (
     <Card className={classes.root}>
-      <CardActionArea component={RouterLink} to={href}>
+      <CardActionArea className={classes.card} component={RouterLink} to={href}>
         <CardMedia className={classes.media} image={image} title={title} />
         <CardContent>
           <Typography
@@ -65,7 +74,12 @@ export default function PromoCard({
           >
             {title}
           </Typography>
-          <Typography variant='body2' color='textSecondary' component='p'>
+          <Typography
+            className={classes.description}
+            variant='body2'
+            color='textSecondary'
+            component='p'
+          >
             {description}
           </Typography>
         </CardContent>

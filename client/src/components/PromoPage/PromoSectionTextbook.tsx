@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       height: '100%',
     },
+    item: {
+      '& > div': {
+        height: '100%',
+      },
+    },
     header: {
       fontWeight: theme.typography.fontWeightBold,
       textShadow: '0px 0px 20px rgba(0, 0, 0, 1)',
@@ -90,7 +95,7 @@ export default function PromoSectionTextbook({ show, onNextPage }: Props) {
           </Grid>
           <Grid item>
             <Grid container justify='space-evenly' spacing={4}>
-              <Grid item xs={6} sm={5} md={4}>
+              <Grid className={classes.item} item xs={6} sm={5} md={4}>
                 {show && (
                   <Bounce left>
                     <PromoCard
@@ -103,7 +108,7 @@ export default function PromoSectionTextbook({ show, onNextPage }: Props) {
                   </Bounce>
                 )}
               </Grid>
-              <Grid item xs={6} sm={5} md={4}>
+              <Grid className={classes.item} item xs={6} sm={5} md={4}>
                 {show && (
                   <Bounce right>
                     <PromoCard
