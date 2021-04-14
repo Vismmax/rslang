@@ -5,9 +5,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import YouTubeIcon from '@material-ui/icons/YouTube';
 import school from '../../assets/rs_school.svg';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme: Theme) =>

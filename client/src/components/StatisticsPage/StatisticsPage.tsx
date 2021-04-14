@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     background: {
+      backgroundColor: theme.palette.info.light,
       backgroundImage: `url(${routesData.statistics.background})`,
     },
   }),

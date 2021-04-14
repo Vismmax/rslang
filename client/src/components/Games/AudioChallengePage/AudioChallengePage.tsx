@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
+      backgroundColor: theme.palette.info.light,
       backgroundImage: `url(${routesData.audioChallenge.image})`,
     },
   }),

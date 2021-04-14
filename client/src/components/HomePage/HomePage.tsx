@@ -26,16 +26,13 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
+      backgroundColor: theme.palette.info.main,
       backgroundImage: `url(${routesData.home.background})`,
     },
     section: {
       marginBottom: theme.spacing(6),
     },
     header: {
-      marginBottom: theme.spacing(3),
-      textShadow: '0px 0px 6px rgba(255, 255, 255, 1)',
-    },
-    white: {
       marginBottom: theme.spacing(3),
       color: 'white',
       textShadow: '0px 0px 20px rgba(0, 0, 0, 1)',
@@ -97,7 +94,7 @@ export default function HomePage() {
 
       <section className={classes.section}>
         <Typography
-          className={classes.white}
+          className={classes.header}
           gutterBottom
           variant='h4'
           component='h2'

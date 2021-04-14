@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ReactPageScroller from 'react-page-scroller';
 import PromoSectionTitle from './PromoSectionTitle';
@@ -6,6 +8,7 @@ import PromoSectionTextbook from './PromoSectionTextbook';
 import PromoSectionGame from './PromoSectionGame';
 import PromoSectionStatistics from './PromoSectionStatistics';
 import PromoSectionRegister from './PromoSectionRegister';
+import { userStore } from '../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,8 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PromoPage() {
   const classes = useStyles();
+  const user = useSelector(userStore);
+  const history = useHistory();
 
   const [section, setSection] = useState<number>(0);
+
+  // useEffect(() => {
+  //   history.push('/');
+  // }, [user]);
 
   const handleBeforePageScroll = (number: number) => {};
 

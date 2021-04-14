@@ -8,6 +8,7 @@ import Fade from 'react-reveal/Fade';
 import PromoButtonNext from './PromoButtonNext';
 import PromoHeader from './PromoHeader';
 import video from '../../assets/promo.mp4';
+import brown from '@material-ui/core/colors/brown';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       width: '100%',
       height: '100%',
+      backgroundColor: brown[700],
     },
     video: {
       position: 'absolute',

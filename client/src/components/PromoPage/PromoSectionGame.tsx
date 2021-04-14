@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundColor: theme.palette.success.dark,
       backgroundImage: `url(${sprint.background})`,
     },
     container: {

@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
     },
     background: {
+      backgroundColor: theme.palette.warning.dark,
       backgroundImage: `url(${routesData.about.background})`,
     },
     card: {

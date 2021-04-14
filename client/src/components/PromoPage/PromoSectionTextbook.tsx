@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundColor: theme.palette.text.secondary,
       backgroundImage: `url(${dictionary.background})`,
     },
     container: {

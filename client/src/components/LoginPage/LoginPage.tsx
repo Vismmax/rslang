@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
   background: {
+    backgroundColor: theme.palette.text.secondary,
     backgroundImage: `url(${routesData.login.background})`,
   },
   tabs: {

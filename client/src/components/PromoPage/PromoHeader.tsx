@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { setIsOpenSideBar } from '../SideBar/sideBarSlice';
+import { userStore } from '../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PromoHeader() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = useSelector(userStore);
 
   const handleClickMenu = () => {
     dispatch(setIsOpenSideBar(true));
@@ -46,14 +48,16 @@ export default function PromoHeader() {
 
         <div className={classes.grow} />
 
-        <Button
-          className={classes.login}
-          component={RouterLink}
-          to='/login'
-          color='inherit'
-        >
-          Войти
-        </Button>
+        {!user.userId && (
+          <Button
+            className={classes.login}
+            component={RouterLink}
+            to='/login'
+            color='inherit'
+          >
+            Войти
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );

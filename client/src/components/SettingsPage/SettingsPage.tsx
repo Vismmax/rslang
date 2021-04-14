@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3, 0),
     },
     background: {
+      backgroundColor: theme.palette.primary.dark,
       backgroundImage: `url(${routesData.settings.background})`,
     },
     header: {

@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundColor: theme.palette.info.light,
       backgroundImage: `url(${statistics.background})`,
-      // backgroundImage: dictionaryBg,
     },
     container: {
       display: 'flex',

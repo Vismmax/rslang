@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import brown from '@material-ui/core/colors/brown';
 import Bounce from 'react-reveal/Bounce';
 import Flip from 'react-reveal/Flip';
 
@@ -12,6 +13,8 @@ import Footer from '../PageLayout/Footer';
 import routesData from '../Routes/routesData';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Fab from '@material-ui/core/Fab';
+import { useSelector } from 'react-redux';
+import { userStore } from '../LoginPage/userSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundColor: brown[700],
       backgroundImage: `url(${routesData.promo.background})`,
     },
     container: {
@@ -78,6 +82,7 @@ interface Props {
 
 export default function PromoSectionRegister({ show, onSclollTop }: Props) {
   const classes = useStyles();
+  const user = useSelector(userStore);
 
   return (
     <div className={classes.root}>
@@ -119,7 +124,7 @@ export default function PromoSectionRegister({ show, onSclollTop }: Props) {
             )}
           </Grid>
           <Grid item>
-            {show && (
+            {show && !user.userId && (
               <Flip delay={1500}>
                 <Button
                   size='large'

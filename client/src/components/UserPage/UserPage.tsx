@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
     },
     background: {
+      backgroundColor: theme.palette.text.secondary,
       backgroundImage: `url(${routesData.user.background})`,
     },
     panel: {

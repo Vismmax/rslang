@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   background: {
+    backgroundColor: theme.palette.text.secondary,
     backgroundImage: `url(${routesData.dictionary.background})`,
     backgroundAttachment: 'fixed',
   },
