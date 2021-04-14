@@ -12,9 +12,10 @@ import SwipeableViews from 'react-swipeable-views';
 import PageLayout from '../PageLayout/PageLayout';
 import Login from './Login';
 import Registration from './Registration';
-import { userStore } from './userSlice';
+import { isLoadingStore, userStore } from './userSlice';
 import { backRouteStore, setBackRoute } from '../Routes/routeSlice';
 import routesData from '../Routes/routesData';
+import Spinner from '../common/Spinner';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -77,6 +78,7 @@ export default function LoginPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const backRoute = useSelector(backRouteStore);
+  const loading = useSelector(isLoadingStore);
 
   useEffect(() => {
     return () => {
@@ -112,7 +114,9 @@ export default function LoginPage() {
     dispatch(setBackRoute(''));
   };
 
-  return (
+  return loading && !userId ? (
+    <Spinner />
+  ) : (
     <PageLayout background={classes.background}>
       <div className={classes.root}>
         <div className={classes.tabs}>
