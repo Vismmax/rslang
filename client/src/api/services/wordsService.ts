@@ -84,6 +84,25 @@ export const getActiveWordsByUser = async ({
   return extWords;
 };
 
+export const getCountActiveWordsByGroup = async ({
+  userId,
+  group,
+}: {
+  userId: string;
+  group: number;
+}): Promise<number> => {
+  const url = `/users/${userId}/aggregatedWords`;
+  const params = {
+    group,
+    page: 0,
+    wordsPerPage: 1,
+    filter:
+      '{"$or":[{"userWord.difficulty":"work"},{"userWord.difficulty":"hard"}]}',
+  };
+  const res = (await webApi.get(url, params)) as ExtWordsResponse;
+  return res[0]?.totalCount[0]?.count;
+};
+
 export const createUserWord = async ({
   userId,
   wordId,

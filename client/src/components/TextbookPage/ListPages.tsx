@@ -11,6 +11,7 @@ import Spinner from '../common/Spinner';
 import EmptyPage from '../common/EmptyPage';
 import {
   activePage,
+  activeStatistics,
   activeWords,
   clearTextbookWords,
   fetchActiveWords,
@@ -18,6 +19,7 @@ import {
   loadingTextbookWords,
   saveActivePage,
 } from './textbookSlice';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +56,7 @@ export default function ListPages({ group }: Props) {
   const loadingWord = useSelector(idLoadingWord);
   const words = useSelector(activeWords);
   const page = useSelector(activePage);
+  const statistics = useSelector(activeStatistics);
 
   const matches = useMediaQuery('(min-width:420px)');
 
@@ -79,6 +82,18 @@ export default function ListPages({ group }: Props) {
         <EmptyPage text='На этой странице больше нет слов' />
       )}
       <div className={classes.page}>
+        <Grid container justify='center' spacing={3}>
+          <Grid item>
+            <Typography variant='body1' align='center'>
+              В главе изучается {statistics.countWordsByGroup} из 600 слов.
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant='body1' align='center'>
+              На странице изучается {statistics.countWordsByPage} из 20 слов.
+            </Typography>
+          </Grid>
+        </Grid>
         <Grid container direction='column' spacing={2}>
           {words.map((word) => (
             <Grid key={word.id} item>

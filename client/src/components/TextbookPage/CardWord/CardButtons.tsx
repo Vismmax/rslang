@@ -11,7 +11,7 @@ import { idLoadingWord } from '../textbookSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    buttonRelative: {
+    relative: {
       position: 'relative',
     },
     buttonProgress: {
@@ -47,7 +47,7 @@ export default function CardButtons({
     <Grid item>
       <ButtonGroup variant='contained' size='small'>
         <Button
-          className={classes.buttonRelative}
+          className={classes.relative}
           disabled={!user.userId || idLoading === wordId}
           color={hard ? 'default' : 'primary'}
           onClick={onClickHard}
@@ -63,6 +63,9 @@ export default function CardButtons({
           onClick={onClickDelete}
         >
           Удалить
+          {idLoading === wordId && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
         </Button>
       </ButtonGroup>
     </Grid>

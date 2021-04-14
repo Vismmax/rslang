@@ -6,6 +6,7 @@ import {
   createUserWord,
   getActiveWords,
   getActiveWordsByUser,
+  getCountActiveWordsByGroup,
   updateUserWord,
 } from '../../api/services/wordsService';
 import { getLocalUserId } from '../../common/helpers/userHelper';
@@ -23,6 +24,7 @@ interface TextbookState {
   activeWords: IExtWord[];
   activeGroup: number;
   activePage: number;
+  countActiveWordsByGroup: number;
 }
 
 const initialState: TextbookState = {
@@ -31,6 +33,7 @@ const initialState: TextbookState = {
   activeWords: [],
   activeGroup: 0,
   activePage: 0,
+  countActiveWordsByGroup: 0,
 };
 
 export const textbookSlice = createSlice({
@@ -52,6 +55,9 @@ export const textbookSlice = createSlice({
     setActivePage: (state, action: PayloadAction<number>) => {
       state.activePage = action.payload;
     },
+    setCountActiveWordsByGroup: (state, action: PayloadAction<number>) => {
+      state.countActiveWordsByGroup = action.payload;
+    },
   },
 });
 
@@ -61,10 +67,12 @@ export const {
   setIdLoadingWord,
   setActiveGroup,
   setActivePage,
+  setCountActiveWordsByGroup,
 } = textbookSlice.actions;
 
 export const fetchActiveWords = (): AppThunk => async (dispatch, getState) => {
   dispatch(setIsLoading(true));
+  dispatch(fetchStatisticsGroup());
   const group = getState().textbook.activeGroup;
   const page = getState().textbook.activePage;
   const userId = getLocalUserId();
@@ -78,6 +86,18 @@ export const fetchActiveWords = (): AppThunk => async (dispatch, getState) => {
 
   dispatch(setIsLoading(false));
   dispatch(setIdLoadingWord(''));
+};
+
+export const fetchStatisticsGroup = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  const group = getState().textbook.activeGroup;
+  const userId = getLocalUserId();
+  if (userId) {
+    const count = await getCountActiveWordsByGroup({ userId, group });
+    dispatch(setCountActiveWordsByGroup(count || 0));
+  }
 };
 
 export const fetchSetUserWord = ({
@@ -164,5 +184,12 @@ export const activeGroup = (state: RootState) => state.textbook.activeGroup;
 export const activePage = (state: RootState) => state.textbook.activePage;
 export const activeWordsLength = (state: RootState) =>
   state.textbook.activeWords.length;
+export const activeStatistics = (state: RootState) => ({
+  countWordsByGroup: state.textbook.countActiveWordsByGroup,
+  countWordsByPage: state.textbook.activeWords.filter(
+    (word) =>
+      word.userWord.difficulty !== '' && word.userWord.difficulty !== 'delete',
+  ).length,
+});
 
 export default textbookSlice.reducer;
