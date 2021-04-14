@@ -6,3 +6,4 @@ declare module 'react-reveal/Fade';
 declare module 'react-reveal/Bounce';
 declare module 'react-reveal/Roll';
 declare module 'react-reveal/Flip';
+declare module 'react-avatar-editor';
