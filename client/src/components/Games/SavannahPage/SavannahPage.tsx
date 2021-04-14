@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {},
     background: {
       backgroundColor: theme.palette.warning.light,
-      backgroundImage: `url(${routesData.savannah.image})`,
+      backgroundImage: `url(${routesData.savannah.background})`,
     },
   }),
 );

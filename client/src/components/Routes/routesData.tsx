@@ -81,7 +81,7 @@ export const routesData: IRoutesData = {
   },
   textbook: {
     title: 'Учебник',
-    description: 'Содержит псе доступные в приложении слова.',
+    description: 'Содержит все доступные в приложении слова.',
     image: textbookImg,
     background: textbookBg,
     icon: <LocalLibraryIcon />,
@@ -89,7 +89,7 @@ export const routesData: IRoutesData = {
   },
   dictionary: {
     title: 'Словарь',
-    description: 'Содержит словы, которые использовал пользователь.',
+    description: 'Содержит слова, которые использовал пользователь.',
     image: dictionaryImg,
     background: dictionaryBg,
     icon: <MenuBookIcon />,

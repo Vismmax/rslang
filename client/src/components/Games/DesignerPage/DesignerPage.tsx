@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     background: {
       backgroundColor: theme.palette.warning.main,
-      backgroundImage: `url(${routesData.designer.image})`,
+      backgroundImage: `url(${routesData.designer.background})`,
     },
   }),
 );

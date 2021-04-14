@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     background: {
       backgroundColor: theme.palette.success.dark,
-      backgroundImage: `url(${routesData.sprint.image})`,
+      backgroundImage: `url(${routesData.sprint.background})`,
     },
   }),
 );

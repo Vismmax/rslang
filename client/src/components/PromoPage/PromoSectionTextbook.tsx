@@ -89,7 +89,7 @@ export default function PromoSectionTextbook({ show, onNextPage }: Props) {
                   align='center'
                 >
                   Открывай учебник и выбирай нужные слова, все выбранные слова
-                  окажуться в словаре.
+                  окажутся в словаре.
                 </Typography>
               </Zoom>
             )}
