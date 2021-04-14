@@ -9,6 +9,7 @@ import PromoSectionGame from './PromoSectionGame';
 import PromoSectionStatistics from './PromoSectionStatistics';
 import PromoSectionRegister from './PromoSectionRegister';
 import { userStore } from '../LoginPage/userSlice';
+import PromoSectionVideo from './PromoSectionVideo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,8 +66,12 @@ export default function PromoPage() {
           show={section === 3}
           onNextPage={handleNextSection}
         />
-        <PromoSectionRegister
+        <PromoSectionVideo
           show={section === 4}
+          onNextPage={handleNextSection}
+        />
+        <PromoSectionRegister
+          show={section === 5}
           onSclollTop={handleSclollTop}
         />
       </ReactPageScroller>
