@@ -91,7 +91,8 @@ export default function LoginPage() {
       if (backRoute) {
         history.push(backRoute);
       } else {
-        history.goBack();
+        // history.goBack();
+        history.push('/');
       }
       dispatch(setBackRoute(''));
     }

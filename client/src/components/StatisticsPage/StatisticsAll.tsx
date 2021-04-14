@@ -51,7 +51,7 @@ export default function StatisticsAll() {
   const games = useSelector(statisticsAllDays);
   const [data, setData] = useState(getDataChart(games));
 
-  return (
+  return games.length ? (
     <div className={classes.root}>
       <Typography className={classes.header} variant='h4' component='h1'>
         Статистика за весь период обучения
@@ -112,5 +112,5 @@ export default function StatisticsAll() {
         </ResponsiveContainer>
       </div>
     </div>
-  );
+  ) : null;
 }
