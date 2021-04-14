@@ -98,7 +98,7 @@ export default function SettingsAudioChallenge({ settings, onChange }: Props) {
             value={settings.countVariants}
             onChange={handleSelectChange}
           >
-            {new Array(8).fill(1).map((n, id) => (
+            {new Array(5).fill(1).map((n, id) => (
               <MenuItem value={id + 2}>{id + 2}</MenuItem>
             ))}
           </Select>

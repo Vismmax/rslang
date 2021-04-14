@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 import SettingsSavannah from './SettingsSavannah';
 import SettingsSprint from './SettingsSprint';
@@ -20,6 +21,7 @@ import {
   settingsSavannah,
   settingsSprint,
   saveSettings,
+  resetSettings,
 } from './settingsSlice';
 import routesData from '../Routes/routesData';
 
@@ -35,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       marginBottom: theme.spacing(3),
     },
+    reset: {
+      padding: theme.spacing(3, 0),
+    },
   }),
 );
 
@@ -49,6 +54,10 @@ export default function SettingsPage() {
 
   const handleChangeSettings = (nameSettings: string, settings: ISettings) => {
     dispatch(saveSettings({ nameSettings, settings }));
+  };
+
+  const handleResetSettings = () => {
+    dispatch(resetSettings());
   };
 
   return (
@@ -94,6 +103,11 @@ export default function SettingsPage() {
                 onChange={handleChangeSettings}
               />
             </Grid>
+          </Grid>
+          <Grid className={classes.reset} container justify='flex-end'>
+            <Button variant='contained' onClick={handleResetSettings}>
+              Сброс настроек
+            </Button>
           </Grid>
         </Container>
       </Paper>

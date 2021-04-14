@@ -99,23 +99,15 @@ export const settingsSlice = createSlice({
     setAllSettings: (state, action: PayloadAction<ISettingsState>) => {
       return action.payload;
     },
-    // setSoundOn: (state, action: PayloadAction<boolean>) => {
-    //   state.soundOn = action.payload;
-    // },
+    resetAll: () => {
+      return initialState;
+    },
   },
 });
 
-export const {
-  setSettings,
-  setAllSettings,
-  // setSoundOn,
-} = settingsSlice.actions;
+export const { setSettings, setAllSettings, resetAll } = settingsSlice.actions;
 
-export const saveSettings = (set: IOneSettings): AppThunk => async (
-  dispatch,
-  getState,
-) => {
-  dispatch(setSettings(set));
+const saveSettingsDb = (): AppThunk => async (dispatch, getState) => {
   const settings = getState().settings;
   setLocalSettings(settings);
   const userId = getLocalUserId();
@@ -126,6 +118,24 @@ export const saveSettings = (set: IOneSettings): AppThunk => async (
         showNotificationError('Не удалось сохранить настройки на сервере'),
       );
   }
+};
+
+export const saveSettings = (set: IOneSettings): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  dispatch(setSettings(set));
+  dispatch(saveSettingsDb());
+  // const settings = getState().settings;
+  // setLocalSettings(settings);
+  // const userId = getLocalUserId();
+  // if (userId) {
+  //   const res = await putSettings({ userId, settings });
+  //   if (!res)
+  //     dispatch(
+  //       showNotificationError('Не удалось сохранить настройки на сервере'),
+  //     );
+  // }
 };
 
 export const setSoundOn = (settings: boolean): AppThunk => async (
@@ -145,6 +155,11 @@ export const loadSettings = (): AppThunk => async (dispatch, getState) => {
     if (settings) dispatch(setAllSettings(settings));
   }
   dispatch(setIsLoading(false));
+};
+
+export const resetSettings = (): AppThunk => async (dispatch, getState) => {
+  dispatch(resetAll());
+  dispatch(saveSettingsDb());
 };
 
 export const settingsTextbook = (state: RootState) => state.settings.textbook;

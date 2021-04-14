@@ -97,7 +97,7 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
             onChange={handleSelectChange}
           >
             <MenuItem value={0}>Без права на ошибку</MenuItem>
-            {new Array(9).fill(1).map((n, id) => (
+            {new Array(6).fill(1).map((n, id) => (
               <MenuItem value={id + 1}>{id + 1}</MenuItem>
             ))}
           </Select>
@@ -112,7 +112,7 @@ export default function SettingsSavannah({ settings, onChange }: Props) {
             value={settings.countVariants}
             onChange={handleSelectChange}
           >
-            {new Array(8).fill(1).map((n, id) => (
+            {new Array(5).fill(1).map((n, id) => (
               <MenuItem value={id + 2}>{id + 2}</MenuItem>
             ))}
           </Select>
