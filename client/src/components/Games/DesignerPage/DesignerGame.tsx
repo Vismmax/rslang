@@ -14,6 +14,7 @@ import falseSfx from '../../../assets/false.mp3';
 import {
   settingsAudioChallenge,
   settingsDesigner,
+  settingsSoundOn,
 } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,13 +47,14 @@ export default function DesignerGame() {
   const dispatch = useDispatch();
   const word = useSelector(activeWordDesigner);
   const settings = useSelector(settingsDesigner);
+  const soundOn = useSelector(settingsSoundOn);
 
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [start, setStart] = useState(false);
   const [disableEditor, setDisableEditor] = useState(false);
 
-  const [trueSound] = useSound(trueSfx);
-  const [falseSound] = useSound(falseSfx);
+  const [trueSound] = useSound(trueSfx, { soundEnabled: soundOn });
+  const [falseSound] = useSound(falseSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     dispatch(nextWordDesigner());

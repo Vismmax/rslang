@@ -7,7 +7,10 @@ import useSound from 'use-sound';
 
 import SprintCard from './SprintCard';
 import { SprintProgress } from './SprintProgress';
-import { settingsSprint } from '../../SettingsPage/settingsSlice';
+import {
+  settingsSoundOn,
+  settingsSprint,
+} from '../../SettingsPage/settingsSlice';
 import { addAnswerGame, scoreGame, stopGame } from '../gameSlice';
 import {
   activeVariantSprint,
@@ -51,14 +54,15 @@ export default function SprintGame() {
   const word = useSelector(activeWordSprint);
   const variant = useSelector(activeVariantSprint);
   const settings = useSelector(settingsSprint);
+  const soundOn = useSelector(settingsSoundOn);
 
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(0);
 
   const { episode, series, score } = useSelector(scoreGame);
 
-  const [trueSound] = useSound(trueSfx);
-  const [falseSound] = useSound(falseSfx);
+  const [trueSound] = useSound(trueSfx, { soundEnabled: soundOn });
+  const [falseSound] = useSound(falseSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     dispatch(nextWordSprint());

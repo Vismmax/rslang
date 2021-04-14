@@ -8,6 +8,8 @@ import useSound from 'use-sound';
 
 import tickSfx from '../../../assets/tick.mp3';
 import gongSfx from '../../../assets/gong.mp3';
+import { useSelector } from 'react-redux';
+import { settingsSoundOn } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +28,11 @@ interface Props {
 
 export function Starter({ open = true, time = 5, onStop }: Props) {
   const classes = useStyles();
+  const soundOn = useSelector(settingsSoundOn);
   const [progress, setProgress] = React.useState(0);
 
-  const [tick] = useSound(tickSfx);
-  const [gong] = useSound(gongSfx);
+  const [tick] = useSound(tickSfx, { soundEnabled: soundOn });
+  const [gong] = useSound(gongSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     tick();

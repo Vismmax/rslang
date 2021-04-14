@@ -22,6 +22,7 @@ import { IWord } from '../../../common/interfaces/WordInterfaces';
 import ResultItem from './ResultItem';
 import { fetchWordSetDifficulty, levelGame, resultGame } from '../gameSlice';
 import endSfx from '../../../assets/end.mp3';
+import { settingsSoundOn } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,11 +82,12 @@ export default function ResultGame({ open, onCancel, onReset }: Props) {
   const dispatch = useDispatch();
   const { score, experience, wordsTrue, wordsFalse } = useSelector(resultGame);
   const level = useSelector(levelGame);
+  const soundOn = useSelector(settingsSoundOn);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const [endSound] = useSound(endSfx);
+  const [endSound] = useSound(endSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     if (open) endSound();

@@ -7,7 +7,10 @@ import useSound from 'use-sound';
 
 import { IWord } from '../../../common/interfaces/WordInterfaces';
 import CardWord from '../common/CardWord';
-import { settingsAudioChallenge } from '../../SettingsPage/settingsSlice';
+import {
+  settingsAudioChallenge,
+  settingsSoundOn,
+} from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,9 +33,13 @@ interface Props {
 export default function AudioChallengeCard({ isOpen, word }: Props) {
   const classes = useStyles();
   const settings = useSelector(settingsAudioChallenge);
+  const soundOn = useSelector(settingsSoundOn);
 
-  // @ts-ignore
-  const [speak] = useSound(word.audio, { autoplay: true });
+  const [speak] = useSound(word.audio, {
+    // @ts-ignore
+    autoplay: true,
+    soundEnabled: soundOn,
+  });
 
   const handleSpeak = () => {
     speak();

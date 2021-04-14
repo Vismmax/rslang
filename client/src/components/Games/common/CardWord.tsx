@@ -10,6 +10,8 @@ import ReactCardFlip from 'react-card-flip';
 import useSound from 'use-sound';
 
 import { IWord } from '../../../common/interfaces/WordInterfaces';
+import { useSelector } from 'react-redux';
+import { settingsSoundOn } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,8 +64,9 @@ export default function CardWord({
   paper = false,
 }: Props) {
   const classes = useStyles();
+  const soundOn = useSelector(settingsSoundOn);
 
-  const [speak] = useSound(word.audio);
+  const [speak] = useSound(word.audio, { soundEnabled: soundOn });
 
   const handleSpeak = () => {
     speak();

@@ -14,6 +14,8 @@ import AddIcon from '@material-ui/icons/Add';
 import useSound from 'use-sound';
 
 import { IWord } from '../../../common/interfaces/WordInterfaces';
+import { useSelector } from 'react-redux';
+import { settingsSoundOn } from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +37,9 @@ interface Props {
 
 export default function ResultItem({ word, result, onClick, level }: Props) {
   const classes = useStyles();
-  const [speak] = useSound(word.audio);
+  const soundOn = useSelector(settingsSoundOn);
+
+  const [speak] = useSound(word.audio, { soundEnabled: soundOn });
 
   const [disable, setDisable] = useState(false);
 

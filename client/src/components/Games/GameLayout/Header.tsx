@@ -14,11 +14,19 @@ import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 
 import { setIsOpenSideBar } from '../../SideBar/sideBarSlice';
 import { nameGame } from '../gameSlice';
-import { saveSettings, settingsGame } from '../../SettingsPage/settingsSlice';
+import {
+  saveSettings,
+  setSoundOn,
+  settingsGame,
+  settingsSoundOn,
+} from '../../SettingsPage/settingsSlice';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      zIndex: theme.zIndex.drawer + 2,
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     },
     grow: {
@@ -46,6 +54,7 @@ export default function Header({ fullscreen, onFullscreen, onClose }: IProps) {
   const dispatch = useDispatch();
   const gameName = useSelector(nameGame);
   const settingsAll = useSelector(settingsGame);
+  const soundOn = useSelector(settingsSoundOn);
 
   // @ts-ignore
   const settings = settingsAll[gameName];
@@ -71,6 +80,10 @@ export default function Header({ fullscreen, onFullscreen, onClose }: IProps) {
     );
   };
 
+  const handleClickSound = () => {
+    dispatch(setSoundOn(!soundOn));
+  };
+
   return (
     <AppBar position='fixed' classes={{ root: classes.root }}>
       <Toolbar variant='dense'>
@@ -86,6 +99,14 @@ export default function Header({ fullscreen, onFullscreen, onClose }: IProps) {
         )}
 
         <div className={classes.grow} />
+
+        <IconButton
+          color='inherit'
+          aria-label='sound'
+          onClick={handleClickSound}
+        >
+          {soundOn ? <VolumeUpIcon /> : <VolumeOffIcon />}
+        </IconButton>
 
         {gameName && (
           <Tooltip title='Язык отображения слова-вопроса'>

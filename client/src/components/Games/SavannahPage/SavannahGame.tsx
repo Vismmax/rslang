@@ -8,7 +8,10 @@ import useSound from 'use-sound';
 
 import Fire from '../common/Fire';
 import ButtonsWords from '../common/ButtonsWords';
-import { settingsSavannah } from '../../SettingsPage/settingsSlice';
+import {
+  settingsSavannah,
+  settingsSoundOn,
+} from '../../SettingsPage/settingsSlice';
 import { addAnswerGame, stopGame } from '../gameSlice';
 import {
   activeVariantsSavannah,
@@ -58,14 +61,15 @@ export default function SavannahGame() {
   const word = useSelector(activeWordSavannah);
   const variants = useSelector(activeVariantsSavannah);
   const { timeWord, countError, langWordEn } = useSelector(settingsSavannah);
+  const soundOn = useSelector(settingsSoundOn);
 
   const [reserveErrors, setReserveErrors] = useState(countError);
   const [showWord, setShowWord] = useState(false);
   const [showTrueButton, setShowTrueButton] = useState(false);
   const [start, setStart] = useState(false);
 
-  const [trueSound] = useSound(trueSfx);
-  const [falseSound] = useSound(falseSfx);
+  const [trueSound] = useSound(trueSfx, { soundEnabled: soundOn });
+  const [falseSound] = useSound(falseSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     dispatch(nextWordSavannah());

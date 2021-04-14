@@ -41,7 +41,8 @@ export type ISettings =
   | ISettingsAudioChallenge
   | ISettingsSprint
   | ISettingsDesigner
-  | ISettingsTextbook;
+  | ISettingsTextbook
+  | boolean;
 
 export interface IOneSettings {
   nameSettings: string;
@@ -49,6 +50,7 @@ export interface IOneSettings {
 }
 
 export interface ISettingsState {
+  soundOn: boolean;
   textbook: ISettingsTextbook;
   savannah: ISettingsSavannah;
   audioChallenge: ISettingsAudioChallenge;
@@ -57,6 +59,7 @@ export interface ISettingsState {
 }
 
 const initialState: ISettingsState = {
+  soundOn: true,
   textbook: {
     showTranslate: true,
     showButtons: true,
@@ -96,10 +99,17 @@ export const settingsSlice = createSlice({
     setAllSettings: (state, action: PayloadAction<ISettingsState>) => {
       return action.payload;
     },
+    // setSoundOn: (state, action: PayloadAction<boolean>) => {
+    //   state.soundOn = action.payload;
+    // },
   },
 });
 
-export const { setSettings, setAllSettings } = settingsSlice.actions;
+export const {
+  setSettings,
+  setAllSettings,
+  // setSoundOn,
+} = settingsSlice.actions;
 
 export const saveSettings = (set: IOneSettings): AppThunk => async (
   dispatch,
@@ -116,6 +126,13 @@ export const saveSettings = (set: IOneSettings): AppThunk => async (
         showNotificationError('Не удалось сохранить настройки на сервере'),
       );
   }
+};
+
+export const setSoundOn = (settings: boolean): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  dispatch(saveSettings({ nameSettings: 'soundOn', settings }));
 };
 
 export const loadSettings = (): AppThunk => async (dispatch, getState) => {
@@ -137,5 +154,6 @@ export const settingsAudioChallenge = (state: RootState) =>
 export const settingsSprint = (state: RootState) => state.settings.sprint;
 export const settingsDesigner = (state: RootState) => state.settings.designer;
 export const settingsGame = (state: RootState) => state.settings;
+export const settingsSoundOn = (state: RootState) => state.settings.soundOn;
 
 export default settingsSlice.reducer;

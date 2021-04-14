@@ -11,7 +11,10 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import useSound from 'use-sound';
 
 import { IExtWord } from '../../../common/interfaces/WordInterfaces';
-import { settingsTextbook } from '../../SettingsPage/settingsSlice';
+import {
+  settingsSoundOn,
+  settingsTextbook,
+} from '../../SettingsPage/settingsSlice';
 import { showNotificationWarning } from '../../common/Notification/notificationSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,6 +55,7 @@ export default function CardMain({ word }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const settings = useSelector(settingsTextbook);
+  const soundOn = useSelector(settingsSoundOn);
 
   const [timerId, setTimerId] = useState<number>();
 

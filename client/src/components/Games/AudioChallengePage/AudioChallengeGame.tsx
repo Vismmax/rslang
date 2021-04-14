@@ -18,7 +18,10 @@ import {
 import trueSfx from '../../../assets/true.mp3';
 import falseSfx from '../../../assets/false.mp3';
 import './AudioChallenge.css';
-import { settingsAudioChallenge } from '../../SettingsPage/settingsSlice';
+import {
+  settingsAudioChallenge,
+  settingsSoundOn,
+} from '../../SettingsPage/settingsSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +59,7 @@ export default function AudioChallengeGame() {
   const word = useSelector(activeWordAudioChallenge);
   const variants = useSelector(activeVariantsAudioChallenge);
   const settings = useSelector(settingsAudioChallenge);
+  const soundOn = useSelector(settingsSoundOn);
 
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [showTrueButton, setShowTrueButton] = useState(false);
@@ -63,8 +67,8 @@ export default function AudioChallengeGame() {
   const [showSlide, setShowSlide] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('left');
 
-  const [trueSound] = useSound(trueSfx);
-  const [falseSound] = useSound(falseSfx);
+  const [trueSound] = useSound(trueSfx, { soundEnabled: soundOn });
+  const [falseSound] = useSound(falseSfx, { soundEnabled: soundOn });
 
   useEffect(() => {
     dispatch(nextWordAudioChallenge());
