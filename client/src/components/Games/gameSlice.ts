@@ -312,7 +312,10 @@ export const stopGame = (name: string): AppThunk => async (
 ) => {
   dispatch(setIsStart(false));
   dispatch(setIsStop(true));
-  if (getState().game.level === null) {
+  if (
+    getState().game.level === null &&
+    getState().game.data.difficulty !== 'delete'
+  ) {
     const statistics = {
       name,
       timeStart: getState().game.timeStart as Date,

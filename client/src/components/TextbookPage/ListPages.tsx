@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import CardWord from './CardWord/CardWord';
 import Spinner from '../common/Spinner';
@@ -19,7 +20,6 @@ import {
   loadingTextbookWords,
   saveActivePage,
 } from './textbookSlice';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
